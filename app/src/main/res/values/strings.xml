@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CardManager</string>
+    <string name="cardCapture">Search By Image</string>
+    <string name="configSettings">Settings</string>
+    <string name="checkInventory">Search By Text</string>
+    <string name="aboutUs">About Us</string>
+    <string name="cardSearch">Card Name</string>
+</resources>
