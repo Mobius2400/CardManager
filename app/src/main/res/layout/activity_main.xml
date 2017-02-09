@@ -11,14 +11,14 @@
     tools:context="com.venkatesan.das.cardmanager.MainActivity">
 
     <Button
-        android:text="@string/aboutUs"
+        android:text="@string/searchByImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/aboutUs"
+        android:id="@+id/captureCard"
         style="@android:style/Widget.Material.Button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="27dp" />
+        android:layout_marginTop="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="@string/configSettings"
@@ -26,28 +26,29 @@
         android:layout_height="wrap_content"
         android:id="@+id/configSettings"
         style="@android:style/Widget.Material.Button"
-        android:layout_above="@+id/aboutUs"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="31dp" />
+        android:layout_marginTop="57dp"
+        android:layout_below="@+id/checkInventory2"
+        android:layout_alignParentStart="true" />
 
     <Button
-        android:text="@string/checkInventory"
+        android:text="@string/aboutUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/aboutUs"
+        style="@android:style/Widget.Material.Button"
+        android:layout_marginBottom="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/searchByText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/checkInventory2"
         style="@android:style/Widget.Material.Button"
-        android:layout_alignBottom="@+id/configSettings"
+        android:layout_marginTop="66dp"
+        android:layout_below="@+id/captureCard"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="69dp" />
-
-    <Button
-        android:text="@string/cardCapture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/captureCard"
-        style="@android:style/Widget.Material.Button"
-        android:layout_marginBottom="99dp"
-        android:layout_above="@+id/configSettings"
-        android:layout_alignParentStart="true" />
+        android:onClick="toSearchByText" />
 
 </RelativeLayout>

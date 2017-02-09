@@ -10,26 +10,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.venkatesan.das.cardmanager.MainActivity">
 
-    <EditText
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:text="@string/cardSearch"
         android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="105dp"
         android:id="@+id/cardSearcher"
-        style="@android:style/Widget.AutoCompleteTextView" />
+        style="@android:style/Widget.AutoCompleteTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        tools:background="@drawable/border" />
 
     <Button
-        android:text="@string/checkInventory"
+        android:text="@string/goSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/checkInventory2"
         style="@android:style/Widget.Material.Button"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:onClick="searchCardbyName" />
+        android:onClick="searchCardbyName"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/cardSearcher"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

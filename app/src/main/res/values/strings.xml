@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">CardManager</string>
-    <string name="cardCapture">Search By Image</string>
+    <string name="searchByImage">Search By Image</string>
     <string name="configSettings">Settings</string>
-    <string name="checkInventory">Search By Text</string>
+    <string name="searchByText">Search By Text</string>
     <string name="aboutUs">About Us</string>
     <string name="cardSearch">Card Name</string>
+    <string name="goSearch">Search</string>
 </resources>
