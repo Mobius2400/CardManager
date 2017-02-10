@@ -15,40 +15,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/captureCard"
-        style="@android:style/Widget.Material.Button"
+        style="@android:style/Widget.Button"
         android:layout_marginTop="62dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
 
     <Button
         android:text="@string/configSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/configSettings"
-        style="@android:style/Widget.Material.Button"
+        style="@android:style/Widget.Button"
         android:layout_marginTop="57dp"
-        android:layout_below="@+id/checkInventory2"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/searchText"
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
 
     <Button
         android:text="@string/aboutUs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/aboutUs"
-        style="@android:style/Widget.Material.Button"
+        style="@android:style/Widget.Button"
         android:layout_marginBottom="51dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
 
     <Button
         android:text="@string/searchByText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/checkInventory2"
-        style="@android:style/Widget.Material.Button"
+        android:id="@+id/searchText"
+        style="@android:style/Widget.Button"
         android:layout_marginTop="66dp"
         android:layout_below="@+id/captureCard"
         android:layout_alignParentStart="true"
-        android:onClick="toSearchByText" />
+        android:onClick="onButtonClick"
+        android:textSize="18sp" />
 
 </RelativeLayout>
