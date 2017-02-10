@@ -6,4 +6,5 @@
     <string name="aboutUs">About Us</string>
     <string name="cardSearch">Card Name</string>
     <string name="goSearch">Search</string>
+    <string name="exit">Quit</string>
 </resources>

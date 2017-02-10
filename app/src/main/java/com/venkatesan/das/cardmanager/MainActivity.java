@@ -25,5 +25,9 @@ public class MainActivity extends Activity {
                 Intent searchByText = new Intent(MainActivity.this, searchInventory.class);
                 startActivity(searchByText);
         }
+        switch(buttonID){
+            case R.id.exitButton:
+                finish();
+        }
     }
 }

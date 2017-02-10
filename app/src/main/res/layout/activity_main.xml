@@ -22,26 +22,41 @@
         android:textSize="18sp" />
 
     <Button
-        android:text="@string/configSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/configSettings"
-        style="@android:style/Widget.Button"
-        android:layout_marginTop="57dp"
-        android:layout_below="@+id/searchText"
-        android:layout_alignParentStart="true"
-        android:textSize="18sp" />
-
-    <Button
         android:text="@string/aboutUs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/aboutUs"
         style="@android:style/Widget.Button"
-        android:layout_marginBottom="51dp"
-        android:layout_alignParentBottom="true"
+        android:textSize="18sp"
+        android:layout_below="@+id/configSettings"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="18sp" />
+        android:layout_marginTop="33dp" />
+
+    <Button
+        android:text="@string/exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/exitButton"
+        style="@android:style/Widget.Button"
+        android:textSize="18sp"
+        android:layout_alignTop="@+id/aboutUs"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="77dp"
+        android:onClick="onButtonClick (MainActivity)" />
+
+    <Button
+        android:text="@string/configSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/configSettings"
+        style="@android:style/Widget.Button"
+        android:layout_marginTop="31dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/searchText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="@string/searchByText"
@@ -49,10 +64,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchText"
         style="@android:style/Widget.Button"
-        android:layout_marginTop="66dp"
-        android:layout_below="@+id/captureCard"
-        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp"
         android:onClick="onButtonClick"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_below="@+id/captureCard"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

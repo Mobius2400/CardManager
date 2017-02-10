@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,15 +14,19 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text="@string/cardSearch"
-            android:ems="10"
+            android:ems="35"
             android:id="@+id/editText"
-            style="@android:style/Widget.DeviceDefault.Light.EditText" />
+            style="@android:style/Widget.DeviceDefault.Light.EditText"
+            />
 
         <Button
             android:text="@string/goSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/searchButton" />
+            android:id="@+id/searchButton"
+            style="@android:style/Widget.Button"
+            android:textSize="18sp"
+            android:onClick="onSearch" />
 
         <ListView
             android:layout_width="match_parent"
