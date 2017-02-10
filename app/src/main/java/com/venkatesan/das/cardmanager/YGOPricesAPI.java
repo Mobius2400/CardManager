@@ -4,12 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -18,59 +17,84 @@ import java.util.ArrayList;
  */
 
 public class YGOPricesAPI {
+
+   final static String baseURL_allVersions = "http://yugiohprices.com/api/card_versions/";
+   static String testName = "";
+   static String currName = "";
+
+   public static void main(String[] args){
+       testName = "Blue-Eyes White Dragon";
+       try {
+           System.out.println(searchByName(testName));
+//           JSONArray tester = toJSON(searchByName(testName));
+//           for(int i = 0; i < tester.length(); i++){
+//               JSONObject printer = tester.getJSONObject(i);
+//               System.out.print(printer.getString("print_tag"));
+//               System.out.println(printer.getString("rarity"));
+//           }
+       }
+       catch (MalformedURLException e) {
+           e.printStackTrace();
+       } //catch (JSONException e) {
+           //e.printStackTrace();
+       //}
+   }
+
    public static String searchByName(String name) throws MalformedURLException{
-       String results = "";
+       currName = name;
+       String results = "Error: Something happened";
+       StringBuilder returnSet = new StringBuilder();
        try{
            // Make Connection
-           final URL byName = new URL("http://yugiohprices.com/api/card_data/");
-           URLConnection connection = byName.openConnection();
+           URL byName = new URL(baseURL_allVersions+URLEncoder.encode(name,"UTF-8"));
+           HttpURLConnection connection = (HttpURLConnection)byName.openConnection();
 
            //Use Post
            connection.setDoOutput(true);
            connection.setAllowUserInteraction(false);
 
-           //Send Query
-           String query = byName+URLEncoder.encode(name,"UTF-8");
-           PrintStream poster = new PrintStream(connection.getOutputStream());
-           poster.print(query);
-           poster.close();
-
            //Parse Result
-           ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
-           byte[] buffer = new byte[1024];
            int length;
-           //InputStreamReader resultReturn = new InputStreamReader(connection.getInputStream());
-           while((length = connection.getInputStream().read(buffer)) != -1){
-               resultStream.write(buffer,0,length);
-           }
+           if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 400){
+               BufferedReader bufferedReturn = new BufferedReader(new InputStreamReader(connection
+                       .getInputStream()));
+               String currLine = null;
 
-           //Turn to String
-           results = resultStream.toString("UTF-8");
+               while ((currLine=bufferedReturn.readLine())!=null) {
+                   returnSet.append(currLine);
+               }
+               bufferedReturn.close();
+           }
        }
        catch(Exception e){
            e.printStackTrace();
        }
-   return results;
+       results = returnSet.toString();
+       return results;
    }
 
    public static JSONArray toJSON(String results) throws JSONException{
        JSONArray jArray = null;
        try {
-           jArray = new JSONArray(results);
+           JSONObject jsnObj = new JSONObject(results);
+           jArray = jsnObj.getJSONArray("data");
        }
-       catch (Exception m){
+       catch (JSONException m){
            m.printStackTrace();
        }
        return jArray;
    }
 
-   public static ArrayList<YugiohCard> getCard(JSONArray resultSet) throws JSONException{
+   public static ArrayList<YugiohCard> getCardForShortListing(JSONArray resultSet) throws JSONException{
        ArrayList<YugiohCard> cards = new ArrayList<YugiohCard>();
        try{
            for(int i = 0; i < resultSet.length(); i++) {
                YugiohCard toAdd = new YugiohCard();
                JSONObject temp = resultSet.getJSONObject(i);
-               toAdd.setName(temp.getString("name"));
+               toAdd.setName(currName);
+               toAdd.setPrint_tag(temp.getString("print_tag"));
+               toAdd.setRarity(temp.getString("rarity"));
+               cards.add(toAdd);
            }
 
        }
