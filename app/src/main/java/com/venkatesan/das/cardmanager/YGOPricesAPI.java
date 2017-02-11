@@ -1,5 +1,7 @@
 package com.venkatesan.das.cardmanager;
 
+import android.os.AsyncTask;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,13 +19,12 @@ import java.util.ArrayList;
  */
 
 public class YGOPricesAPI {
-
    final static String baseURL_allVersions = "http://yugiohprices.com/api/card_versions/";
    static String testName = "";
    static String currName = "";
 
    public static void main(String[] args){
-       testName = "Blue-Eyes White Dragon";
+       testName = "Jinzo";
        try {
            System.out.println(searchByName(testName));
 //           JSONArray tester = toJSON(searchByName(testName));
@@ -65,11 +66,11 @@ public class YGOPricesAPI {
                }
                bufferedReturn.close();
            }
+           results = returnSet.toString();
        }
        catch(Exception e){
            e.printStackTrace();
        }
-       results = returnSet.toString();
        return results;
    }
 

@@ -28,5 +28,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':openCVLibrary320')
     compile files('src/main/libs/json-20140107.jar')
+    compile project(':dropboxChooserSDK')
 }
 

@@ -1,7 +1,9 @@
 package com.venkatesan.das.cardmanager;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
@@ -58,15 +61,8 @@ public class searchInventory extends Activity {
         try{
             results.add("123");
             results.add("234");
-            results.add(YGOPricesAPI.searchByName(card_name));
             //Search By Card Name
-            ArrayList<YugiohCard> cardVersions = new ArrayList<YugiohCard>();
-            cardVersions = YGOPricesAPI.getCardForShortListing(YGOPricesAPI.toJSON(YGOPricesAPI.searchByName(card_name)));
-            YugiohCard[] iterator = cardVersions.toArray(new YugiohCard[cardVersions.size()]);
-            for(int i = 0; i < iterator.length; i++){
-
-                results.add(iterator[i].getPrint_tag());
-            }
+            new AsyncQuery().execute(card_name);
 
             //Display Results
             ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -76,6 +72,35 @@ public class searchInventory extends Activity {
         }
         catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public class AsyncQuery extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... input)
+        {
+            Boolean success = false;
+            String output = "";
+            try {
+                output = YGOPricesAPI.searchByName(card_name);
+                //Log.d("result: ", output);
+                if (output.length() > 0){
+                    ArrayList<YugiohCard> cardVersions = new ArrayList<YugiohCard>();
+                    cardVersions = YGOPricesAPI.getCardForShortListing(YGOPricesAPI.toJSON(output));
+                    YugiohCard[] iterator = cardVersions.toArray(new YugiohCard[cardVersions.size()]);
+                    if (iterator.length >= 1){
+                        success = true;
+                    }
+                    for(int i = 0; i < iterator.length; i++){
+                        results.add(iterator[i].getPrint_tag());
+                    }
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return success;
         }
     }
 }
