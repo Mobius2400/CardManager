@@ -38,9 +38,7 @@ public class MainActivity extends Activity {
     public boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         android.net.NetworkInfo networkinfo = cm.getActiveNetworkInfo();
-        if (networkinfo != null && networkinfo.isConnected()) {
-            return true;
-        }
+        if (networkinfo != null && networkinfo.isConnected()) return true;
         return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.venkatesan.das.cardmanager;
 
+import android.media.Image;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -19,14 +20,18 @@ import java.util.ArrayList;
  */
 
 public class YGOPricesAPI {
-   final static String baseURL_allVersions = "http://yugiohprices.com/api/card_versions/";
-   static String testName = "";
-   static String currName = "";
+   final static String base = "http://yugiohprices.com/api/";
+   final static String baseURL_allVersions = base + "card_versions/";
+   final static String baseURL_dataByTag = base + "price_for_print_tag/";
+   final static String baseURL_imageByName = base + "card_image/";
+   private static String currName = "";
 
    public static void main(String[] args){
-       testName = "Jinzo";
+       String testName = "Dark Magician";
+       String testTag = "PSV-000";
        try {
            System.out.println(searchByName(testName));
+           //System.out.println(priceByTag(testTag));
 //           JSONArray tester = toJSON(searchByName(testName));
 //           for(int i = 0; i < tester.length(); i++){
 //               JSONObject printer = tester.getJSONObject(i);
@@ -40,18 +45,67 @@ public class YGOPricesAPI {
            //e.printStackTrace();
        //}
    }
+   public static Image imageByName(String name) throws MalformedURLException {
+       String currTag = name;
+       Image results = null;
+       try {
+           //Make Connection
+           URL byName = new URL(baseURL_imageByName + URLEncoder.encode(currTag, "UTF-8"));
+           HttpURLConnection connection = (HttpURLConnection) byName.openConnection();
+           //Use Post
+           connection.setRequestMethod("GET");
+           connection.setAllowUserInteraction(false);
+           //Parse Result
+           int length;
+           if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 400) {
+               // Read Image
+           }
+       } catch (Exception e) {
+          e.printStackTrace();
+       }
+       return results;
+   }
+
+   public static String priceByTag(String print_tag) throws MalformedURLException {
+       String currTag = print_tag;
+       String results = "Error: Something happened";
+       StringBuilder returnSet = new StringBuilder();
+       try {
+           // Make Connection
+           URL byTag = new URL(baseURL_dataByTag + URLEncoder.encode(currTag, "UTF-8"));
+           HttpURLConnection connection = (HttpURLConnection) byTag.openConnection();
+           //Use Post
+           connection.setRequestMethod("GET");
+           connection.setAllowUserInteraction(false);
+           //Parse Result
+           int length;
+           if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 400) {
+               BufferedReader bufferedReturn = new BufferedReader(new InputStreamReader(connection
+                       .getInputStream()));
+               String currLine = null;
+               while ((currLine = bufferedReturn.readLine()) != null) {
+                   returnSet.append(currLine);
+               }
+               bufferedReturn.close();
+           }
+           results = returnSet.toString();
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+       return results;
+   }
 
    public static String searchByName(String name) throws MalformedURLException{
        currName = name;
        String results = "Error: Something happened";
        StringBuilder returnSet = new StringBuilder();
+       HttpURLConnection connection = null;
        try{
            // Make Connection
-           URL byName = new URL(baseURL_allVersions+URLEncoder.encode(name,"UTF-8"));
-           HttpURLConnection connection = (HttpURLConnection)byName.openConnection();
-
-           //Use Post
-           connection.setDoOutput(true);
+           String encoded = name.replace(' ', '+');
+           URL byName = new URL(baseURL_allVersions+encoded);
+           connection = (HttpURLConnection)byName.openConnection();
+           connection.setRequestMethod("GET");
            connection.setAllowUserInteraction(false);
 
            //Parse Result
@@ -70,6 +124,9 @@ public class YGOPricesAPI {
        }
        catch(Exception e){
            e.printStackTrace();
+       }
+       finally{
+           connection.disconnect();
        }
        return results;
    }

@@ -30,6 +30,7 @@ public class searchInventory extends Activity {
     ListView displayResults;
     Button goSearch;
     String card_name = "";
+    AsyncQuery searcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class searchInventory extends Activity {
         cardName = (EditText)findViewById(R.id.editText);
         displayResults = (ListView)findViewById(R.id.resultSet);
         goSearch = (Button)findViewById(R.id.searchButton);
+        searcher = new AsyncQuery();
         goSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,10 +61,12 @@ public class searchInventory extends Activity {
     public void onSearch(View goSearch) throws MalformedURLException{
         results.clear();
         try{
+            // Test ListView
             results.add("123");
             results.add("234");
+
             //Search By Card Name
-            new AsyncQuery().execute(card_name);
+            searcher.execute(card_name);
 
             //Display Results
             ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -75,24 +79,30 @@ public class searchInventory extends Activity {
         }
     }
 
-    public class AsyncQuery extends AsyncTask<String, Void, Boolean> {
+    public void toAdd(YugiohCard[] toadd){
+        for(YugiohCard card: toadd){
+            String print_tag = card.getPrint_tag();
+            String rarity = card.getRarity();
+            results.add(print_tag + " - " + rarity);
+        }
+    }
+
+    public class AsyncQuery extends AsyncTask<String, Void, YugiohCard[]> {
         @Override
-        protected Boolean doInBackground(String... input)
+
+        protected YugiohCard[] doInBackground(String... input)
         {
-            Boolean success = false;
+            YugiohCard[] iterator;
+            card_name = input[0];
             String output = "";
             try {
                 output = YGOPricesAPI.searchByName(card_name);
-                //Log.d("result: ", output);
                 if (output.length() > 0){
                     ArrayList<YugiohCard> cardVersions = new ArrayList<YugiohCard>();
                     cardVersions = YGOPricesAPI.getCardForShortListing(YGOPricesAPI.toJSON(output));
-                    YugiohCard[] iterator = cardVersions.toArray(new YugiohCard[cardVersions.size()]);
+                    iterator = cardVersions.toArray(new YugiohCard[cardVersions.size()]);
                     if (iterator.length >= 1){
-                        success = true;
-                    }
-                    for(int i = 0; i < iterator.length; i++){
-                        results.add(iterator[i].getPrint_tag());
+                        return iterator;
                     }
                 }
             } catch (MalformedURLException e) {
@@ -100,7 +110,13 @@ public class searchInventory extends Activity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return success;
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(YugiohCard[] yugiohCards) {
+            super.onPostExecute(yugiohCards);
+            toAdd(yugiohCards);
         }
     }
 }
