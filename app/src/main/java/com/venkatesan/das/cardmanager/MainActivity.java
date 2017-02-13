@@ -29,6 +29,13 @@ public class MainActivity extends Activity {
             case R.id.searchText:
                 Intent searchByText = new Intent(MainActivity.this, searchInventory.class);
                 startActivity(searchByText);
+                break;
+        }
+        switch(buttonID){
+            case R.id.configSettings:
+                Intent settings = new Intent(MainActivity.this, settingsDropbox.class);
+                startActivity(settings);
+                break;
         }
         switch(buttonID){
             case R.id.exitButton:

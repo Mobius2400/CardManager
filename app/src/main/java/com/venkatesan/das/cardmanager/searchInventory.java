@@ -17,7 +17,7 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-import static com.venkatesan.das.cardmanager.R.id.editText;
+import static com.venkatesan.das.cardmanager.R.id.cardNameByName;
 import static com.venkatesan.das.cardmanager.R.id.searchText;
 
 /**
@@ -36,10 +36,15 @@ public class searchInventory extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_text);
-        cardName = (EditText)findViewById(R.id.editText);
+        cardName = (EditText)findViewById(R.id.cardNameByName);
         displayResults = (ListView)findViewById(R.id.resultSet);
         goSearch = (Button)findViewById(R.id.searchButton);
         searcher = new AsyncQuery();
+        cardName.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                cardName.setText("");
+            }
+        });
         goSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +77,7 @@ public class searchInventory extends Activity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>
                       (searchInventory.this, android.R.layout.simple_list_item_1, results);
             displayResults.setAdapter(adapter);
-            ((EditText) findViewById(R.id.editText)).setText("");
+            ((EditText) findViewById(R.id.cardNameByName)).setText("");
         }
         catch(Exception e){
             e.printStackTrace();

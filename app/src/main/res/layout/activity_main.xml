@@ -56,7 +56,8 @@
         android:textSize="18sp"
         android:layout_below="@+id/searchText"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="onButtonClick" />
 
     <Button
         android:text="@string/searchByText"
