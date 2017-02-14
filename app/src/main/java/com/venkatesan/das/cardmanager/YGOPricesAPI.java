@@ -26,44 +26,8 @@ public class YGOPricesAPI {
    final static String baseURL_imageByName = base + "card_image/";
    private static String currName = "";
 
-   public static void main(String[] args){
-       String testName = "Dark Magician";
-       String testTag = "PSV-000";
-       try {
-           System.out.println(searchByName(testName));
-           //System.out.println(priceByTag(testTag));
-//           JSONArray tester = toJSON(searchByName(testName));
-//           for(int i = 0; i < tester.length(); i++){
-//               JSONObject printer = tester.getJSONObject(i);
-//               System.out.print(printer.getString("print_tag"));
-//               System.out.println(printer.getString("rarity"));
-//           }
-       }
-       catch (MalformedURLException e) {
-           e.printStackTrace();
-       } //catch (JSONException e) {
-           //e.printStackTrace();
-       //}
-   }
-   public static Image imageByName(String name) throws MalformedURLException {
-       String currTag = name;
-       Image results = null;
-       try {
-           //Make Connection
-           URL byName = new URL(baseURL_imageByName + URLEncoder.encode(currTag, "UTF-8"));
-           HttpURLConnection connection = (HttpURLConnection) byName.openConnection();
-           //Use Post
-           connection.setRequestMethod("GET");
-           connection.setAllowUserInteraction(false);
-           //Parse Result
-           int length;
-           if (connection.getResponseCode() >= 200 && connection.getResponseCode() < 400) {
-               // Read Image
-           }
-       } catch (Exception e) {
-          e.printStackTrace();
-       }
-       return results;
+   public static String getURLImageByName(){
+        return baseURL_imageByName;
    }
 
    public static String priceByTag(String print_tag) throws MalformedURLException {

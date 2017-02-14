@@ -21,8 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".searchInventory"></activity>
-        <activity android:name=".settingsDropbox"></activity>
+        <activity android:name=".searchInventory" />
+        <activity android:name=".settingsDropbox" />
+        <activity android:name=".CardDisplay"></activity>
     </application>
 
 </manifest>

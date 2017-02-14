@@ -17,7 +17,7 @@ public class settingsDropbox extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_dropbox);
+        setContentView(R.layout.settings);
 
         userName = (EditText)findViewById(R.id.enterUsername);
         userName.setText(getPreferences(usernameKey));

@@ -3,9 +3,9 @@
     <color name="actionBarBackground">#007de3</color>
     <color name="actionBarHighlight">#000000</color>
     <color name="actionModeBackground">#FFFFFFFF</color>
-    <color name="actionModeHighlight">#FF000000</color>
+    <color name="actionModeHighlight">#000000</color>
     <color name="album_list_cover_image_frame">#FF000000</color>
-    <color name="barDark">#444</color>
+    <color name="barDark">#444444</color>
     <color name="barDarkBorder">#666</color>
     <color name="barLight">#dcdcdc</color>
     <color name="barLightBorder">#c1c1c1</color>
@@ -108,14 +108,10 @@
     <string name="dbx_update_main">Please Update the Dropbox App</string>
     <string name="dbx_update_sub">With the new Dropbox app, you can access all your stuff in your favorite apps, like this one!</string>
     <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+        
     </style>
     <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        
     </style>
     <style name="BottomBar">
         <item name="android:layout_width">match_parent</item>

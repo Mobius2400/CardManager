@@ -1,14 +1,17 @@
 package com.venkatesan.das.cardmanager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -24,9 +27,12 @@ import static com.venkatesan.das.cardmanager.R.id.searchText;
  * Created by Das on 2/8/2017.
  */
 
-public class searchInventory extends Activity {
+public class searchInventory extends Activity implements AdapterView.OnItemClickListener{
     EditText cardName;
+    TextView nameDisplay;
+    TextView resultMessage;
     ArrayList<String> results = new ArrayList<String>();
+    YugiohCard[] resultCards;
     ListView displayResults;
     Button goSearch;
     String card_name = "";
@@ -36,15 +42,20 @@ public class searchInventory extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_text);
+
+        // Create variable references to each widget.
         cardName = (EditText)findViewById(R.id.cardNameByName);
+        nameDisplay = (TextView)findViewById(R.id.cardNameShow);
+        resultMessage = (TextView)findViewById(R.id.resultMessage);
         displayResults = (ListView)findViewById(R.id.resultSet);
-        goSearch = (Button)findViewById(R.id.searchButton);
         searcher = new AsyncQuery();
         cardName.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 cardName.setText("");
             }
         });
+
+        goSearch = (Button)findViewById(R.id.searchButton);
         goSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +65,8 @@ public class searchInventory extends Activity {
                 }
                 else{
                     try {
+                        nameDisplay.setText(cardName.getText());
+                        setSearchProgress("Searching...");
                         onSearch(v);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
@@ -63,21 +76,14 @@ public class searchInventory extends Activity {
         });
     }
 
+    public void setSearchProgress(String message){
+        resultMessage.setText(message);
+    }
+
     public void onSearch(View goSearch) throws MalformedURLException{
         results.clear();
         try{
-            // Test ListView
-            results.add("123");
-            results.add("234");
-
-            //Search By Card Name
             searcher.execute(card_name);
-
-            //Display Results
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                      (searchInventory.this, android.R.layout.simple_list_item_1, results);
-            displayResults.setAdapter(adapter);
-            ((EditText) findViewById(R.id.cardNameByName)).setText("");
         }
         catch(Exception e){
             e.printStackTrace();
@@ -89,6 +95,24 @@ public class searchInventory extends Activity {
             String print_tag = card.getPrint_tag();
             String rarity = card.getRarity();
             results.add(print_tag + " - " + rarity);
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(results.size() > 0 && results.size() != 1){
+            Intent cardDisplay = new Intent(searchInventory.this, CardDisplay.class);
+            YugiohCard chosenCard = resultCards[position];
+
+            //Pass on data to new Activity
+            Bundle sendToCardActivity = new Bundle();
+            sendToCardActivity.putString("card_name", card_name);
+            sendToCardActivity.putString("print_tag", chosenCard.getPrint_tag());
+            sendToCardActivity.putString("rarity", chosenCard.getRarity());
+            cardDisplay.putExtras(sendToCardActivity);
+
+            //Finally, start activity
+            startActivity(cardDisplay);
         }
     }
 
@@ -121,7 +145,23 @@ public class searchInventory extends Activity {
         @Override
         protected void onPostExecute(YugiohCard[] yugiohCards) {
             super.onPostExecute(yugiohCards);
-            toAdd(yugiohCards);
+            resultCards = yugiohCards;
+            if(yugiohCards.length == 0){
+                setSearchProgress("No Results Found");
+            }
+            else if(yugiohCards.length == 1){
+                // Redirect to nextActivity with yugiohCards[0];
+            }
+            else if(yugiohCards.length > 1){
+                setSearchProgress("Multiple Versions Found:");
+                toAdd(yugiohCards);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                        (searchInventory.this, android.R.layout.simple_list_item_1, results);
+                displayResults.setAdapter(adapter);
+                ((EditText) findViewById(R.id.cardNameByName)).setText("");
+
+            }
+
         }
     }
 }

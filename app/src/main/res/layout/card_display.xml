@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_display"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.venkatesan.das.cardmanager.CardDisplay">
+
+    <TextView
+        android:text="Test1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/cardNameWithCard"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textColor="@color/actionModeHighlight"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/border"
+        android:layout_below="@+id/cardNameWithCard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36sp"
+        android:id="@+id/cardImage"
+        android:layout_marginLeft="36sp"
+        android:layout_marginRight="36sp"
+        android:layout_marginEnd="36sp"
+        android:layout_marginStart="36sp"
+        android:keepScreenOn="false"
+        android:maxHeight="520sp"
+        android:maxWidth="360sp"
+        android:minHeight="@dimen/dbx_search_view_preferred_width"
+        android:minWidth="156sp"
+        android:background="@color/barLight"
+        android:alpha="15.00"
+        tools:minHeight="225sp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:id="@+id/addInventory"
+        android:minHeight="17dp"
+        android:minWidth="17dp"
+        android:maxHeight="35dp"
+        android:maxWidth="35dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginEnd="19dp"
+        android:scaleX="1.75"
+        android:scaleY="1.75"
+        android:layout_below="@+id/cardImage"
+        android:layout_alignRight="@+id/cardImage"
+        android:layout_alignEnd="@+id/cardImage"
+        android:layout_marginTop="28dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_delete"
+        android:id="@+id/removeInventory"
+        android:maxHeight="35dp"
+        android:maxWidth="35dp"
+        android:minHeight="17dp"
+        android:minWidth="17dp"
+        android:scaleX="1.75"
+        android:scaleY="1.75"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/addInventory"
+        android:layout_alignStart="@+id/addInventory"
+        android:layout_marginBottom="15dp" />
+
+    <TextView
+        android:text="High:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/High"
+        android:layout_alignBaseline="@+id/priceHigh"
+        android:layout_alignBottom="@+id/priceHigh"
+        android:layout_alignLeft="@+id/cardImage"
+        android:layout_alignStart="@+id/cardImage"
+        android:textColor="@color/actionBarHighlight" />
+
+    <TextView
+        android:text="Median"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Median"
+        android:textStyle="normal|bold"
+        android:textColor="@color/actionBarHighlight"
+        android:layout_alignBaseline="@+id/priceMedian"
+        android:layout_alignBottom="@+id/priceMedian"
+        android:layout_alignLeft="@+id/High"
+        android:layout_alignStart="@+id/High" />
+
+    <TextView
+        android:text="Shift:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Shift"
+        android:textColor="@color/actionBarHighlight"
+        android:layout_alignBaseline="@+id/priceLow"
+        android:layout_alignBottom="@+id/priceLow"
+        android:layout_alignRight="@+id/High"
+        android:layout_alignEnd="@+id/High" />
+
+    <TextView
+        android:text="Low:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Low"
+        android:textColor="@color/actionBarHighlight"
+        android:layout_alignBaseline="@+id/priceShift"
+        android:layout_alignBottom="@+id/priceShift"
+        android:layout_alignLeft="@+id/Shift"
+        android:layout_alignStart="@+id/Shift" />
+
+    <TextView
+        android:text="N/A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceShift"
+        android:inputType="numberDecimal"
+        android:layout_alignBottom="@+id/addInventory"
+        android:layout_alignLeft="@+id/priceMedian"
+        android:layout_alignStart="@+id/priceMedian" />
+
+    <TextView
+        android:text="888"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/qtyInInventory"
+        android:textSize="36sp"
+        android:inputType="number"
+        android:textColor="@color/actionBarHighlight"
+        android:layout_alignBottom="@+id/removeInventory"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="N/A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceLow"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/Low"
+        android:layout_alignLeft="@+id/priceShift"
+        android:layout_alignStart="@+id/priceShift" />
+
+    <TextView
+        android:text="N/A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceMedian"
+        android:inputType="numberDecimal"
+        android:textSize="14sp"
+        android:textStyle="normal|bold"
+        android:layout_above="@+id/priceShift"
+        android:layout_alignRight="@+id/priceHigh"
+        android:layout_alignEnd="@+id/priceHigh" />
+
+    <TextView
+        android:text="N/A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceHigh"
+        android:inputType="numberDecimal"
+        android:layout_above="@+id/priceMedian"
+        android:layout_toRightOf="@+id/Median"
+        android:layout_toEndOf="@+id/Median"
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp" />
+
+    <TextView
+        android:text="In Stock:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView11"
+        android:textSize="24sp"
+        android:layout_alignBaseline="@+id/qtyInInventory"
+        android:layout_alignBottom="@+id/qtyInInventory"
+        android:layout_alignLeft="@+id/Shift"
+        android:layout_alignStart="@+id/Shift"
+        android:textColor="@color/actionBarHighlight" />
+
+    <TextView
+        android:text="PSV-EN000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/printTag"
+        android:textSize="18sp"
+        android:textColor="@color/barDark"
+        android:layout_alignBaseline="@+id/Rarity"
+        android:layout_alignBottom="@+id/Rarity"
+        android:layout_alignRight="@+id/cardImage"
+        android:layout_alignEnd="@+id/cardImage" />
+
+    <TextView
+        android:text="Ultimate Rare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/Rarity"
+        android:textSize="18sp"
+        android:textColor="@color/barDark"
+        android:layout_below="@+id/cardNameWithCard"
+        android:layout_alignLeft="@+id/cardImage"
+        android:layout_alignStart="@+id/cardImage" />
+
+</RelativeLayout>
