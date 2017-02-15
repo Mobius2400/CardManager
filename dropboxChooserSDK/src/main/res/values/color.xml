@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:dbxbuild="https://android.dropbox.com/StringsSchema">
     <color name="red">#FFFF0000</color>
-    <color name="green">#FF00FF00</color>
+    <color name="green">#00ff00</color>
     <color name="blue">#FF0000FF</color>
 
     <color name="whiteBackground">#FFFFFF</color>
@@ -113,7 +113,7 @@
 		dbxbuild:default="#AA000000"
 		dbxbuild:samsung="#ff000000">#AA000000</color>
 
-   <color name="barDark">#444444</color>
+   <color name="barDark">#232222</color>
    <color name="barDarkBorder">#666</color>
    <color name="barLight">#dcdcdc</color>
    <color name="barLightBorder">#c1c1c1</color>

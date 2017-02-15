@@ -29,7 +29,7 @@
             android:background="@drawable/common_btn_light_gray_disabled"
             android:backgroundTint="@color/galleryItemSelectedOverlay"
             android:textAllCaps="false"
-            android:textColor="@color/barDark" />
+            android:textColor="@color/barLightBorder" />
 
         <Button
             android:text="@string/goSearch"
@@ -58,7 +58,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/resultMessage"
             android:textSize="18sp"
-            android:textColor="@color/barDark" />
+            android:textColor="@color/barLight"
+            android:paddingLeft="10sp" />
 
         <ListView
             android:layout_width="wrap_content"

@@ -29,5 +29,6 @@ dependencies {
     compile project(':openCVLibrary320')
     compile files('src/main/libs/json-20140107.jar')
     compile project(':dropboxChooserSDK')
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
 }
 

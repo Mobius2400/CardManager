@@ -47,14 +47,7 @@
                     "endOffset": 322
                 },
                 "from": {
-                    "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 273,
-                        "endColumn": 53,
-                        "endOffset": 322
-                    }
+                    "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
                 }
             },
             {
@@ -405,20 +398,27 @@
                     "startLine": 34,
                     "startColumn": 4,
                     "startOffset": 2015,
-                    "endColumn": 41,
-                    "endOffset": 2052
+                    "endColumn": 39,
+                    "endOffset": 2050
                 },
                 "from": {
-                    "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
+                    "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 34,
+                        "startColumn": 4,
+                        "startOffset": 2015,
+                        "endColumn": 39,
+                        "endOffset": 2050
+                    }
                 }
             },
             {
                 "to": {
                     "startLine": 35,
                     "startColumn": 4,
-                    "startOffset": 2057,
+                    "startOffset": 2055,
                     "endColumn": 49,
-                    "endOffset": 2102
+                    "endOffset": 2100
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -428,9 +428,9 @@
                 "to": {
                     "startLine": 36,
                     "startColumn": 4,
-                    "startOffset": 2107,
+                    "startOffset": 2105,
                     "endColumn": 53,
-                    "endOffset": 2156
+                    "endOffset": 2154
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -440,9 +440,9 @@
                 "to": {
                     "startLine": 37,
                     "startColumn": 4,
-                    "startOffset": 2161,
+                    "startOffset": 2159,
                     "endColumn": 54,
-                    "endOffset": 2211
+                    "endOffset": 2209
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -452,9 +452,9 @@
                 "to": {
                     "startLine": 38,
                     "startColumn": 4,
-                    "startOffset": 2216,
+                    "startOffset": 2214,
                     "endColumn": 44,
-                    "endOffset": 2256
+                    "endOffset": 2254
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -464,9 +464,9 @@
                 "to": {
                     "startLine": 39,
                     "startColumn": 4,
-                    "startOffset": 2261,
+                    "startOffset": 2259,
                     "endColumn": 57,
-                    "endOffset": 2314
+                    "endOffset": 2312
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -476,9 +476,9 @@
                 "to": {
                     "startLine": 40,
                     "startColumn": 4,
-                    "startOffset": 2319,
+                    "startOffset": 2317,
                     "endColumn": 52,
-                    "endOffset": 2367
+                    "endOffset": 2365
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -488,9 +488,9 @@
                 "to": {
                     "startLine": 41,
                     "startColumn": 4,
-                    "startOffset": 2372,
+                    "startOffset": 2370,
                     "endColumn": 51,
-                    "endOffset": 2419
+                    "endOffset": 2417
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -500,9 +500,9 @@
                 "to": {
                     "startLine": 42,
                     "startColumn": 4,
-                    "startOffset": 2424,
+                    "startOffset": 2422,
                     "endColumn": 43,
-                    "endOffset": 2463
+                    "endOffset": 2461
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -512,9 +512,9 @@
                 "to": {
                     "startLine": 43,
                     "startColumn": 4,
-                    "startOffset": 2468,
+                    "startOffset": 2466,
                     "endColumn": 48,
-                    "endOffset": 2512
+                    "endOffset": 2510
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -524,9 +524,9 @@
                 "to": {
                     "startLine": 44,
                     "startColumn": 4,
-                    "startOffset": 2517,
+                    "startOffset": 2515,
                     "endColumn": 62,
-                    "endOffset": 2575
+                    "endOffset": 2573
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -536,9 +536,9 @@
                 "to": {
                     "startLine": 45,
                     "startColumn": 4,
-                    "startOffset": 2580,
+                    "startOffset": 2578,
                     "endColumn": 51,
-                    "endOffset": 2627
+                    "endOffset": 2625
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -548,9 +548,9 @@
                 "to": {
                     "startLine": 46,
                     "startColumn": 4,
-                    "startOffset": 2632,
+                    "startOffset": 2630,
                     "endColumn": 51,
-                    "endOffset": 2679
+                    "endOffset": 2677
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -560,9 +560,9 @@
                 "to": {
                     "startLine": 47,
                     "startColumn": 4,
-                    "startOffset": 2684,
+                    "startOffset": 2682,
                     "endColumn": 51,
-                    "endOffset": 2731
+                    "endOffset": 2729
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -572,9 +572,9 @@
                 "to": {
                     "startLine": 48,
                     "startColumn": 4,
-                    "startOffset": 2736,
+                    "startOffset": 2734,
                     "endColumn": 51,
-                    "endOffset": 2783
+                    "endOffset": 2781
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -584,9 +584,9 @@
                 "to": {
                     "startLine": 49,
                     "startColumn": 4,
-                    "startOffset": 2788,
+                    "startOffset": 2786,
                     "endColumn": 58,
-                    "endOffset": 2842
+                    "endOffset": 2840
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -596,9 +596,9 @@
                 "to": {
                     "startLine": 50,
                     "startColumn": 4,
-                    "startOffset": 2847,
+                    "startOffset": 2845,
                     "endColumn": 60,
-                    "endOffset": 2903
+                    "endOffset": 2901
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -608,9 +608,9 @@
                 "to": {
                     "startLine": 51,
                     "startColumn": 4,
-                    "startOffset": 2908,
+                    "startOffset": 2906,
                     "endColumn": 54,
-                    "endOffset": 2958
+                    "endOffset": 2956
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -620,9 +620,9 @@
                 "to": {
                     "startLine": 52,
                     "startColumn": 4,
-                    "startOffset": 2963,
+                    "startOffset": 2961,
                     "endColumn": 60,
-                    "endOffset": 3019
+                    "endOffset": 3017
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -632,9 +632,9 @@
                 "to": {
                     "startLine": 53,
                     "startColumn": 4,
-                    "startOffset": 3024,
+                    "startOffset": 3022,
                     "endColumn": 52,
-                    "endOffset": 3072
+                    "endOffset": 3070
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -644,9 +644,9 @@
                 "to": {
                     "startLine": 54,
                     "startColumn": 4,
-                    "startOffset": 3077,
+                    "startOffset": 3075,
                     "endColumn": 39,
-                    "endOffset": 3112
+                    "endOffset": 3110
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -656,9 +656,9 @@
                 "to": {
                     "startLine": 55,
                     "startColumn": 4,
-                    "startOffset": 3117,
+                    "startOffset": 3115,
                     "endColumn": 47,
-                    "endOffset": 3160
+                    "endOffset": 3158
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -668,9 +668,9 @@
                 "to": {
                     "startLine": 56,
                     "startColumn": 4,
-                    "startOffset": 3165,
+                    "startOffset": 3163,
                     "endColumn": 45,
-                    "endOffset": 3206
+                    "endOffset": 3204
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -680,9 +680,9 @@
                 "to": {
                     "startLine": 57,
                     "startColumn": 4,
-                    "startOffset": 3211,
+                    "startOffset": 3209,
                     "endColumn": 61,
-                    "endOffset": 3268
+                    "endOffset": 3266
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -692,9 +692,9 @@
                 "to": {
                     "startLine": 58,
                     "startColumn": 4,
-                    "startOffset": 3273,
+                    "startOffset": 3271,
                     "endColumn": 63,
-                    "endOffset": 3332
+                    "endOffset": 3330
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -704,9 +704,9 @@
                 "to": {
                     "startLine": 59,
                     "startColumn": 4,
-                    "startOffset": 3337,
+                    "startOffset": 3335,
                     "endColumn": 57,
-                    "endOffset": 3390
+                    "endOffset": 3388
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -716,9 +716,9 @@
                 "to": {
                     "startLine": 60,
                     "startColumn": 4,
-                    "startOffset": 3395,
+                    "startOffset": 3393,
                     "endColumn": 52,
-                    "endOffset": 3443
+                    "endOffset": 3441
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -728,9 +728,9 @@
                 "to": {
                     "startLine": 61,
                     "startColumn": 4,
-                    "startOffset": 3448,
+                    "startOffset": 3446,
                     "endColumn": 40,
-                    "endOffset": 3484
+                    "endOffset": 3482
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -740,9 +740,9 @@
                 "to": {
                     "startLine": 62,
                     "startColumn": 4,
-                    "startOffset": 3489,
+                    "startOffset": 3487,
                     "endColumn": 49,
-                    "endOffset": 3534
+                    "endOffset": 3532
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -752,9 +752,9 @@
                 "to": {
                     "startLine": 63,
                     "startColumn": 4,
-                    "startOffset": 3539,
+                    "startOffset": 3537,
                     "endColumn": 47,
-                    "endOffset": 3582
+                    "endOffset": 3580
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -764,9 +764,9 @@
                 "to": {
                     "startLine": 64,
                     "startColumn": 4,
-                    "startOffset": 3587,
+                    "startOffset": 3585,
                     "endColumn": 46,
-                    "endOffset": 3629
+                    "endOffset": 3627
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -776,9 +776,9 @@
                 "to": {
                     "startLine": 65,
                     "startColumn": 4,
-                    "startOffset": 3634,
+                    "startOffset": 3632,
                     "endColumn": 51,
-                    "endOffset": 3681
+                    "endOffset": 3679
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -788,9 +788,9 @@
                 "to": {
                     "startLine": 66,
                     "startColumn": 4,
-                    "startOffset": 3686,
+                    "startOffset": 3684,
                     "endColumn": 45,
-                    "endOffset": 3727
+                    "endOffset": 3725
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -800,9 +800,9 @@
                 "to": {
                     "startLine": 67,
                     "startColumn": 4,
-                    "startOffset": 3732,
+                    "startOffset": 3730,
                     "endColumn": 48,
-                    "endOffset": 3776
+                    "endOffset": 3774
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -812,9 +812,9 @@
                 "to": {
                     "startLine": 68,
                     "startColumn": 4,
-                    "startOffset": 3781,
+                    "startOffset": 3779,
                     "endColumn": 42,
-                    "endOffset": 3819
+                    "endOffset": 3817
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -824,9 +824,9 @@
                 "to": {
                     "startLine": 69,
                     "startColumn": 4,
-                    "startOffset": 3824,
+                    "startOffset": 3822,
                     "endColumn": 47,
-                    "endOffset": 3867
+                    "endOffset": 3865
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -836,9 +836,9 @@
                 "to": {
                     "startLine": 70,
                     "startColumn": 4,
-                    "startOffset": 3872,
+                    "startOffset": 3870,
                     "endColumn": 110,
-                    "endOffset": 3978
+                    "endOffset": 3976
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -848,9 +848,9 @@
                 "to": {
                     "startLine": 71,
                     "startColumn": 4,
-                    "startOffset": 3983,
+                    "startOffset": 3981,
                     "endColumn": 69,
-                    "endOffset": 4048
+                    "endOffset": 4046
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -860,9 +860,9 @@
                 "to": {
                     "startLine": 72,
                     "startColumn": 4,
-                    "startOffset": 4053,
+                    "startOffset": 4051,
                     "endColumn": 110,
-                    "endOffset": 4159
+                    "endOffset": 4157
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -872,9 +872,9 @@
                 "to": {
                     "startLine": 73,
                     "startColumn": 4,
-                    "startOffset": 4164,
+                    "startOffset": 4162,
                     "endColumn": 56,
-                    "endOffset": 4216
+                    "endOffset": 4214
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -884,9 +884,9 @@
                 "to": {
                     "startLine": 74,
                     "startColumn": 4,
-                    "startOffset": 4221,
+                    "startOffset": 4219,
                     "endColumn": 110,
-                    "endOffset": 4327
+                    "endOffset": 4325
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -896,9 +896,9 @@
                 "to": {
                     "startLine": 75,
                     "startColumn": 4,
-                    "startOffset": 4332,
+                    "startOffset": 4330,
                     "endColumn": 49,
-                    "endOffset": 4377
+                    "endOffset": 4375
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -908,9 +908,9 @@
                 "to": {
                     "startLine": 76,
                     "startColumn": 4,
-                    "startOffset": 4382,
+                    "startOffset": 4380,
                     "endColumn": 43,
-                    "endOffset": 4421
+                    "endOffset": 4419
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -920,9 +920,9 @@
                 "to": {
                     "startLine": 77,
                     "startColumn": 4,
-                    "startOffset": 4426,
+                    "startOffset": 4424,
                     "endColumn": 57,
-                    "endOffset": 4479
+                    "endOffset": 4477
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -932,9 +932,9 @@
                 "to": {
                     "startLine": 78,
                     "startColumn": 4,
-                    "startOffset": 4484,
+                    "startOffset": 4482,
                     "endColumn": 45,
-                    "endOffset": 4525
+                    "endOffset": 4523
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -944,9 +944,9 @@
                 "to": {
                     "startLine": 79,
                     "startColumn": 4,
-                    "startOffset": 4530,
+                    "startOffset": 4528,
                     "endColumn": 61,
-                    "endOffset": 4587
+                    "endOffset": 4585
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -956,9 +956,9 @@
                 "to": {
                     "startLine": 80,
                     "startColumn": 4,
-                    "startOffset": 4592,
+                    "startOffset": 4590,
                     "endColumn": 67,
-                    "endOffset": 4655
+                    "endOffset": 4653
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -968,9 +968,9 @@
                 "to": {
                     "startLine": 81,
                     "startColumn": 4,
-                    "startOffset": 4660,
+                    "startOffset": 4658,
                     "endColumn": 68,
-                    "endOffset": 4724
+                    "endOffset": 4722
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -980,9 +980,9 @@
                 "to": {
                     "startLine": 82,
                     "startColumn": 4,
-                    "startOffset": 4729,
+                    "startOffset": 4727,
                     "endColumn": 64,
-                    "endOffset": 4789
+                    "endOffset": 4787
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -992,9 +992,9 @@
                 "to": {
                     "startLine": 83,
                     "startColumn": 4,
-                    "startOffset": 4794,
+                    "startOffset": 4792,
                     "endColumn": 65,
-                    "endOffset": 4855
+                    "endOffset": 4853
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1004,9 +1004,9 @@
                 "to": {
                     "startLine": 84,
                     "startColumn": 4,
-                    "startOffset": 4860,
+                    "startOffset": 4858,
                     "endColumn": 61,
-                    "endOffset": 4917
+                    "endOffset": 4915
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1016,9 +1016,9 @@
                 "to": {
                     "startLine": 85,
                     "startColumn": 4,
-                    "startOffset": 4922,
+                    "startOffset": 4920,
                     "endColumn": 59,
-                    "endOffset": 4977
+                    "endOffset": 4975
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1028,9 +1028,9 @@
                 "to": {
                     "startLine": 86,
                     "startColumn": 4,
-                    "startOffset": 4982,
+                    "startOffset": 4980,
                     "endColumn": 59,
-                    "endOffset": 5037
+                    "endOffset": 5035
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1040,9 +1040,9 @@
                 "to": {
                     "startLine": 87,
                     "startColumn": 4,
-                    "startOffset": 5042,
+                    "startOffset": 5040,
                     "endColumn": 65,
-                    "endOffset": 5103
+                    "endOffset": 5101
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1052,9 +1052,9 @@
                 "to": {
                     "startLine": 88,
                     "startColumn": 4,
-                    "startOffset": 5108,
+                    "startOffset": 5106,
                     "endColumn": 66,
-                    "endOffset": 5170
+                    "endOffset": 5168
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1064,9 +1064,9 @@
                 "to": {
                     "startLine": 89,
                     "startColumn": 4,
-                    "startOffset": 5175,
+                    "startOffset": 5173,
                     "endColumn": 64,
-                    "endOffset": 5235
+                    "endOffset": 5233
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1076,9 +1076,9 @@
                 "to": {
                     "startLine": 90,
                     "startColumn": 4,
-                    "startOffset": 5240,
+                    "startOffset": 5238,
                     "endColumn": 63,
-                    "endOffset": 5299
+                    "endOffset": 5297
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1088,9 +1088,9 @@
                 "to": {
                     "startLine": 91,
                     "startColumn": 4,
-                    "startOffset": 5304,
+                    "startOffset": 5302,
                     "endColumn": 51,
-                    "endOffset": 5351
+                    "endOffset": 5349
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1100,9 +1100,9 @@
                 "to": {
                     "startLine": 92,
                     "startColumn": 4,
-                    "startOffset": 5356,
+                    "startOffset": 5354,
                     "endColumn": 52,
-                    "endOffset": 5404
+                    "endOffset": 5402
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1112,9 +1112,9 @@
                 "to": {
                     "startLine": 93,
                     "startColumn": 4,
-                    "startOffset": 5409,
+                    "startOffset": 5407,
                     "endColumn": 55,
-                    "endOffset": 5460
+                    "endOffset": 5458
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1124,9 +1124,9 @@
                 "to": {
                     "startLine": 94,
                     "startColumn": 4,
-                    "startOffset": 5465,
+                    "startOffset": 5463,
                     "endColumn": 54,
-                    "endOffset": 5515
+                    "endOffset": 5513
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1136,9 +1136,9 @@
                 "to": {
                     "startLine": 95,
                     "startColumn": 4,
-                    "startOffset": 5520,
+                    "startOffset": 5518,
                     "endColumn": 52,
-                    "endOffset": 5568
+                    "endOffset": 5566
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1148,9 +1148,9 @@
                 "to": {
                     "startLine": 96,
                     "startColumn": 4,
-                    "startOffset": 5573,
+                    "startOffset": 5571,
                     "endColumn": 53,
-                    "endOffset": 5622
+                    "endOffset": 5620
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1160,9 +1160,9 @@
                 "to": {
                     "startLine": 97,
                     "startColumn": 4,
-                    "startOffset": 5627,
+                    "startOffset": 5625,
                     "endColumn": 52,
-                    "endOffset": 5675
+                    "endOffset": 5673
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1172,9 +1172,9 @@
                 "to": {
                     "startLine": 98,
                     "startColumn": 4,
-                    "startOffset": 5680,
+                    "startOffset": 5678,
                     "endColumn": 51,
-                    "endOffset": 5727
+                    "endOffset": 5725
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1184,9 +1184,9 @@
                 "to": {
                     "startLine": 99,
                     "startColumn": 4,
-                    "startOffset": 5732,
+                    "startOffset": 5730,
                     "endColumn": 54,
-                    "endOffset": 5782
+                    "endOffset": 5780
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1196,9 +1196,9 @@
                 "to": {
                     "startLine": 100,
                     "startColumn": 4,
-                    "startOffset": 5787,
+                    "startOffset": 5785,
                     "endColumn": 55,
-                    "endOffset": 5838
+                    "endOffset": 5836
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1208,9 +1208,9 @@
                 "to": {
                     "startLine": 101,
                     "startColumn": 4,
-                    "startOffset": 5843,
+                    "startOffset": 5841,
                     "endColumn": 60,
-                    "endOffset": 5899
+                    "endOffset": 5897
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1220,9 +1220,9 @@
                 "to": {
                     "startLine": 102,
                     "startColumn": 4,
-                    "startOffset": 5904,
+                    "startOffset": 5902,
                     "endColumn": 57,
-                    "endOffset": 5957
+                    "endOffset": 5955
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1232,9 +1232,9 @@
                 "to": {
                     "startLine": 103,
                     "startColumn": 4,
-                    "startOffset": 5962,
+                    "startOffset": 5960,
                     "endColumn": 75,
-                    "endOffset": 6033
+                    "endOffset": 6031
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1244,9 +1244,9 @@
                 "to": {
                     "startLine": 104,
                     "startColumn": 4,
-                    "startOffset": 6038,
+                    "startOffset": 6036,
                     "endColumn": 135,
-                    "endOffset": 6169
+                    "endOffset": 6167
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1256,9 +1256,9 @@
                 "to": {
                     "startLine": 105,
                     "startColumn": 4,
-                    "startOffset": 6174,
+                    "startOffset": 6172,
                     "endColumn": 53,
-                    "endOffset": 6223
+                    "endOffset": 6221
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1268,9 +1268,9 @@
                 "to": {
                     "startLine": 106,
                     "startColumn": 4,
-                    "startOffset": 6228,
+                    "startOffset": 6226,
                     "endColumn": 55,
-                    "endOffset": 6279
+                    "endOffset": 6277
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1280,9 +1280,9 @@
                 "to": {
                     "startLine": 107,
                     "startColumn": 4,
-                    "startOffset": 6284,
+                    "startOffset": 6282,
                     "endColumn": 73,
-                    "endOffset": 6353
+                    "endOffset": 6351
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1292,9 +1292,9 @@
                 "to": {
                     "startLine": 108,
                     "startColumn": 4,
-                    "startOffset": 6358,
+                    "startOffset": 6356,
                     "endColumn": 136,
-                    "endOffset": 6490
+                    "endOffset": 6488
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1304,10 +1304,10 @@
                 "to": {
                     "startLine": 109,
                     "startColumn": 4,
-                    "startOffset": 6495,
+                    "startOffset": 6493,
                     "endLine": 111,
                     "endColumn": 12,
-                    "endOffset": 6573
+                    "endOffset": 6571
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1317,10 +1317,10 @@
                 "to": {
                     "startLine": 112,
                     "startColumn": 4,
-                    "startOffset": 6578,
+                    "startOffset": 6576,
                     "endLine": 114,
                     "endColumn": 12,
-                    "endOffset": 6645
+                    "endOffset": 6643
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1330,10 +1330,10 @@
                 "to": {
                     "startLine": 115,
                     "startColumn": 4,
-                    "startOffset": 6650,
+                    "startOffset": 6648,
                     "endLine": 121,
                     "endColumn": 12,
-                    "endOffset": 7005
+                    "endOffset": 7003
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1343,10 +1343,10 @@
                 "to": {
                     "startLine": 122,
                     "startColumn": 4,
-                    "startOffset": 7010,
+                    "startOffset": 7008,
                     "endLine": 126,
                     "endColumn": 12,
-                    "endOffset": 7239
+                    "endOffset": 7237
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1356,10 +1356,10 @@
                 "to": {
                     "startLine": 127,
                     "startColumn": 4,
-                    "startOffset": 7244,
+                    "startOffset": 7242,
                     "endLine": 130,
                     "endColumn": 12,
-                    "endOffset": 7462
+                    "endOffset": 7460
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1369,10 +1369,10 @@
                 "to": {
                     "startLine": 131,
                     "startColumn": 4,
-                    "startOffset": 7467,
+                    "startOffset": 7465,
                     "endLine": 134,
                     "endColumn": 12,
-                    "endOffset": 7693
+                    "endOffset": 7691
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"
@@ -1382,10 +1382,10 @@
                 "to": {
                     "startLine": 135,
                     "startColumn": 4,
-                    "startOffset": 7698,
+                    "startOffset": 7696,
                     "endLine": 139,
                     "endColumn": 12,
-                    "endOffset": 7935
+                    "endOffset": 7933
                 },
                 "from": {
                     "file": "C:\\Users\\Das\\AndroidStudioProjects\\CardManager\\dropboxChooserSDK\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml"

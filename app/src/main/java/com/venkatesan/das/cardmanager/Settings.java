@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class settingsDropbox extends Activity {
+public class Settings extends Activity {
     EditText userName, password;
     final String preferencesKey = "userPreferences";
     final String usernameKey = "ownerName";

@@ -27,7 +27,7 @@ import static com.venkatesan.das.cardmanager.R.id.searchText;
  * Created by Das on 2/8/2017.
  */
 
-public class searchInventory extends Activity implements AdapterView.OnItemClickListener{
+public class searchInventory extends Activity {
     EditText cardName;
     TextView nameDisplay;
     TextView resultMessage;
@@ -47,7 +47,28 @@ public class searchInventory extends Activity implements AdapterView.OnItemClick
         cardName = (EditText)findViewById(R.id.cardNameByName);
         nameDisplay = (TextView)findViewById(R.id.cardNameShow);
         resultMessage = (TextView)findViewById(R.id.resultMessage);
+
         displayResults = (ListView)findViewById(R.id.resultSet);
+        displayResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(results.size() > 0 && results.size() != 1){
+                    Intent cardDisplay = new Intent(searchInventory.this, CardDisplay.class);
+                    YugiohCard chosenCard = resultCards[position];
+
+                    //Pass on data to new Activity
+                    Bundle sendToCardActivity = new Bundle();
+                    sendToCardActivity.putString("card_name", card_name);
+                    sendToCardActivity.putString("print_tag", chosenCard.getPrint_tag());
+                    sendToCardActivity.putString("rarity", chosenCard.getRarity());
+                    cardDisplay.putExtras(sendToCardActivity);
+
+                    //Finally, start activity
+                    startActivity(cardDisplay);
+                }
+            }
+        });
+
         searcher = new AsyncQuery();
         cardName.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -98,24 +119,6 @@ public class searchInventory extends Activity implements AdapterView.OnItemClick
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(results.size() > 0 && results.size() != 1){
-            Intent cardDisplay = new Intent(searchInventory.this, CardDisplay.class);
-            YugiohCard chosenCard = resultCards[position];
-
-            //Pass on data to new Activity
-            Bundle sendToCardActivity = new Bundle();
-            sendToCardActivity.putString("card_name", card_name);
-            sendToCardActivity.putString("print_tag", chosenCard.getPrint_tag());
-            sendToCardActivity.putString("rarity", chosenCard.getRarity());
-            cardDisplay.putExtras(sendToCardActivity);
-
-            //Finally, start activity
-            startActivity(cardDisplay);
-        }
-    }
-
     public class AsyncQuery extends AsyncTask<String, Void, YugiohCard[]> {
         @Override
 
@@ -159,7 +162,6 @@ public class searchInventory extends Activity implements AdapterView.OnItemClick
                         (searchInventory.this, android.R.layout.simple_list_item_1, results);
                 displayResults.setAdapter(adapter);
                 ((EditText) findViewById(R.id.cardNameByName)).setText("");
-
             }
 
         }

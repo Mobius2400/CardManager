@@ -16,7 +16,7 @@ import java.net.URLEncoder;
  */
 
 public class asyncImageLoad extends AsyncTask<Void, Void, Bitmap> {
-    private String getImageURL ;
+    private String getImageURL;
     private ImageView putCardImage;
 
     public asyncImageLoad(String cardName, ImageView destinationView){

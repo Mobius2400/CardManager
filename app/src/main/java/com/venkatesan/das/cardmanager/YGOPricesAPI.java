@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class YGOPricesAPI {
    final static String base = "http://yugiohprices.com/api/";
    final static String baseURL_allVersions = base + "card_versions/";
-   final static String baseURL_dataByTag = base + "price_for_print_tag/";
+   final static String baseURL_dataByTagandRarity = base + "price_history/";
    final static String baseURL_imageByName = base + "card_image/";
    private static String currName = "";
 
@@ -30,13 +30,15 @@ public class YGOPricesAPI {
         return baseURL_imageByName;
    }
 
-   public static String priceByTag(String print_tag) throws MalformedURLException {
+   public static String priceByTag(String print_tag, String rarity) throws MalformedURLException {
        String currTag = print_tag;
+       String currRarity = rarity;
        String results = "Error: Something happened";
        StringBuilder returnSet = new StringBuilder();
        try {
            // Make Connection
-           URL byTag = new URL(baseURL_dataByTag + URLEncoder.encode(currTag, "UTF-8"));
+           URL byTag = new URL(baseURL_dataByTagandRarity + URLEncoder.encode(currTag, "UTF-8") + "?rarity=" +
+                   URLEncoder.encode(currRarity, "UTF-8"));
            HttpURLConnection connection = (HttpURLConnection) byTag.openConnection();
            //Use Post
            connection.setRequestMethod("GET");
@@ -124,5 +126,21 @@ public class YGOPricesAPI {
            n.printStackTrace();
        }
        return cards;
+   }
+
+   public static YugiohCard getCardForDisplay(JSONArray resultSet) throws JSONException{
+       YugiohCard thisCard = new YugiohCard();
+
+       try{
+           JSONObject temp = resultSet.getJSONObject(0);
+           thisCard.setHigh(temp.getDouble("price_high"));
+           thisCard.setMedian(temp.getDouble("price_average"));
+           thisCard.setLow(temp.getDouble("price_low"));
+           thisCard.setShift(temp.getDouble("price_shift") * 100);
+       }
+       catch(Exception n){
+          n.printStackTrace();
+       }
+       return thisCard;
    }
 }

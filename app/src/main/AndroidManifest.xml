@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".searchInventory" />
-        <activity android:name=".settingsDropbox" />
+        <activity android:name=".Settings" />
         <activity android:name=".CardDisplay"></activity>
     </application>
 

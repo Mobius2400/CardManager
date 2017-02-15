@@ -4,17 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
-import java.net.URL;
 
 public class MainActivity extends Activity {
 
@@ -35,7 +26,7 @@ public class MainActivity extends Activity {
         }
         switch(buttonID){
             case R.id.configSettings:
-                Intent settings = new Intent(MainActivity.this, settingsDropbox.class);
+                Intent settings = new Intent(MainActivity.this, Settings.class);
                 startActivity(settings);
                 break;
         }

@@ -1,5 +1,7 @@
 package com.venkatesan.das.cardmanager;
 
+import android.widget.ImageView;
+
 /**
  * Created by Das on 2/9/2017.
  */
@@ -7,9 +9,10 @@ package com.venkatesan.das.cardmanager;
 public class YugiohCard {
     String name;
     String print_tag;
-    double low, median, high;
+    double low, median, high, shift;
     int numInventory;
     String rarity;
+    ImageView cardImage;
 
     public YugiohCard(){
         name = "";
@@ -17,8 +20,10 @@ public class YugiohCard {
         low = 0.0;
         median = 0.0;
         high = 0.0;
+        shift = 0.0;
         numInventory = 0;
         rarity = "";
+        cardImage = null;
     }
 
     @Override
@@ -29,6 +34,7 @@ public class YugiohCard {
                 ", low=" + low +
                 ", median=" + median +
                 ", high=" + high +
+                ", shift=" + shift +
                 ", numInventory=" + numInventory +
                 ", rarity='" + rarity + '\'' +
                 '}';
@@ -74,6 +80,14 @@ public class YugiohCard {
         this.high = high;
     }
 
+    public double getShift() {
+        return shift;
+    }
+
+    public void setShift(double shift) {
+        this.shift = shift;
+    }
+
     public int getNumInventory() {
         return numInventory;
     }
@@ -89,4 +103,8 @@ public class YugiohCard {
     public void setRarity(String rarity) {
         this.rarity = rarity;
     }
+
+    public ImageView getCardImage() { return cardImage; }
+
+    public void setCardImage(ImageView cardImage) { this.cardImage = cardImage; }
 }

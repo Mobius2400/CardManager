@@ -5,7 +5,7 @@
     <color name="actionModeBackground">#FFFFFFFF</color>
     <color name="actionModeHighlight">#000000</color>
     <color name="album_list_cover_image_frame">#FF000000</color>
-    <color name="barDark">#444444</color>
+    <color name="barDark">#232222</color>
     <color name="barDarkBorder">#666</color>
     <color name="barLight">#dcdcdc</color>
     <color name="barLightBorder">#c1c1c1</color>
@@ -32,7 +32,7 @@
     <color name="galleryItemSelectedOverlay" ns1:default="#55007ee5" ns1:samsung="#00000000">#55007ee5</color>
     <color name="grayBlueishText">#768195</color>
     <color name="grayButtonText">#111</color>
-    <color name="green">#FF00FF00</color>
+    <color name="green">#00ff00</color>
     <color name="greenButtonText">#FFFFFF</color>
     <color name="lightBlueBackground">#F4FAFF</color>
     <color name="lightBlueBackground2">#f2f8fc</color>
