@@ -13,7 +13,15 @@ import static com.venkatesan.das.cardmanager.YGOPricesAPI.toJSON;
 
 public class CardDisplay extends Activity {
 
-    public static YugiohCard thisCard;
+    YugiohCard thisCard;
+    TextView name;
+    TextView cardRarity;
+    TextView cardTag;
+    TextView quantityInStock;
+    TextView hi;
+    TextView med;
+    TextView low;
+    TextView shift;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +37,14 @@ public class CardDisplay extends Activity {
         thisCard.setCardImage((ImageView)findViewById(R.id.cardImage));
 
         // Define fields
-        TextView name = (TextView)findViewById(R.id.cardNameWithCard);
-        TextView cardRarity = (TextView)findViewById(R.id.Rarity);
-        TextView cardTag = (TextView)findViewById(R.id.printTag);
-        TextView quantityInStock = (TextView)findViewById(R.id.qtyInInventory);
-        TextView hi = (TextView)findViewById(R.id.priceHigh);
-        TextView med = (TextView)findViewById(R.id.priceMedian);
-        TextView low = (TextView)findViewById(R.id.priceLow);
-        TextView shift = (TextView)findViewById(R.id.priceShift );
+        name = (TextView)findViewById(R.id.cardNameWithCard);
+        cardRarity = (TextView)findViewById(R.id.Rarity);
+        cardTag = (TextView)findViewById(R.id.printTag);
+        quantityInStock = (TextView)findViewById(R.id.qtyInInventory);
+        hi = (TextView)findViewById(R.id.priceHigh);
+        med = (TextView)findViewById(R.id.priceMedian);
+        low = (TextView)findViewById(R.id.priceLow);
+        shift = (TextView)findViewById(R.id.priceShift );
 
         // Render fields
         name.setText(thisCard.getName());
@@ -44,17 +52,11 @@ public class CardDisplay extends Activity {
         cardRarity.setText(thisCard.getRarity());
         new asyncImageLoad(thisCard.getName(), thisCard.getCardImage()).execute();
         new asyncGetPrices().execute();
-        hi.setText("$"+Double.toString(thisCard.getHigh()));
-        med.setText("$"+Double.toString(thisCard.getMedian()));
-        low.setText("$"+Double.toString(thisCard.getLow()));
-        shift.setText(Double.toString(thisCard.getShift())+"%");
-    }
-
-    public void setPrices(YugiohCard yugiohCard){
-        thisCard.setLow(yugiohCard.getLow());
-        thisCard.setMedian(yugiohCard.getMedian());
-        thisCard.setHigh(yugiohCard.getHigh());
-        thisCard.setShift(yugiohCard.getShift());
+//        thisCard.setHigh(Double.parseDouble(hi.getText().toString()));
+//        thisCard.setMedian(Double.parseDouble(med.getText().toString()));
+//        thisCard.setLow(Double.parseDouble(low.getText().toString()));
+//        thisCard.setShift(Double.parseDouble(shift.getText().toString()));
+        System.out.println(thisCard.toString());
     }
 
     public class asyncGetPrices extends AsyncTask<Void, Void, YugiohCard> {
@@ -75,7 +77,10 @@ public class CardDisplay extends Activity {
         @Override
         protected void onPostExecute(YugiohCard yugiohCard) {
             super.onPostExecute(yugiohCard);
-            setPrices(yugiohCard);
+            hi.setText("$"+Double.toString(yugiohCard.getHigh()));
+            med.setText("$"+Double.toString(yugiohCard.getMedian()));
+            low.setText("$"+Double.toString(yugiohCard.getLow()));
+            shift.setText(Double.toString(Math.round((yugiohCard.getShift()*100)/100))+"%");
         }
     }
 }

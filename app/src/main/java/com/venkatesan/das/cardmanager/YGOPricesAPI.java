@@ -20,15 +20,10 @@ import java.util.ArrayList;
  */
 
 public class YGOPricesAPI {
-   final static String base = "http://yugiohprices.com/api/";
-   final static String baseURL_allVersions = base + "card_versions/";
-   final static String baseURL_dataByTagandRarity = base + "price_history/";
-   final static String baseURL_imageByName = base + "card_image/";
+   final static String baseURL_allVersions = Contract.getBaseURL_allVersions();
+   final static String baseURL_dataByTagandRarity = Contract.getBaseURL_dataByTagandRarity();
+   final static String baseURL_imageByName = Contract.getBaseURL_imageByName();
    private static String currName = "";
-
-   public static String getURLImageByName(){
-        return baseURL_imageByName;
-   }
 
    public static String priceByTag(String print_tag, String rarity) throws MalformedURLException {
        String currTag = print_tag;

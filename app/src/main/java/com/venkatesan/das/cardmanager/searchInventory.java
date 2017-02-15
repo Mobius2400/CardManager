@@ -52,20 +52,7 @@ public class searchInventory extends Activity {
         displayResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(results.size() > 0 && results.size() != 1){
-                    Intent cardDisplay = new Intent(searchInventory.this, CardDisplay.class);
-                    YugiohCard chosenCard = resultCards[position];
-
-                    //Pass on data to new Activity
-                    Bundle sendToCardActivity = new Bundle();
-                    sendToCardActivity.putString("card_name", card_name);
-                    sendToCardActivity.putString("print_tag", chosenCard.getPrint_tag());
-                    sendToCardActivity.putString("rarity", chosenCard.getRarity());
-                    cardDisplay.putExtras(sendToCardActivity);
-
-                    //Finally, start activity
-                    startActivity(cardDisplay);
-                }
+                sendToCardDisplay(position);
             }
         });
 
@@ -80,7 +67,7 @@ public class searchInventory extends Activity {
         goSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                card_name = cardName.getText().toString();
+                card_name = cardName.getText().toString().trim();
                 if(card_name == null || card_name.trim().equals("")){
                     Toast.makeText(getBaseContext(), "Input is empty", Toast.LENGTH_SHORT).show();
                 }
@@ -95,6 +82,21 @@ public class searchInventory extends Activity {
                 }
             }
         });
+    }
+
+    public void sendToCardDisplay(int position){
+        Intent cardDisplay = new Intent(searchInventory.this, CardDisplay.class);
+        YugiohCard chosenCard = resultCards[position];
+
+        //Pass on data to new Activity
+        Bundle sendToCardActivity = new Bundle();
+        sendToCardActivity.putString("card_name", card_name);
+        sendToCardActivity.putString("print_tag", chosenCard.getPrint_tag());
+        sendToCardActivity.putString("rarity", chosenCard.getRarity());
+        cardDisplay.putExtras(sendToCardActivity);
+
+        //Finally, start activity
+        startActivity(cardDisplay);
     }
 
     public void setSearchProgress(String message){
@@ -153,7 +155,9 @@ public class searchInventory extends Activity {
                 setSearchProgress("No Results Found");
             }
             else if(yugiohCards.length == 1){
-                // Redirect to nextActivity with yugiohCards[0];
+                setSearchProgress("Multiple Versions Found:");
+                toAdd(yugiohCards);
+                sendToCardDisplay(0);
             }
             else if(yugiohCards.length > 1){
                 setSearchProgress("Multiple Versions Found:");

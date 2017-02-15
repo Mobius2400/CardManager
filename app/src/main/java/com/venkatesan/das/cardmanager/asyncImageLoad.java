@@ -21,7 +21,7 @@ public class asyncImageLoad extends AsyncTask<Void, Void, Bitmap> {
 
     public asyncImageLoad(String cardName, ImageView destinationView){
         try {
-            getImageURL = YGOPricesAPI.getURLImageByName() + URLEncoder.encode(cardName, "UTF-8");
+            getImageURL = Contract.getBaseURL_imageByName() + URLEncoder.encode(cardName, "UTF-8");
         } catch (Exception e) {
             e.printStackTrace();
         }
