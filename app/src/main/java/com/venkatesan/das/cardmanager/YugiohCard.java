@@ -26,6 +26,19 @@ public class YugiohCard {
         cardImage = null;
     }
 
+    public YugiohCard(String newname, String newprint_tag, double newhigh, double newmedian, double newlow, double newshift,
+                      int newnumInventory, String newrarity){
+        name = newname;
+        print_tag = newprint_tag;
+        low = newlow;
+        median = newmedian;
+        high = newhigh;
+        shift = newshift;
+        numInventory = newnumInventory;
+        rarity = newrarity;
+        cardImage = null;
+    }
+
     @Override
     public String toString() {
         return "YugiohCard{" +
