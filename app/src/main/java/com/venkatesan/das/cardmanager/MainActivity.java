@@ -25,14 +25,10 @@ public class MainActivity extends Activity {
                 break;
         }
         switch(buttonID){
-            case R.id.configSettings:
+            case R.id.viewInventory:
                 Intent settings = new Intent(MainActivity.this, Settings.class);
                 startActivity(settings);
                 break;
-        }
-        switch(buttonID){
-            case R.id.exitButton:
-                finish();
         }
     }
     public boolean isOnline(Context context) {

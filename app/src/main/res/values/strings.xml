@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">CardManager</string>
     <string name="searchByImage">Search By Image</string>
+    <string name="viewInventory">View Inventory</string>
+    <string name="viewCart">View Cart</string>
     <string name="configSettings">Settings</string>
     <string name="searchByText">Search By Text</string>
     <string name="aboutUs">About Us</string>

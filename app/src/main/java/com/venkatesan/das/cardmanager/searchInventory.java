@@ -90,9 +90,9 @@ public class searchInventory extends Activity {
 
         //Pass on data to new Activity
         Bundle sendToCardActivity = new Bundle();
-        sendToCardActivity.putString("card_name", card_name);
-        sendToCardActivity.putString("print_tag", chosenCard.getPrint_tag());
-        sendToCardActivity.putString("rarity", chosenCard.getRarity());
+        sendToCardActivity.putString(Contract.nameKey, card_name);
+        sendToCardActivity.putString(Contract.tagKey, chosenCard.getPrint_tag());
+        sendToCardActivity.putString(Contract.rarityKey, chosenCard.getRarity());
         cardDisplay.putExtras(sendToCardActivity);
 
         //Finally, start activity
@@ -155,7 +155,6 @@ public class searchInventory extends Activity {
                 setSearchProgress("No Results Found");
             }
             else if(yugiohCards.length == 1){
-                setSearchProgress("Multiple Versions Found:");
                 toAdd(yugiohCards);
                 sendToCardDisplay(0);
             }
