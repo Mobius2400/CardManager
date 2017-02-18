@@ -5,7 +5,7 @@
     android:id="@+id/card_display"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.venkatesan.das.cardmanager.CardDisplay">
+    tools:context="com.venkatesan.das.cardmanager.cardDisplayController">
 
     <TextView
         android:text="Test1"

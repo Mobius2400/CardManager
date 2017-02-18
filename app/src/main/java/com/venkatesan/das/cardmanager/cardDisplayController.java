@@ -1,8 +1,7 @@
 package com.venkatesan.das.cardmanager;
 
 import android.app.Activity;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +9,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.database.Cursor;
+
 import org.json.JSONArray;
 
 import static com.venkatesan.das.cardmanager.YGOPricesAPI.getCardForDisplay;
 import static com.venkatesan.das.cardmanager.YGOPricesAPI.toJSON;
 
-public class CardDisplay extends Activity {
+public class cardDisplayController extends Activity {
 
     YugiohCard thisCard;
     TextView name;
@@ -34,7 +33,7 @@ public class CardDisplay extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.card_display);
+        setContentView(R.layout.activity_card_display);
         Bundle cardInfo = getIntent().getExtras();
         thisCard = new YugiohCard();
         db = new cardDatabase(this);
@@ -73,43 +72,53 @@ public class CardDisplay extends Activity {
         add.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //Check autoCommit
-                //Check bulk add option
+            int quantity = 1;
+            //Check autoCommit
+            //Check bulk add option
 
-                //Add card to inventory.
-                if(!thisCard.getName().equals("") && thisCard.getHigh() != 0.0){
-                    if(db.getIDFromCart(thisCard) == -1){
-                        YugiohCard adder = thisCard;
-                        adder.setNumInventory(thisCard.getNumInventory()+1);
-                        db.addCardToCart(adder);
-                    }
-                    else{
-                        db.addQuantityFromCart(thisCard, 1);
-                    }
+            //Add card to inventory.
+            if(!thisCard.getName().equals("") && thisCard.getHigh() != 0.0){
+                Intent cardDisplay = new Intent(cardDisplayController.this, mainActivityController.class);
+                if(db.getIDFromCart(thisCard) == -1){
+                    YugiohCard adder = thisCard;
+                    adder.setNumInventory(thisCard.getNumInventory()+1);
+                    db.addCardToCart(adder);
+                    Toast.makeText(getBaseContext(), "Card added to cart.", Toast.LENGTH_SHORT).show();
+                    startActivity(cardDisplay);
                 }
+                else{
+                    db.addQuantityFromCart(thisCard, quantity);
+                    Toast.makeText(getBaseContext(), "Increased quantity by " + quantity, Toast.LENGTH_SHORT).show();
+                    startActivity(cardDisplay);
+                }
+            }
             }
         });
         remove.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //Check autoCommit
-                //Check bulk remove option.
+            //Check autoCommit
+            //Check bulk remove option.
 
-                //Remove card from inventory.
-                if(!thisCard.getName().equals("") && thisCard.getHigh() != 0.0){
-                    int ID = db.getIDFromCart(thisCard);
-                    if(ID == -1){
-                        Toast.makeText(getBaseContext(), "You don't have this card.", Toast.LENGTH_SHORT).show();
-                    }
-                    else if(db.getQuantityFromCart(ID) == 1){
-                        db.deleteFromCart(ID);
-                        Toast.makeText(getBaseContext(), "Deleted the card from cart.", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        db.removeQuantityFromCart(thisCard, 1);
-                        Toast.makeText(getBaseContext(), "Removed 1 copy from cart.", Toast.LENGTH_SHORT).show();
-                    }
+            //Remove card from inventory.
+            if(!thisCard.getName().equals("") && thisCard.getHigh() != 0.0){
+                Intent cardDisplay = new Intent(cardDisplayController.this, mainActivityController.class);
+                int ID = db.getIDFromCart(thisCard);
+                if(ID == -1){
+                    Toast.makeText(getBaseContext(), "You don't have this card.", Toast.LENGTH_SHORT).show();
+                    startActivity(cardDisplay);
                 }
+                else if(ID != -1 && db.getQuantityFromCart(ID) == 1){
+                    db.deleteFromCart(ID);
+                    Toast.makeText(getBaseContext(), "Deleted the card from cart.", Toast.LENGTH_SHORT).show();
+                    startActivity(cardDisplay);
+                }
+                else{
+                    db.removeQuantityFromCart(thisCard, 1);
+                    Toast.makeText(getBaseContext(), "Removed 1 copy from cart.", Toast.LENGTH_SHORT).show();
+                    startActivity(cardDisplay);
+                }
+            }
             }
         });
     }

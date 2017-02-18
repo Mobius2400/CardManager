@@ -2,13 +2,12 @@ package com.venkatesan.das.cardmanager;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Settings extends Activity {
+public class settingsController extends Activity {
     EditText userName, password;
     final String preferencesKey = "userPreferences";
     final String usernameKey = "ownerName";
@@ -17,7 +16,7 @@ public class Settings extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.activity_settings);
 
         userName = (EditText)findViewById(R.id.enterUsername);
         userName.setText(getPreferences(usernameKey));
@@ -49,7 +48,7 @@ public class Settings extends Activity {
             editor.putString(usernameKey, username);
             editor.putString(passwordKey, password);
             editor.commit();
-            Toast.makeText(getBaseContext()," Settings stored and validated.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext()," settingsController stored and validated.", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(getBaseContext(), "Error, Please Try Again.", Toast.LENGTH_SHORT).show();

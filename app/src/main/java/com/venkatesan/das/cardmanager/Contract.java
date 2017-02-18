@@ -17,9 +17,9 @@ public class Contract {
 
     //Shared Preferences:
     final static String sharedPreferences = "sharedPreferences";
-        //User Settings Attributes
+        //User settingsController Attributes
         final static String userName = "user_name";
-        //Inventory Settings Attributes
+        //Inventory settingsController Attributes
         final static String bulkAdd = "bulk_add";
         final static String bulkRemove = "bulk_remove";
         final static String autoCommit = "auto_commit";

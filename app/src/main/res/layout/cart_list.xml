@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="87dp"
+        android:id="@+id/selectCard"
+        android:layout_weight="0.39"
+        tools:gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="10sp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="277dp"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+        <TextView android:id="@+id/cardName"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFF00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Card Name" />
+
+        <TextView android:id="@+id/printTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Print Tag"
+            android:textSize="16sp"
+            android:textColor="@color/barLight" />
+
+        <TextView android:id="@+id/rarity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rarity"
+            android:textSize="16sp"
+            android:textColor="@color/barLight" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="88888"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numQuantity"
+        android:layout_weight="0.33"
+        android:textSize="24sp"
+        android:textAlignment="viewStart"
+        android:textStyle="normal|bold"
+        android:textColor="@color/barLight" />
+
+</LinearLayout>

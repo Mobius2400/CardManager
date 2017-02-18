@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,19 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-
-import static com.venkatesan.das.cardmanager.R.id.cardNameByName;
-import static com.venkatesan.das.cardmanager.R.id.searchText;
 
 /**
  * Created by Das on 2/8/2017.
  */
 
-public class searchInventory extends Activity {
+public class searchTextController extends Activity {
     EditText cardName;
     TextView nameDisplay;
     TextView resultMessage;
@@ -41,7 +36,7 @@ public class searchInventory extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_text);
+        setContentView(R.layout.activity_search_text);
 
         // Create variable references to each widget.
         cardName = (EditText)findViewById(R.id.cardNameByName);
@@ -85,7 +80,7 @@ public class searchInventory extends Activity {
     }
 
     public void sendToCardDisplay(int position){
-        Intent cardDisplay = new Intent(searchInventory.this, CardDisplay.class);
+        Intent cardDisplay = new Intent(searchTextController.this, cardDisplayController.class);
         YugiohCard chosenCard = resultCards[position];
 
         //Pass on data to new Activity
@@ -162,7 +157,7 @@ public class searchInventory extends Activity {
                 setSearchProgress("Multiple Versions Found:");
                 toAdd(yugiohCards);
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                        (searchInventory.this, android.R.layout.simple_list_item_1, results);
+                        (searchTextController.this, android.R.layout.simple_list_item_1, results);
                 displayResults.setAdapter(adapter);
                 ((EditText) findViewById(R.id.cardNameByName)).setText("");
             }

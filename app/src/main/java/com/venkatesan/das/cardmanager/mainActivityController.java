@@ -7,7 +7,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends Activity {
+public class mainActivityController extends Activity {
 
     //static{ System.loadLibrary("opencv_java"); }
     @Override
@@ -20,14 +20,20 @@ public class MainActivity extends Activity {
         int buttonID = in_view.getId();
         switch(buttonID){
             case R.id.searchText:
-                Intent searchByText = new Intent(MainActivity.this, searchInventory.class);
+                Intent searchByText = new Intent(mainActivityController.this, searchTextController.class);
                 startActivity(searchByText);
                 break;
         }
         switch(buttonID){
             case R.id.viewInventory:
-                Intent settings = new Intent(MainActivity.this, Settings.class);
+                Intent settings = new Intent(mainActivityController.this, settingsController.class);
                 startActivity(settings);
+                break;
+        }
+        switch(buttonID){
+            case R.id.viewCart:
+                Intent cart = new Intent(mainActivityController.this, cartListController.class);
+                startActivity(cart);
                 break;
         }
     }

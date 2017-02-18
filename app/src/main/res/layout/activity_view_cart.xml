@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="514dp"
+        android:id="@+id/searchResults"
+        android:clickable="true" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -15,7 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/commitToInventory"
-            android:layout_weight="0.43" />
+            android:layout_weight="0.42"
+            android:textSize="14sp" />
 
         <Button
             android:text="Discard Selected"
@@ -25,9 +32,5 @@
             android:layout_weight="1" />
 
     </LinearLayout>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="546dp" />
 
 </LinearLayout>
