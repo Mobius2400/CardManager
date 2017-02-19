@@ -104,6 +104,7 @@ public class cardDisplayController extends Activity {
             if(!thisCard.getName().equals("") && thisCard.getHigh() != 0.0){
                 Intent cardDisplay = new Intent(cardDisplayController.this, mainActivityController.class);
                 int ID = db.getIDFromCart(thisCard);
+                System.out.println(ID);
                 if(ID == -1){
                     Toast.makeText(getBaseContext(), "You don't have this card.", Toast.LENGTH_SHORT).show();
                     startActivity(cardDisplay);

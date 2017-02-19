@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="514dp"
-        android:id="@+id/searchResults"
-        android:clickable="true" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -17,20 +12,26 @@
         android:layout_weight="1">
 
         <Button
-            android:text="Commit To Inventory"
+            android:text="Add To Inventory"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/commitToInventory"
-            android:layout_weight="0.42"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_weight="0.39" />
 
         <Button
             android:text="Discard Selected"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/discardSelected"
-            android:layout_weight="1" />
+            android:layout_weight="0.53" />
 
     </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="514dp"
+        android:id="@+id/searchResults"
+        android:clickable="true" />
 
 </LinearLayout>

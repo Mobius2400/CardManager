@@ -25,6 +25,7 @@
         <activity android:name=".settingsController" />
         <activity android:name=".cardDisplayController" />
         <activity android:name=".cartListController" />
+        <activity android:name=".inventoryDisplayController" />
     </application>
 
 </manifest>

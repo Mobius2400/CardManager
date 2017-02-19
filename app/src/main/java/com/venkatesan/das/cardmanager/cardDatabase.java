@@ -36,6 +36,8 @@ public class cardDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    ///////////////////////////////////////////////// Cart Table //////////////////////////////////////////////
+
     void addCardToCart(YugiohCard toAdd){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues attributes = new ContentValues();
@@ -58,6 +60,7 @@ public class cardDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.rawQuery("DELETE FROM " + Contract.cartTable + " WHERE " + Contract.ID + " =?",
                 new String[] {Integer.toString(ID)});
+        db.close();
     }
 
     public YugiohCard getCardFromCart(int ID){
@@ -72,35 +75,52 @@ public class cardDatabase extends SQLiteOpenHelper {
             cursor.moveToFirst();
             sendCard = cursorToCard(cursor);
         }
+        cursor.close();
+        db.close();
         return sendCard;
     }
 
     public int getIDFromCart(YugiohCard thisCard){
-        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT " + Contract.ID + " FROM " +
+        SQLiteDatabase db = this.getReadableDatabase();
+        int ID = -1;
+        Cursor cursor = db.rawQuery("SELECT " + Contract.ID + " FROM " +
                 Contract.cartTable + " WHERE " + Contract.cardName + "=? AND " + Contract.print_tag
                 + "=? AND " + Contract.rarity + "=?", new String[] {thisCard.getName(), thisCard.getPrint_tag(),
                 thisCard.getRarity()});
         if(cursor.getCount() != 0){
             cursor.moveToFirst();
-            return cursor.getInt(0);
+            ID = cursor.getInt(0);
         }
-        return -1;
+        cursor.close();
+        db.close();
+        return ID;
     }
 
     public int getQuantityFromCart(int ID){
-        return this.getReadableDatabase().rawQuery("SELECT " + Contract.numInventory + " FROM " +
-                Contract.cartTable + " WHERE " + Contract.ID + "=?", new String[] {Integer.toString(ID)}).getInt(0);
+        SQLiteDatabase db = this.getReadableDatabase();
+        int returner = -1000;
+        Cursor cursor = db.rawQuery("SELECT " + Contract.numInventory + " FROM " +
+                Contract.cartTable + " WHERE " + Contract.ID + "=?", new String[] {Integer.toString(ID)});
+        if(cursor.getCount() != 0){
+            cursor.moveToFirst();
+            returner =  cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+        return returner;
     }
 
     public void setQuantityToCart(int ID, int quantity){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + Contract.cartTable + " SET " + Contract.numInventory + " = " + quantity
                 + " WHERE " + Contract.ID + " = " + ID);
+        db.close();
     }
 
     public void addQuantityFromCart(YugiohCard thisCard, int quantity){
-        int currQuantity = getQuantityFromCart(getIDFromCart(thisCard)) + quantity;
-        setQuantityToCart(getIDFromCart(thisCard), currQuantity);
+        int ID = getIDFromCart(thisCard);
+        int currQuantity = getQuantityFromCart(ID) + quantity;
+        setQuantityToCart(ID, currQuantity);
     }
 
     public void removeQuantityFromCart(YugiohCard thisCard, int quantity){
@@ -112,6 +132,24 @@ public class cardDatabase extends SQLiteOpenHelper {
             currQuantity = 0;
         }
         setQuantityToCart(getIDFromCart(thisCard), currQuantity);
+    }
+
+    public ArrayList<YugiohCard> getAllCartCards() {
+        ArrayList<YugiohCard> YugiohCards = new ArrayList<YugiohCard>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(Contract.cartTable,
+                null, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            YugiohCard YugiohCard = cursorToCard(cursor);
+            YugiohCards.add(YugiohCard);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        db.close();
+        return YugiohCards;
     }
 
     ///////////////////////////////////////////////// Inventory Table //////////////////////////////////////////////
@@ -138,6 +176,7 @@ public class cardDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.rawQuery("DELETE FROM " + Contract.inventoryTable + " WHERE " + Contract.ID + " =?",
                 new String[] {Integer.toString(ID)});
+        db.close();
     }
 
     public YugiohCard getCardFromInventory(int ID){
@@ -152,6 +191,8 @@ public class cardDatabase extends SQLiteOpenHelper {
             cursor.moveToFirst();
             sendCard = cursorToCard(cursor);
         }
+        cursor.close();
+        db.close();
         return sendCard;
     }
 
@@ -169,31 +210,45 @@ public class cardDatabase extends SQLiteOpenHelper {
     }
 
     public int getIDFromInventory(YugiohCard thisCard){
-        Cursor cursor = this.getReadableDatabase().rawQuery("SELECT " + Contract.ID + " FROM " +
+        SQLiteDatabase db = this.getReadableDatabase();
+        int ID = -1;
+        Cursor cursor = db.rawQuery("SELECT " + Contract.ID + " FROM " +
                 Contract.inventoryTable + " WHERE " + Contract.cardName + "=? AND " + Contract.print_tag
                 + "=? AND " + Contract.rarity + "=?", new String[] {thisCard.getName(), thisCard.getPrint_tag(),
                 thisCard.getRarity()});
         if(cursor.getCount() != 0){
             cursor.moveToFirst();
-            return cursor.getInt(0);
+            ID = cursor.getInt(0);
         }
-        return -1;
+        cursor.close();
+        db.close();
+        return ID;
     }
 
     public int getQuantityFromInventory(int ID){
-        return this.getReadableDatabase().rawQuery("SELECT " + Contract.numInventory + " FROM " +
-                Contract.inventoryTable + " WHERE " + Contract.ID + "=?", new String[] {Integer.toString(ID)}).getInt(0);
+        SQLiteDatabase db = this.getReadableDatabase();
+        int returner = -1000;
+        Cursor cursor = db.rawQuery("SELECT " + Contract.numInventory + " FROM " +
+                Contract.inventoryTable + " WHERE " + Contract.ID + "=?", new String[] {Integer.toString(ID)});
+        if(cursor.getCount() != 0){
+            cursor.moveToFirst();
+            returner = cursor.getInt(0);
+        }
+        db.close();
+        return returner;
     }
 
     public void setQuantityFromInventory(int ID, int quantity){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + Contract.inventoryTable + " SET " + Contract.numInventory + " = " + quantity
                 + " WHERE " + Contract.ID + " = " + ID);
+        db.close();
     }
 
     public void addQuantityFromInventory(YugiohCard thisCard, int quantity){
-        int currQuantity = this.getQuantityFromInventory(getIDFromInventory(thisCard)) + quantity;
-        setQuantityFromInventory(getIDFromInventory(thisCard), currQuantity);
+        int ID = getIDFromInventory(thisCard);
+        int currQuantity = getQuantityFromInventory(ID) + quantity;
+        setQuantityFromInventory(ID, currQuantity);
     }
 
     public void removeQuantityFromInventory(YugiohCard thisCard, int quantity){
@@ -205,5 +260,35 @@ public class cardDatabase extends SQLiteOpenHelper {
             currQuantity = 0;
         }
         setQuantityFromInventory(getIDFromInventory(thisCard), currQuantity);
+    }
+
+    public ArrayList<String> getDistinctRarities(){
+        ArrayList<String> returnSet = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT DISTINCT " + Contract.rarity + " FROM " + Contract.inventoryTable, null);
+        while(!cursor.isAfterLast()){
+            returnSet.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return returnSet;
+    }
+
+    public ArrayList<YugiohCard> getAllInventoryCards() {
+        ArrayList<YugiohCard> YugiohCards = new ArrayList<YugiohCard>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(Contract.inventoryTable,
+                null, null, null, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            YugiohCard YugiohCard = cursorToCard(cursor);
+            YugiohCards.add(YugiohCard);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        db.close();
+        return YugiohCards;
     }
 }

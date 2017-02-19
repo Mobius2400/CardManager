@@ -10,10 +10,13 @@ import android.graphics.Bitmap;
 public class Contract {
 
     //URL Attributes
-    final static String base = "http://yugiohprices.com/api/";
-    final static String baseURL_allVersions = base + "card_versions/";
-    final static String baseURL_dataByTagandRarity = base + "price_history/";
-    final static String baseURL_imageByName = base + "card_image/";
+        // List of All YGO Cards
+        final static String allCardsURL = "https://www.yugiohcardguide.com/card_list.html";
+        // YGOPrices URLs
+        final static String base = "http://yugiohprices.com/api/";
+        final static String baseURL_allVersions = base + "card_versions/";
+        final static String baseURL_dataByTagandRarity = base + "price_history/";
+        final static String baseURL_imageByName = base + "card_image/";
 
     //Shared Preferences:
     final static String sharedPreferences = "sharedPreferences";

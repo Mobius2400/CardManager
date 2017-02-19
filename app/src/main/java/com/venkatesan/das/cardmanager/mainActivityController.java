@@ -26,8 +26,8 @@ public class mainActivityController extends Activity {
         }
         switch(buttonID){
             case R.id.viewInventory:
-                Intent settings = new Intent(mainActivityController.this, settingsController.class);
-                startActivity(settings);
+                Intent inventory = new Intent(mainActivityController.this, inventoryDisplayController.class);
+                startActivity(inventory);
                 break;
         }
         switch(buttonID){
@@ -37,6 +37,7 @@ public class mainActivityController extends Activity {
                 break;
         }
     }
+
     public boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         android.net.NetworkInfo networkinfo = cm.getActiveNetworkInfo();

@@ -36,7 +36,7 @@
             android:id="@+id/searchText"
             style="@android:style/Widget.Button"
             android:layout_marginTop="27dp"
-            android:onClick="onButtonClick"
+            android:onClick="onButtonClick (mainActivityController)"
             android:textSize="18sp"
             android:layout_below="@+id/captureCard"
             android:layout_alignParentLeft="true"
@@ -53,7 +53,7 @@
             android:layout_below="@+id/searchText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:onClick="onButtonClick" />
+            android:onClick="onButtonClick (mainActivityController)" />
 
         <Button
             android:text="@string/viewInventory"
@@ -66,7 +66,7 @@
             android:layout_below="@+id/searchText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:onClick="onButtonClick" />
+            android:onClick="onButtonClick (mainActivityController)" />
 
         <Button
             android:text="@string/configSettings"
