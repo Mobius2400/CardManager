@@ -59,7 +59,7 @@ public class cardDatabase extends SQLiteOpenHelper {
     void deleteFromCart(int ID){
         SQLiteDatabase db = this.getWritableDatabase();
         db.rawQuery("DELETE FROM " + Contract.cartTable + " WHERE " + Contract.ID + " =?",
-                new String[] {Integer.toString(ID)});
+                new String[] {Integer.toString(ID)}).moveToFirst();
         db.close();
     }
 
@@ -175,7 +175,7 @@ public class cardDatabase extends SQLiteOpenHelper {
     void deleteFromInventory(int ID){
         SQLiteDatabase db = this.getWritableDatabase();
         db.rawQuery("DELETE FROM " + Contract.inventoryTable + " WHERE " + Contract.ID + " =?",
-                new String[] {Integer.toString(ID)});
+                new String[] {Integer.toString(ID)}).moveToFirst();
         db.close();
     }
 

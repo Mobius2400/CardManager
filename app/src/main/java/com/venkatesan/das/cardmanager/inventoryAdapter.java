@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.venkatesan.das.cardmanager.R;
@@ -18,12 +16,12 @@ import java.util.ArrayList;
  * Created by Das on 2/16/2017.
  */
 
-public class cartAdapter extends BaseAdapter {
+public class inventoryAdapter extends BaseAdapter {
     private static ArrayList<YugiohCard> searchArrayList;
-    private LayoutInflater mInflater;
-    private ViewHolder holder;
 
-    public cartAdapter(Context context, ArrayList<YugiohCard> results) {
+    private LayoutInflater mInflater;
+
+    public inventoryAdapter(Context context, ArrayList<YugiohCard> results) {
         searchArrayList = results;
         mInflater = LayoutInflater.from(context);
     }
@@ -40,9 +38,10 @@ public class cartAdapter extends BaseAdapter {
         return position;
     }
 
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.cart_list, null);
+            convertView = mInflater.inflate(R.layout.inventory_list, null);
             holder = new ViewHolder();
             holder.txtName = (TextView) convertView.findViewById(R.id.cardName);
             holder.txtPrintTag = (TextView) convertView.findViewById(R.id.printTag);

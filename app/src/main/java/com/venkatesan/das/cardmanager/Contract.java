@@ -22,9 +22,9 @@ public class Contract {
     final static String sharedPreferences = "sharedPreferences";
         //User settingsController Attributes
         final static String userName = "user_name";
+        final static String location = "location";
         //Inventory settingsController Attributes
-        final static String bulkAdd = "bulk_add";
-        final static String bulkRemove = "bulk_remove";
+        final static String bulkManage = "bulk_manage";
         final static String autoCommit = "auto_commit";
 
     //Bundle Attributes

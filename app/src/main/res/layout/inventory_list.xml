@@ -9,25 +9,17 @@
         android:layout_height="match_parent"
         android:weightSum="1">
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="87dp"
-            android:id="@+id/selectCard"
-            android:layout_weight="0.39"
-            tools:gravity="center"
-            android:gravity="center"
-            android:layout_marginLeft="10sp"
-            tools:alpha="0.0" />
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="277dp"
             android:layout_height="match_parent"
-            android:clickable="true">
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            android:divider="@drawable/border">
 
             <TextView
                 android:id="@+id/cardName"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#FFFF00"
                 android:layout_width="wrap_content"
@@ -55,91 +47,14 @@
         <TextView
             android:text="88888"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/numQuantity"
             android:layout_weight="0.33"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textAlignment="viewStart"
             android:textStyle="normal|bold"
-            android:textColor="@color/barLight" />
+            android:textColor="@color/barLight"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="87dp"
-        android:id="@+id/checkBox"
-        android:layout_weight="0.39"
-        tools:gravity="center"
-        android:gravity="center"
-        android:layout_marginLeft="10sp" />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true">
-
-        <TextView
-            android:id="@+id/cardName"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#FFFF00"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Card Name" />
-
-        <TextView
-            android:id="@+id/printTag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Print Tag"
-            android:textSize="16sp"
-            android:textColor="@color/barLight" />
-
-        <TextView
-            android:id="@+id/rarity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rarity"
-            android:textSize="16sp"
-            android:textColor="@color/barLight" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#FFFF00"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Card Name" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Print Tag"
-        android:textSize="16sp"
-        android:textColor="@color/barLight" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rarity"
-        android:textSize="16sp"
-        android:textColor="@color/barLight" />
-
-    <TextView
-        android:text="88888"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:layout_weight="0.33"
-        android:textSize="24sp"
-        android:textAlignment="viewStart"
-        android:textStyle="normal|bold"
-        android:textColor="@color/barLight" />
 </LinearLayout>

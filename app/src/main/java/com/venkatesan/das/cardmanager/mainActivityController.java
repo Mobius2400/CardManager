@@ -36,6 +36,12 @@ public class mainActivityController extends Activity {
                 startActivity(cart);
                 break;
         }
+        switch(buttonID){
+            case R.id.Settings:
+                Intent settings = new Intent(mainActivityController.this, settingsController.class);
+                startActivity(settings);
+                break;
+        }
     }
 
     public boolean isOnline(Context context) {

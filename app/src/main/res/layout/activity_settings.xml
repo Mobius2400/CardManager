@@ -12,14 +12,27 @@
     tools:context="com.venkatesan.das.cardmanager.settingsController">
 
     <TextView
-        android:text="Your Name"
+        android:text="Bulk Add/Remove:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView8"
+        android:textSize="24sp"
+        android:textColor="@color/barLight"
+        android:layout_alignBaseline="@+id/bulkButton"
+        android:layout_alignBottom="@+id/bulkButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="User Name:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:id="@+id/ownerName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="@color/barLight" />
 
     <EditText
         android:layout_width="match_parent"
@@ -33,16 +46,18 @@
         android:paddingRight="10sp"
         android:paddingStart="10sp"
         android:paddingTop="10sp"
+        android:imeOptions="actionDone"
         android:background="@drawable/common_btn_light_gray_disabled"
         android:backgroundTint="@color/galleryItemSelectedOverlay"
         android:layout_marginTop="12dp"
         android:layout_below="@+id/ownerName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:inputType="textCapWords" />
+        android:inputType="textCapWords"
+        android:textColor="@color/barLight" />
 
     <TextView
-        android:text="Dropbox Password"
+        android:text="Location:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dropboxPassword"
@@ -50,30 +65,76 @@
         android:layout_marginTop="8dp"
         android:layout_below="@+id/enterUsername"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/barLight" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:ems="10"
         android:layout_marginTop="10dp"
-        android:id="@+id/enterPassword"
-        android:text="qwert"
+        android:id="@+id/enterLocation"
+        android:imeOptions="actionDone"
         android:background="@drawable/common_btn_light_gray_normal"
         android:backgroundTint="@color/galleryItemSelectedOverlay"
         android:layout_below="@+id/dropboxPassword"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:inputType="text"
+        android:textColor="@color/barLight" />
 
     <Button
-        android:text="Validate Credentials"
+        android:text="Save Information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:id="@+id/validateCredentials"
-        android:layout_below="@+id/enterPassword"
+        android:id="@+id/setDetails"
+        android:layout_below="@+id/enterLocation"
         android:layout_centerHorizontal="true"
         android:onClick="saveDropboxCredentials" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bulkButton"
+        android:layout_alignRight="@+id/bulkButton"
+        android:layout_alignEnd="@+id/bulkButton"
+        android:layout_marginTop="25dp"
+        android:id="@+id/autoCommitButton" />
+
+    <TextView
+        android:text="Auto-Commit To Inventory:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/autoCommitButton"
+        android:layout_alignBottom="@+id/autoCommitButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/barLight" />
+
+    <TextView
+        android:text="Update Local Database:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView7"
+        android:textSize="26sp"
+        android:textColor="@color/barLight"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/autoCommitButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/bulkButton"
+        android:layout_below="@+id/setDetails"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

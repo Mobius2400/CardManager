@@ -1,10 +1,19 @@
 package com.venkatesan.das.cardmanager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +38,11 @@ public class cardDisplayController extends Activity {
     ImageButton add;
     ImageButton remove;
     cardDatabase db;
+    final String preferencesKey = Contract.sharedPreferences;
+    SharedPreferences pref;
+    final String bulk_manage = Contract.bulkManage;
+    final String auto_commit = Contract.autoCommit;
+    int quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +51,7 @@ public class cardDisplayController extends Activity {
         Bundle cardInfo = getIntent().getExtras();
         thisCard = new YugiohCard();
         db = new cardDatabase(this);
+        pref = getSharedPreferences(preferencesKey, MODE_PRIVATE);
 
         //Create card
         thisCard.setName(cardInfo.getString(Contract.nameKey));
@@ -68,60 +83,215 @@ public class cardDisplayController extends Activity {
         updateNumberInStock();
         // Set Prices
         new asyncGetPrices().execute();
-
+        // Set Button Listeners
         add.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-            int quantity = 1;
-            //Check autoCommit
-            //Check bulk add option
-
-            //Add card to inventory.
-            if(!thisCard.getName().equals("") && thisCard.getHigh() != 0.0){
-                Intent cardDisplay = new Intent(cardDisplayController.this, mainActivityController.class);
-                if(db.getIDFromCart(thisCard) == -1){
-                    YugiohCard adder = thisCard;
-                    adder.setNumInventory(thisCard.getNumInventory()+1);
-                    db.addCardToCart(adder);
-                    Toast.makeText(getBaseContext(), "Card added to cart.", Toast.LENGTH_SHORT).show();
-                    startActivity(cardDisplay);
+                quantity = 1;
+                //Check bulk add option
+                if(!thisCard.getName().equals("") && thisCard.getHigh() != 0.0 && !thisCard.getRarity().equals("")){
+                    if(pref.getBoolean(bulk_manage, false)){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("Enter Quantity:");
+                        //Setup Quantity Input
+                        final EditText input = new EditText(v.getContext());
+                        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        builder.setView(input);
+                        //Setup Buttons
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                quantity = Integer.parseInt(input.getText().toString());
+                                Intent cardDisplay = new Intent(cardDisplayController.this, mainActivityController.class);
+                                Boolean autoCommit = pref.getBoolean(auto_commit, false);
+                                //Check autoCommit
+                                if(autoCommit){
+                                    if(db.getIDFromInventory(thisCard) == -1){
+                                        YugiohCard adder = thisCard;
+                                        adder.setNumInventory(quantity);
+                                        db.addCardToInventory(adder);
+                                        Toast.makeText(getBaseContext(), "Card added to inventory.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        startActivity(cardDisplay);
+                                    }
+                                    else{
+                                        db.addQuantityFromInventory(thisCard, quantity);
+                                        Toast.makeText(getBaseContext(), "Increased quantity by " + quantity, Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        startActivity(cardDisplay);
+                                    }
+                                }
+                                else{
+                                    if(db.getIDFromCart(thisCard) == -1){
+                                        YugiohCard adder = thisCard;
+                                        adder.setNumInventory(quantity);
+                                        db.addCardToCart(adder);
+                                        Toast.makeText(getBaseContext(), "Card added to cart.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        startActivity(cardDisplay);
+                                    }
+                                    else{
+                                        db.addQuantityFromCart(thisCard, quantity);
+                                        Toast.makeText(getBaseContext(), "Increased quantity by " + quantity, Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        startActivity(cardDisplay);
+                                    }
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        builder.show();
+                    }
+                    //Add card to inventory without bulk options.
+                    else if(!pref.getBoolean(bulk_manage, false)){
+                        Intent cardDisplay = new Intent(cardDisplayController.this, mainActivityController.class);
+                        if(db.getIDFromCart(thisCard) == -1){
+                            YugiohCard adder = thisCard;
+                            adder.setNumInventory(quantity);
+                            db.addCardToCart(adder);
+                            Toast.makeText(getBaseContext(), "Card added to cart.", Toast.LENGTH_SHORT).show();
+                            finish();
+                            startActivity(cardDisplay);
+                        }
+                        else{
+                            db.addQuantityFromCart(thisCard, quantity);
+                            Toast.makeText(getBaseContext(), "Increased quantity by " + quantity, Toast.LENGTH_SHORT).show();
+                            finish();
+                            startActivity(cardDisplay);
+                        }
+                    }
                 }
-                else{
-                    db.addQuantityFromCart(thisCard, quantity);
-                    Toast.makeText(getBaseContext(), "Increased quantity by " + quantity, Toast.LENGTH_SHORT).show();
-                    startActivity(cardDisplay);
-                }
-            }
             }
         });
-        remove.setOnClickListener(new View.OnClickListener(){
+        remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //Check autoCommit
-            //Check bulk remove option.
-
-            //Remove card from inventory.
-            if(!thisCard.getName().equals("") && thisCard.getHigh() != 0.0){
-                Intent cardDisplay = new Intent(cardDisplayController.this, mainActivityController.class);
-                int ID = db.getIDFromCart(thisCard);
-                System.out.println(ID);
-                if(ID == -1){
-                    Toast.makeText(getBaseContext(), "You don't have this card.", Toast.LENGTH_SHORT).show();
-                    startActivity(cardDisplay);
+                quantity = 1;
+                //Check bulk remove option.
+                if (!thisCard.getName().equals("") && thisCard.getHigh() != 0.0 && !thisCard.getRarity().equals("")) {
+                    if (pref.getBoolean(bulk_manage, false)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("Enter Quantity:");
+                        //Setup Quantity Input
+                        final EditText input = new EditText(v.getContext());
+                        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        builder.setView(input);
+                        //Setup Buttons
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                quantity = Integer.parseInt(input.getText().toString());
+                                Boolean autoCommit = pref.getBoolean(auto_commit, false);
+                                //Check autoCommit
+                                if(autoCommit){
+                                    autoCommitRemoveCard();
+                                }
+                                else{
+                                    removeCard();
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        builder.show();
+                    }
+                    else if (!pref.getBoolean(bulk_manage, false)) {
+                        removeCard();
+                    }
                 }
-                else if(ID != -1 && db.getQuantityFromCart(ID) == 1){
-                    db.deleteFromCart(ID);
-                    Toast.makeText(getBaseContext(), "Deleted the card from cart.", Toast.LENGTH_SHORT).show();
-                    startActivity(cardDisplay);
-                }
-                else{
-                    db.removeQuantityFromCart(thisCard, 1);
-                    Toast.makeText(getBaseContext(), "Removed 1 copy from cart.", Toast.LENGTH_SHORT).show();
-                    startActivity(cardDisplay);
-                }
-            }
             }
         });
+    }
+
+    private void autoCommitRemoveCard(){
+        Intent mainScreen = new Intent(cardDisplayController.this, mainActivityController.class);
+        int inventoryID = db.getIDFromInventory(thisCard);
+        if(inventoryID == -1){
+            Toast.makeText(getBaseContext(), "You don't have this card.", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(mainScreen);
+        }
+        else if(quantity > db.getQuantityFromInventory(inventoryID)){
+            Toast.makeText(getBaseContext(), "You don't have the required quantity.", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(mainScreen);
+        }
+        else if(quantity == db.getQuantityFromInventory(inventoryID)){
+            db.deleteFromInventory(inventoryID);
+            Toast.makeText(getBaseContext(), "Removed card from inventory.", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(mainScreen);
+        }
+        else if(quantity < db.getQuantityFromInventory(inventoryID)){
+            db.removeQuantityFromInventory(thisCard, quantity);
+            Toast.makeText(getBaseContext(), "Removed " + quantity + " from inventory.", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(mainScreen);
+        }
+    }
+
+    private void removeCard(){
+        Intent mainScreen = new Intent(cardDisplayController.this, mainActivityController.class);
+        int cartID = db.getIDFromCart(thisCard);
+        int inventoryID = db.getIDFromInventory(thisCard);
+
+        //Card doesn't exist in cart.
+        if (cartID == -1 && inventoryID == -1) {
+            Toast.makeText(getBaseContext(), "You don't have this card.", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(mainScreen);
+        }
+        //Card is in cart and removing less than total in cart.
+        else if (cartID != -1 && quantity < db.getQuantityFromCart(cartID)) {
+            db.removeQuantityFromCart(thisCard, quantity);
+            Toast.makeText(getBaseContext(), "Removed " + quantity + " from cart.", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(mainScreen);
+        }
+        //Card is in cart and removing equal to total in cart.
+        else if (cartID != -1 && quantity == db.getQuantityFromCart(cartID)) {
+            db.deleteFromCart(cartID);
+            Toast.makeText(getBaseContext(), "Removed " + quantity + " from cart.", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(mainScreen);
+        }
+        //Card is in cart and removing more than total in cart.
+        else if (cartID != -1 && quantity > db.getQuantityFromCart(cartID)) {
+            int remainder = db.getQuantityFromCart(cartID) - quantity;
+            if (inventoryID == -1 || (inventoryID != -1 && db.getQuantityFromInventory(inventoryID) < remainder)) {
+                Toast.makeText(getBaseContext(), "Not permitted: removing more than quantity owned.", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(mainScreen);
+            } else if (inventoryID != -1 && db.getQuantityFromInventory(inventoryID) >= remainder) {
+                db.deleteFromCart(cartID);
+                YugiohCard remover = thisCard;
+                remover.setNumInventory(0 - remainder);
+                db.addCardToCart(remover);
+                Toast.makeText(getBaseContext(), "Added task to cart.", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(mainScreen);
+            }
+        }
+        //Card is not in cart and removing less than total in inventory.
+        else if (cartID == -1 && inventoryID != -1) {
+            if (db.getQuantityFromInventory(inventoryID) > quantity) {
+                YugiohCard remover = thisCard;
+                remover.setNumInventory(0 - quantity);
+                db.addCardToCart(remover);
+                Toast.makeText(getBaseContext(), "Added task to cart.", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(mainScreen);
+            }
+        }
     }
 
     public void updateNumberInStock(){
