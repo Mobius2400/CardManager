@@ -5,12 +5,6 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:id="@+id/spinner" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="366dp"

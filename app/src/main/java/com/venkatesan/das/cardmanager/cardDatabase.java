@@ -266,6 +266,7 @@ public class cardDatabase extends SQLiteOpenHelper {
         ArrayList<String> returnSet = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT DISTINCT " + Contract.rarity + " FROM " + Contract.inventoryTable, null);
+        cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             returnSet.add(cursor.getString(0));
             cursor.moveToNext();

@@ -30,10 +30,6 @@ public class inventoryDisplayController extends Activity {
         setContentView(R.layout.activity_view_inventory);
         cardDatabase db = new cardDatabase(this);
         inventoryCards = db.getAllInventoryCards();
-        // distinctRarities = db.getDistinctRarities();
-
-        rarities = (Spinner)findViewById(R.id.spinner);
-        // Implement filter by rarity.
 
         searchResult = (ListView) findViewById(R.id.searchInventoryResults);
         searchResult.setAdapter(new inventoryAdapter(this, inventoryCards));
