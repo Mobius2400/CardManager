@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,9 +21,9 @@ import java.util.ArrayList;
 public class inventoryDisplayController extends Activity {
 
     ArrayList<YugiohCard> inventoryCards;
+    int totalCards;
+    TextView numCards;
     ListView searchResult;
-    Spinner rarities;
-    ArrayList<String> distinctRarities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +31,12 @@ public class inventoryDisplayController extends Activity {
         setContentView(R.layout.activity_view_inventory);
         cardDatabase db = new cardDatabase(this);
         inventoryCards = db.getAllInventoryCards();
+        totalCards = db.totalCards();
+
+        numCards = (TextView)findViewById(R.id.numCards);
+        numCards.setText(Integer.toString(totalCards));
 
         searchResult = (ListView) findViewById(R.id.searchInventoryResults);
         searchResult.setAdapter(new inventoryAdapter(this, inventoryCards));
-
-        searchResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object o = searchResult.getItemAtPosition(position);
-                YugiohCard fullObject = (YugiohCard) o;
-                Toast.makeText(getBaseContext(), "You have chosen: " + fullObject.getName(), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 }

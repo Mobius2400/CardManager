@@ -292,4 +292,22 @@ public class cardDatabase extends SQLiteOpenHelper {
         db.close();
         return YugiohCards;
     }
+
+    public int totalCards(){
+        int count = 0;
+        //Get total number of cards in inventory.
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(Contract.inventoryTable,
+                null, null, null, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            YugiohCard YugiohCard = cursorToCard(cursor);
+            count += YugiohCard.getNumInventory();
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        db.close();
+        return count;
+    }
 }

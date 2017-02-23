@@ -7,10 +7,13 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -25,8 +28,12 @@ import javax.net.ssl.X509TrustManager;
 
 public class getAllMadeYGOCards {
 
-    public static ArrayList<String> setupAllCards(){
+    public static void main (String[] args){
+    }
+
+    public static ArrayList<String> setupAllCards() throws KeyManagementException, NoSuchAlgorithmException {
         ArrayList<String> allCards = new ArrayList<>();
+        disableSSLCertCheck();
         //Get List of Cards From URL
         try {
             Document doc  = Jsoup.connect(Contract.allCardsURL).get();
@@ -34,6 +41,10 @@ public class getAllMadeYGOCards {
             for(Element a: metaElems){
                 allCards.add(a.text());
             }
+            Set<String> removeDuplicates = new HashSet<>();
+            removeDuplicates.addAll(allCards);
+            allCards.clear();
+            allCards.addAll(removeDuplicates);
         } catch (Exception e) {
             e.printStackTrace();
         }

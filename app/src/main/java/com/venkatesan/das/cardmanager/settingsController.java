@@ -1,7 +1,10 @@
 package com.venkatesan.das.cardmanager;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,26 +13,35 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+
+import static com.venkatesan.das.cardmanager.YGOPricesAPI.getCardForDisplay;
+import static com.venkatesan.das.cardmanager.YGOPricesAPI.toJSON;
+
 public class settingsController extends Activity {
     EditText userName, location;
-    Button setDetails;
+    Button setDetails, updateDatabase;
     ToggleButton bulkManage, autoCommit;
     final String preferencesKey = Contract.sharedPreferences;
     final String usernameKey = Contract.userName;
     final String locationKey = Contract.location;
     final String bulk_manage = Contract.bulkManage;
     final String auto_commit = Contract.autoCommit;
+    allCardsDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        db = new allCardsDatabase(this);
 
         userName = (EditText)findViewById(R.id.enterUsername);
-        userName.setText(getPreferences(usernameKey).toString());
+        userName.setText(getPreferences(usernameKey));
 
         location = (EditText)findViewById(R.id.enterLocation);
-        location.setText(getPreferences(locationKey).toString());
+        location.setText(getPreferences(locationKey));
 
         userName.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -84,6 +96,14 @@ public class settingsController extends Activity {
                 editor.commit();
             }
         });
+
+        updateDatabase = (Button)findViewById(R.id.updateDatabase);
+        updateDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new asyncGetAllCards().execute();
+            }
+        });
     }
 
     public void saveDetails(){
@@ -111,5 +131,47 @@ public class settingsController extends Activity {
     private Boolean getChecked(String key){
         SharedPreferences getter = getSharedPreferences(preferencesKey, MODE_PRIVATE);
         return getter.getBoolean(key, false);
+    }
+
+    public class asyncGetAllCards extends AsyncTask<Void, String, ArrayList<String>> {
+        ProgressDialog asyncDialog = new ProgressDialog(settingsController.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            asyncDialog.setMessage("Searching for update...");
+            asyncDialog.show();
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(Void... params) {
+            ArrayList<String> allCards = new ArrayList<>();
+            try {
+                allCards = getAllMadeYGOCards.setupAllCards();
+                for(String card: allCards){
+                    if(db.getIDFromName(card) == -1){
+                        db.addCard(card);
+                        publishProgress(card);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return allCards;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            asyncDialog.setMessage("Adding " + values[0]);
+            asyncDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> allCards) {
+            super.onPostExecute(allCards);
+            asyncDialog.setMessage("Added " + allCards.size() + " cards");
+            asyncDialog.dismiss();
+        }
     }
 }

@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 
 public class Contract {
 
+    private Contract() {}
+
     //URL Attributes
         // List of All YGO Cards
         final static String allCardsURL = "https://www.yugiohcardguide.com/card_list.html";
@@ -20,6 +22,8 @@ public class Contract {
 
     //Shared Preferences:
     final static String sharedPreferences = "sharedPreferences";
+        //Database Attributes
+        final static String firstUpdate = "first_update";
         //User settingsController Attributes
         final static String userName = "user_name";
         final static String location = "location";
@@ -34,6 +38,7 @@ public class Contract {
 
     //Database Attributes
     final static String databaseName = "CardManagerDatabase";
+    final static String allCardDBName = "AllCardsDatabase";
     final static int databaseVersion = 1;
     //Column names
     final static String ID = "_id";
@@ -46,9 +51,12 @@ public class Contract {
     final static String price_shift = "Shift";
     final static String numInventory = "Inventory";
     //Table names
+    final static String allCardsTable = "AllCards";
     final static String inventoryTable = "Inventory";
     final static String cartTable = "Card";
     //Create Table Query
+    final static String allCardsCreateTable = "CREATE TABLE " + Contract.allCardsTable + "("
+            + Contract.ID + " INTEGER PRIMARY KEY, " + Contract.cardName + " TEXT" + ")";
     final static String inventoryCreateTable = "CREATE TABLE " + Contract.cartTable + "("
             + Contract.ID + " INTEGER PRIMARY KEY," + Contract.cardName + " TEXT,"
             + Contract.print_tag + " TEXT," + Contract.rarity + " TEXT,"
@@ -61,22 +69,4 @@ public class Contract {
             + Contract.price_high + " REAL," + Contract.price_median + " REAL,"
             + Contract.price_low + " REAL," + Contract.price_shift + " REAL,"
             + Contract.numInventory + " INTEGER" + ")";
-
-    private Contract() {}
-
-    public static String getBase() {
-        return base;
-    }
-
-    public static String getBaseURL_allVersions() {
-        return baseURL_allVersions;
-    }
-
-    public static String getBaseURL_dataByTagandRarity() {
-        return baseURL_dataByTagandRarity;
-    }
-
-    public static String getBaseURL_imageByName() {
-        return baseURL_imageByName;
-    }
 }
