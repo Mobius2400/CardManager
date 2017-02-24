@@ -135,6 +135,7 @@ public class settingsController extends Activity {
 
     public class asyncGetAllCards extends AsyncTask<Void, String, ArrayList<String>> {
         ProgressDialog asyncDialog = new ProgressDialog(settingsController.this);
+        ArrayList<String> allCards;
 
         @Override
         protected void onPreExecute() {
@@ -145,13 +146,14 @@ public class settingsController extends Activity {
 
         @Override
         protected ArrayList<String> doInBackground(Void... params) {
-            ArrayList<String> allCards = new ArrayList<>();
+            allCards = new ArrayList<>();
             try {
                 allCards = getAllMadeYGOCards.setupAllCards();
-                for(String card: allCards){
+                for(int i = 0; i < allCards.size(); i++){
+                    String card = allCards.get(i);
+                    publishProgress(Integer.toString(i));
                     if(db.getIDFromName(card) == -1){
                         db.addCard(card);
-                        publishProgress(card);
                     }
                 }
             } catch (Exception e) {
@@ -163,7 +165,8 @@ public class settingsController extends Activity {
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-            asyncDialog.setMessage("Adding " + values[0]);
+            int totalCards = allCards.size();
+            asyncDialog.setMessage("Checking " + values[0] + " of " + totalCards);
             asyncDialog.show();
         }
 

@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
  */
 
 public class searchTextController extends Activity {
-    EditText cardName;
+    AutoCompleteTextView cardName;
     TextView nameDisplay;
     TextView resultMessage;
     ArrayList<String> results = new ArrayList<String>();
@@ -38,8 +40,16 @@ public class searchTextController extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_text);
 
+        //Create Auto Complete Text
+        cardName = (AutoCompleteTextView)findViewById(R.id.cardNameByName);
+        cardName.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        allCardsDatabase db = new allCardsDatabase(this);
+        ArrayList<String> allCards = db.getAllMadeCards();
+        allCards.toArray();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, allCards);
+        cardName.setAdapter(adapter);
+
         // Create variable references to each widget.
-        cardName = (EditText)findViewById(R.id.cardNameByName);
         nameDisplay = (TextView)findViewById(R.id.cardNameShow);
         resultMessage = (TextView)findViewById(R.id.resultMessage);
 
