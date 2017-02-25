@@ -22,7 +22,7 @@ import static com.venkatesan.das.cardmanager.YGOPricesAPI.toJSON;
 
 public class settingsController extends Activity {
     EditText userName, location;
-    Button setDetails, updateDatabase;
+    Button setDetails, updateDatabase, backupInventory;
     ToggleButton bulkManage, autoCommit;
     final String preferencesKey = Contract.sharedPreferences;
     final String usernameKey = Contract.userName;
@@ -104,19 +104,42 @@ public class settingsController extends Activity {
                 new asyncGetAllCards().execute();
             }
         });
+
+        backupInventory = (Button)findViewById(R.id.backupInventory);
+        final cardDatabase db = new cardDatabase(this);
+        if(db.totalCards() > 0){
+            backupInventory.setText(Contract.backupButton);
+        }
+        else{
+            backupInventory.setText(Contract.restoreButton);
+        }
+        backupInventory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(db.totalCards() > 0){
+                    backupDatabase.backupDB();
+                    Toast.makeText(getBaseContext(),"Inventory backed up.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    backupDatabase.restoreDB();
+                    Toast.makeText(getBaseContext(),"Inventory imported.", Toast.LENGTH_SHORT).show();
+                    backupInventory.setText(Contract.backupButton);
+                }
+            }
+        });
     }
 
     public void saveDetails(){
-        String username = findViewById(R.id.enterUsername).toString();
-        String location = findViewById(R.id.enterLocation).toString();
+        String username = userName.getText().toString();
+        String location2 = location.getText().toString();
         SharedPreferences configurations = getSharedPreferences(preferencesKey, MODE_PRIVATE);
 
         if (!username.equals("") && !location.equals("")){
             SharedPreferences.Editor editor = configurations.edit();
             editor.putString(usernameKey, username);
-            editor.putString(locationKey, location);
+            editor.putString(locationKey, location2);
             editor.commit();
-            Toast.makeText(getBaseContext()," Details stored and validated.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Details stored and validated.", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(getBaseContext(), "No blank values, Please Try Again.", Toast.LENGTH_SHORT).show();
