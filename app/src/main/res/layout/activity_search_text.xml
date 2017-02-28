@@ -30,7 +30,9 @@
             android:backgroundTint="@color/galleryItemSelectedOverlay"
             android:textAllCaps="false"
             android:textColor="@color/barLightBorder"
-            android:popupBackground="@color/galleryChromeBackground" />
+            android:popupBackground="@color/galleryChromeBackground"
+            android:completionThreshold="3"
+            android:dropDownSelector="@color/blackBackground" />
 
         <Button
             android:text="@string/goSearch"

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/autoCommit_icon"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/autocommit_icon"
+        android:title="autoCommit"
+        tools:ignore="AppCompatResource" />
+    <item
+        android:id="@+id/bulkAdd_icon"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/bulkadd_icon"
+        android:title="bulkAdd"
+        tools:ignore="AppCompatResource" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="Settings"/>
+
+</menu>

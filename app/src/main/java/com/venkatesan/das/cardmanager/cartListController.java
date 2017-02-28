@@ -63,22 +63,9 @@ public class cartListController extends Activity {
         searchResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CheckBox deleteSelect = (CheckBox)view.findViewById(R.id.selectCard);
-                YugiohCard thisCard = cartCards.get(position);
-                Boolean foundCard = false;
-                for(int i = 0; i < toDelete.size(); i ++){
-                    if(toDelete.get(i).getName().equals(thisCard.getName()) && toDelete.get(i).getRarity().equals(thisCard.getRarity())
-                            && toDelete.get(i).getPrint_tag().equals(thisCard.getPrint_tag()) && !deleteSelect.isChecked()){
-                        toDelete.remove(thisCard);
-                        foundCard = true;
-                        Toast.makeText(getBaseContext(), "Added to list.", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                }
-                if(foundCard == false && deleteSelect.isChecked()){
-                    toDelete.add(thisCard);
-                    Toast.makeText(getBaseContext(), "Added to list.", Toast.LENGTH_SHORT).show();
-                }
+                YugiohCard selectCard = (YugiohCard)parent.getItemAtPosition(position);
+                System.out.println(selectCard.getName());
+                Toast.makeText(getApplicationContext(), "Clicked on Row: " + selectCard.getName(), Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -116,13 +116,11 @@ public class settingsController extends Activity {
         backupInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(db.totalCards() > 0){
-                    backupDatabase.backupDB();
-                    Toast.makeText(getBaseContext(),"Inventory backed up.", Toast.LENGTH_SHORT).show();
+                if(db.totalCards() > 0 && backupInventory.getText().equals(Contract.backupButton)){
+                    backupDatabase.backupDB(v.getContext());
                 }
-                else{
-                    backupDatabase.restoreDB();
-                    Toast.makeText(getBaseContext(),"Inventory imported.", Toast.LENGTH_SHORT).show();
+                else if (backupInventory.getText().equals(Contract.restoreButton)){
+                    backupDatabase.restoreDB(v.getContext());
                     backupInventory.setText(Contract.backupButton);
                 }
             }
