@@ -15,14 +15,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyTheme">
-        <activity android:name=".mainActivityController">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mainActivityController" />
         <activity android:name=".searchTextController" />
+        <activity android:name=".PrivacyPolicyActivity" />
+        <activity android:name=".AboutUsActivity" />
         <activity android:name=".settingsController" />
         <activity android:name=".cardDisplayController" />
         <activity android:name=".cartListController" />

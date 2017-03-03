@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class mainActivityController extends Activity {
+public class mainActivityController extends AppCompatActivity {
 
     //static{ System.loadLibrary("opencv_java"); }
     @Override
