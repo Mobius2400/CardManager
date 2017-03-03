@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/cardNameWithCard"
         android:textAllCaps="true"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="normal|bold"
         android:textAlignment="center"
         android:textColor="@color/barLight"
@@ -118,11 +118,12 @@
         android:id="@+id/printTag"
         android:textSize="18sp"
         android:textColor="@color/barLight"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
         android:layout_below="@+id/cardNameWithCard"
-        android:layout_toRightOf="@+id/qtyInInventory"
-        android:layout_toEndOf="@+id/qtyInInventory" />
+        android:layout_toEndOf="@+id/qtyInInventory"
+        android:textAlignment="viewEnd"
+        android:gravity="right" />
 
     <TextView
         android:text="High:"
@@ -152,28 +153,17 @@
 
     <TextView
         android:text="Ultimate Rare"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Rarity"
         android:textSize="18sp"
         android:textColor="@color/barLight"
         android:layout_below="@+id/cardNameWithCard"
-        android:layout_toLeftOf="@+id/qtyInInventory"
         android:layout_toStartOf="@+id/qtyInInventory"
         android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/addInventory"
-        android:layout_marginTop="72dp"
-        android:layout_below="@+id/cardImage"
-        android:layout_alignLeft="@+id/removeInventory"
-        android:layout_alignStart="@+id/removeInventory"
-        android:scaleX="3.5"
-        android:scaleY="3.5"
-        android:background="@android:drawable/ic_input_add" />
+        android:layout_marginEnd="25dp"
+        android:textAlignment="viewStart"
+        android:gravity="left"
+        android:layout_width="125dp" />
 
     <TextView
         android:text="In Stock:"
@@ -193,12 +183,21 @@
         android:id="@+id/removeInventory"
         android:scaleX="3.0"
         android:scaleY="3.0"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="18dp"
         android:background="@android:drawable/ic_delete"
         android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/printTag"
-        android:layout_alignEnd="@+id/printTag" />
+        android:layout_toEndOf="@+id/cardImage" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addInventory"
+        android:scaleX="3.5"
+        android:scaleY="3.5"
+        android:background="@android:drawable/ic_input_add"
+        android:layout_marginBottom="39dp"
+        android:layout_above="@+id/removeInventory"
+        android:layout_alignStart="@+id/removeInventory" />
 
 </RelativeLayout>

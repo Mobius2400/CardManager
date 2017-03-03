@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Personal Informations"
+        android:key="personal_category">
+        <EditTextPreference
+            android:key="user_name"
+            android:title="Name"
+            android:summary="Enter Your User Name"
+            android:dialogTitle="Your Name"
+            android:dialogMessage="Enter Your Complete Name"
+            android:defaultValue=""
+            android:inputType="textCapWords"/>
+        <EditTextPreference
+            android:key="email_address"
+            android:title="Email Address"
+            android:summary="Enter Your Email Address"
+            android:dialogTitle="Enter Your Email Address"
+            android:dialogMessage="Enter Your Email Address"
+            android:defaultValue=""
+            android:inputType="textEmailAddress"/>
+        <EditTextPreference
+            android:key="location"
+            android:title="Location"
+            android:summary="Enter Your Location"
+            android:dialogTitle="Enter Your Location"
+            android:dialogMessage="Enter Your Location"
+            android:defaultValue=""
+            android:inputType="textCapWords"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Inventory Information"
+        android:key="inventory_category">
+        <CheckBoxPreference
+            android:key="bulk_manage"
+            android:summary="Select multiple cards on action"
+            android:title="Enable Bulk Manage"
+            android:defaultValue="false"/>
+        <CheckBoxPreference
+            android:key="auto_commit"
+            android:summary="Perform actions straight to inventory"
+            android:title="Enable Auto Commit"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

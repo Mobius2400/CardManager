@@ -21,7 +21,7 @@ public class Contract {
         final static String baseURL_imageByName = base + "card_image/";
 
     //Shared Preferences:
-    final static String sharedPreferences = "sharedPreferences";
+    final static String sharedPreferences = "com.venkatesan.das.cardmanager_preferences";
         //Database Attributes
         final static String firstUpdate = "first_update";
         //User settingsController Attributes
