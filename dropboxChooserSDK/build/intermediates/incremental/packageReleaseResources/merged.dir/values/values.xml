@@ -6,7 +6,7 @@
     <color name="actionModeHighlight">#000000</color>
     <color name="album_list_cover_image_frame">#FF000000</color>
     <color name="barDark">#232222</color>
-    <color name="barDarkBorder">#666</color>
+    <color name="barDarkBorder">#666666</color>
     <color name="barLight">#dcdcdc</color>
     <color name="barLightBorder">#c1c1c1</color>
     <color name="blackBackground">#000000</color>
@@ -14,7 +14,7 @@
     <color name="blueBackground">#1865a9</color>
     <color name="buttonHighlight">#ffa443</color>
     <color name="darkBlueText">#2B405C</color>
-    <color name="darkButtonText">#FFFFFF</color>
+    <color name="darkButtonText">#ffffff</color>
     <color name="darkGrayText">#323436</color>
     <color name="dialogBoxTitleBackground">#DD000000</color>
     <color name="errorText">#bb0000</color>

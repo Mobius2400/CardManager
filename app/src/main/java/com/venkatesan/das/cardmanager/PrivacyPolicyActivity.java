@@ -5,10 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 public class PrivacyPolicyActivity extends AppCompatActivity {
+
+    final String title = "Privacy Policy";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.ActionBarTheme);
         setContentView(R.layout.activity_privacy_policy);
+        getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

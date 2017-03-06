@@ -23,7 +23,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgNavHeaderBg;
     private TextView txtName, txtWebsite;
     private Toolbar toolbar;
-    private FloatingActionButton fab;
+    private FloatingActionButton textSearch, imageSearch;
 
     // urls to load navigation header background image
     // and profile image
@@ -72,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        imageSearch = (FloatingActionButton) findViewById(R.id.imageSearch);
+        textSearch = (FloatingActionButton) findViewById(R.id.textSearch);
 
         // Navigation view header
         navHeader = navigationView.getHeaderView(0);
@@ -83,7 +83,14 @@ public class MainActivity extends AppCompatActivity {
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        imageSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        textSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -142,10 +149,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Sometimes, when fragment has huge data, screen seems hanging
-        // when switching between navigation menus
-        // So using runnable, the fragment is loaded with cross fade effect
-        // This effect can be seen in GMail app
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
@@ -163,14 +166,8 @@ public class MainActivity extends AppCompatActivity {
         if (mPendingRunnable != null) {
             mHandler.post(mPendingRunnable);
         }
-
-        // show or hide the fab button
         toggleFab();
-
-        //Closing drawer on item click
         drawer.closeDrawers();
-
-        // refresh toolbar menu
         invalidateOptionsMenu();
     }
 
@@ -196,10 +193,6 @@ public class MainActivity extends AppCompatActivity {
                 // view inventory fragment
                 ViewInventoryFragment viewInventoryFragment = new ViewInventoryFragment();
                 return viewInventoryFragment;
-            case 5:
-                // settings fragment
-                SettingsFragment settingsFragment = new SettingsFragment();
-                return settingsFragment;
             default:
                 return new HomeFragment();
         }
@@ -245,9 +238,10 @@ public class MainActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_VIEWINVENTORY;
                         break;
                     case R.id.nav_settings:
-                        navItemIndex = 5;
-                        CURRENT_TAG = TAG_SETTINGS;
-                        break;
+                        // launch new intent instead of loading fragment
+                        startActivity(new Intent(MainActivity.this, settingsController.class));
+                        drawer.closeDrawers();
+                        return true;
                     case R.id.nav_about_us:
                         // launch new intent instead of loading fragment
                         startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
@@ -333,11 +327,6 @@ public class MainActivity extends AppCompatActivity {
         if (navItemIndex == 0) {
             getMenuInflater().inflate(R.menu.main, menu);
         }
-
-        // when fragment is notifications, load the menu created for notifications
-        if (navItemIndex == 3) {
-            getMenuInflater().inflate(R.menu.notifications, menu);
-        }
         return true;
     }
 
@@ -369,50 +358,23 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Logout user!", Toast.LENGTH_LONG).show();
             return true;
         }
-
-        // user is in notifications fragment
-        // and selected 'Mark all as Read'
-        if (id == R.id.action_mark_all_read) {
-            Toast.makeText(getApplicationContext(), "All notifications marked as read!", Toast.LENGTH_LONG).show();
-        }
-
-        // user is in notifications fragment
-        // and selected 'Clear All'
-        if (id == R.id.action_clear_notifications) {
-            Toast.makeText(getApplicationContext(), "Clear all notifications!", Toast.LENGTH_LONG).show();
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
     // show or hide the fab
     private void toggleFab() {
-        if (navItemIndex == 0)
-            fab.show();
-        else
-            fab.hide();
+        if (navItemIndex == 0) {
+            imageSearch.show();
+            textSearch.show();
+        }
+        else {
+            imageSearch.hide();
+            textSearch.hide();
+        }
     }
 
     public void onButtonClick(View in_view){
         int buttonID = in_view.getId();
-        switch(buttonID){
-            case R.id.searchText:
-                Intent searchByText = new Intent(MainActivity.this, searchTextController.class);
-                startActivity(searchByText);
-                break;
-        }
-        switch(buttonID){
-            case R.id.viewInventory:
-                Intent inventory = new Intent(MainActivity.this, inventoryDisplayController.class);
-                startActivity(inventory);
-                break;
-        }
-        switch(buttonID){
-            case R.id.viewCart:
-                Intent cart = new Intent(MainActivity.this, cartListController.class);
-                startActivity(cart);
-                break;
-        }
     }
 
     public boolean isOnline(Context context) {
