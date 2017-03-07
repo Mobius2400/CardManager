@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-public class PrivacyPolicyActivity extends AppCompatActivity {
+public class DatabaseAllCardsActivity extends AppCompatActivity {
 
     final String title = "Privacy Policy";
 
