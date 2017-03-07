@@ -24,10 +24,10 @@ public class Contract {
     final static String sharedPreferences = "com.venkatesan.das.cardmanager_preferences";
         //Database Attributes
         final static String firstUpdate = "first_update";
-        //User settingsController Attributes
+        //User SettingsActivity Attributes
         final static String userName = "user_name";
         final static String location = "location";
-        //Inventory settingsController Attributes
+        //Inventory SettingsActivity Attributes
         final static String bulkManage = "bulk_manage";
         final static String autoCommit = "auto_commit";
 

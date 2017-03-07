@@ -12,7 +12,7 @@ public class DatabaseAllCardsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.ActionBarTheme);
-        setContentView(R.layout.activity_privacy_policy);
+        setContentView(R.layout.activity_allcards_database);
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

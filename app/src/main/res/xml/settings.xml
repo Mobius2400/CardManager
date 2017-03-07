@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="Personal Informations"
+        android:title="Personal Information"
         android:key="personal_category">
         <EditTextPreference
             android:key="user_name"

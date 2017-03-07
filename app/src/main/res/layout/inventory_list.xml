@@ -53,7 +53,8 @@
             android:textAlignment="viewStart"
             android:textStyle="normal|bold"
             android:textColor="@color/actionBarHighlight"
-            android:layout_height="80dp" />
+            android:layout_height="80dp"
+            android:gravity="center_vertical|center_horizontal" />
 
     </LinearLayout>
 

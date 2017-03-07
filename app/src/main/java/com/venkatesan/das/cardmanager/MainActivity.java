@@ -1,9 +1,11 @@
 package com.venkatesan.das.cardmanager;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -118,8 +122,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadNavHeader() {
         // name, location
-        txtName.setText("<Username>");
-        txtWebsite.setText("<location>");
+        SharedPreferences pref = getSharedPreferences(Contract.sharedPreferences, MODE_PRIVATE);
+        txtName.setText("Welcome, " + pref.getString(Contract.userName, "<no name set>"));
+        txtWebsite.setText(pref.getString(Contract.location, "<no location set>"));
 
         // loading header background image
         Glide.with(this).load(urlNavHeaderBg)
@@ -239,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_settings:
                         // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, settingsController.class));
+                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_about_us:
@@ -249,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_privacy_policy:
                         // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));
+                        startActivity(new Intent(MainActivity.this, DatabaseAllCardsActivity.class));
                         drawer.closeDrawers();
                         return true;
                     default:
@@ -346,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // action with ID action_settings was selected
             case R.id.action_settings:
-                Intent settings = new Intent(MainActivity.this, settingsController.class);
+                Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(settings);
                 break;
             default:
@@ -382,5 +387,51 @@ public class MainActivity extends AppCompatActivity {
         android.net.NetworkInfo networkinfo = cm.getActiveNetworkInfo();
         if (networkinfo != null && networkinfo.isConnected()) return true;
         return false;
+    }
+
+    class asyncGetAllCards extends AsyncTask<Void, String, ArrayList<String>> {
+        allCardsDatabase db = new allCardsDatabase(getApplicationContext());
+        ProgressDialog asyncDialog = new ProgressDialog(getApplicationContext());
+        ArrayList<String> allCards;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            asyncDialog.setMessage("Searching for update...");
+            asyncDialog.show();
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(Void... params) {
+            allCards = new ArrayList<>();
+            try {
+                allCards = getAllMadeYGOCards.setupAllCards();
+                for (int i = 0; i < allCards.size(); i++) {
+                    String card = allCards.get(i);
+                    publishProgress(Integer.toString(i));
+                    if (db.getIDFromName(card) == -1) {
+                        db.addCard(card);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return allCards;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            int totalCards = allCards.size();
+            asyncDialog.setMessage("Checking " + values[0] + " of " + totalCards);
+            asyncDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> allCards) {
+            super.onPostExecute(allCards);
+            asyncDialog.setMessage("Added " + allCards.size() + " cards");
+            asyncDialog.dismiss();
+        }
     }
 }

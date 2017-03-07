@@ -35,8 +35,8 @@
         app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_photo_library_black_24dp"
         app:layout_anchor="@+id/frame"
-        app:layout_anchorGravity="center_vertical|right"
         android:layout_above="@+id/textSearch"
+        app:layout_anchorGravity="center_vertical|right"
         android:layout_gravity="bottom|left" />
 
     <android.support.design.widget.FloatingActionButton

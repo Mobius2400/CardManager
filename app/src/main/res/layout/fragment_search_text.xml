@@ -32,7 +32,7 @@
             android:textColor="@color/actionBarHighlight"
             android:popupBackground="@color/darkButtonText"
             android:completionThreshold="3"
-            android:dropDownSelector="@color/blackBackground" />
+            android:dropDownSelector="@color/galleryItemSelectedOverlay" />
 
         <Button
             android:text="@string/goSearch"
