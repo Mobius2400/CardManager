@@ -12,9 +12,10 @@
     tools:context="com.venkatesan.das.cardmanager.SettingsActivity">
 
     <fragment
-        android:name="com.venkatesan.das.cardmanager.SettingsFragment"
-        android:id="@+id/settings_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:name="com.venkatesan.das.cardmanager.SettingsFragment"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/fragment_settings"
+        android:layout_alignParentTop="true" />
 </RelativeLayout>

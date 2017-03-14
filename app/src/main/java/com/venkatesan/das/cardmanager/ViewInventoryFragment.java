@@ -1,6 +1,7 @@
 package com.venkatesan.das.cardmanager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -65,6 +66,21 @@ public class ViewInventoryFragment extends Fragment {
 
         searchResult = (ListView)view.findViewById(R.id.searchInventoryResults);
         searchResult.setAdapter(new inventoryAdapter(getActivity(), inventoryCards));
+        searchResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                YugiohCard thisCard = (YugiohCard)searchResult.getItemAtPosition(position);
+                Intent toCardDisplay = new Intent(getActivity(), CardDisplayActivity.class);
+
+                Bundle values = new Bundle();
+                values.putString(Contract.nameKey, thisCard.getName());
+                values.putString(Contract.tagKey, thisCard.getPrint_tag());
+                values.putString(Contract.rarityKey, thisCard.getRarity());
+                toCardDisplay.putExtras(values);
+                //Inflate the fragment
+                startActivity(toCardDisplay);
+            }
+        });
         return view;
     }
 

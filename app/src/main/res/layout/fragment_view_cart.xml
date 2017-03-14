@@ -32,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="514dp"
         android:id="@+id/searchResults"
-        android:clickable="true" />
+        android:clickable="false"
+        android:focusable="false" />
 
 </LinearLayout>

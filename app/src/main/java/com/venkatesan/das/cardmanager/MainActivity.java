@@ -1,11 +1,9 @@
 package com.venkatesan.das.cardmanager;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -28,7 +26,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_SEARCHTEXT = "Search Text";
     private static final String TAG_VIEWCART = "View Cart";
     private static final String TAG_VIEWINVENTORY = "View Inventory";
-    private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
 
     // toolbar titles respected to selected nav menu item
@@ -252,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                         drawer.closeDrawers();
                         return true;
-                    case R.id.nav_privacy_policy:
+                    case R.id.nav_update_database:
                         // launch new intent instead of loading fragment
                         startActivity(new Intent(MainActivity.this, DatabaseAllCardsActivity.class));
                         drawer.closeDrawers();
@@ -325,13 +321,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         thisMenu = menu;
+        menu.clear();
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, thisMenu);
         setOptions();
-        // show menu only when home fragment is selected
-        if (navItemIndex == 0) {
-            getMenuInflater().inflate(R.menu.main, menu);
-        }
         return true;
     }
 
@@ -366,6 +359,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onResume(){
+        invalidateOptionsMenu();
+        super.onResume();
+    }
+
     // show or hide the fab
     private void toggleFab() {
         if (navItemIndex == 0) {
@@ -387,51 +386,5 @@ public class MainActivity extends AppCompatActivity {
         android.net.NetworkInfo networkinfo = cm.getActiveNetworkInfo();
         if (networkinfo != null && networkinfo.isConnected()) return true;
         return false;
-    }
-
-    class asyncGetAllCards extends AsyncTask<Void, String, ArrayList<String>> {
-        allCardsDatabase db = new allCardsDatabase(getApplicationContext());
-        ProgressDialog asyncDialog = new ProgressDialog(getApplicationContext());
-        ArrayList<String> allCards;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            asyncDialog.setMessage("Searching for update...");
-            asyncDialog.show();
-        }
-
-        @Override
-        protected ArrayList<String> doInBackground(Void... params) {
-            allCards = new ArrayList<>();
-            try {
-                allCards = getAllMadeYGOCards.setupAllCards();
-                for (int i = 0; i < allCards.size(); i++) {
-                    String card = allCards.get(i);
-                    publishProgress(Integer.toString(i));
-                    if (db.getIDFromName(card) == -1) {
-                        db.addCard(card);
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return allCards;
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-            int totalCards = allCards.size();
-            asyncDialog.setMessage("Checking " + values[0] + " of " + totalCards);
-            asyncDialog.show();
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<String> allCards) {
-            super.onPostExecute(allCards);
-            asyncDialog.setMessage("Added " + allCards.size() + " cards");
-            asyncDialog.dismiss();
-        }
     }
 }

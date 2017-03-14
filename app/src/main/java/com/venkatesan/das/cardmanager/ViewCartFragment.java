@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,8 +24,9 @@ public class ViewCartFragment extends Fragment {
     Button btnaddToInventory;
     Button btndeleteSelected;
     ArrayList<YugiohCard> cartCards;
-    ArrayList<YugiohCard> toDelete;
+    ArrayList<YugiohCard> isSelected;
     ListView searchResult;
+    cartAdapter adapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -41,20 +46,22 @@ public class ViewCartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_view_cart, container, false);
+        final View view = inflater.inflate(R.layout.fragment_view_cart, container, false);
 
-        cardDatabase db = new cardDatabase(getActivity());
-        cartCards = db.getAllCartCards();
-        toDelete = new ArrayList<>();
-        db.close();
+        isSelected = new ArrayList<>();
+
+        setupCartList(view);
+
         btnaddToInventory = (Button)view.findViewById(R.id.commitToInventory);
         btnaddToInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveToInventory(cartCards);
-                Toast.makeText(getActivity(), "All cards added to inventory.", Toast.LENGTH_SHORT).show();
-                Intent toMain = new Intent(getActivity(), MainActivity.class);
-                startActivity(toMain);
+                Boolean moved = moveToInventory(cartCards);
+                if(moved){
+                    Toast.makeText(getActivity(), "Selected Cards added to inventory.", Toast.LENGTH_SHORT).show();
+                    //Reload cart items.
+                    setupCartList(view);
+                }
             }
         });
 
@@ -64,21 +71,37 @@ public class ViewCartFragment extends Fragment {
             public void onClick(View v) {
                 deleteSelected();
                 Toast.makeText(getActivity(), "Removed selected.", Toast.LENGTH_SHORT).show();
+                //Reload cart items.
+                setupCartList(view);
             }
         });
+        return view;
+    }
 
+    private void setupCartList(View view){
+        cardDatabase db = new cardDatabase(getActivity());
+        cartCards = db.getAllCartCards();
         searchResult = (ListView) view.findViewById(R.id.searchResults);
-        searchResult.setAdapter(new cartAdapter(getActivity(), cartCards));
+        adapter = new cartAdapter(getActivity(), cartCards);
+        searchResult.setAdapter(adapter);
         searchResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                YugiohCard selectCard = (YugiohCard)parent.getItemAtPosition(position);
-                System.out.println(selectCard.getName());
-                Toast.makeText(getActivity(), "Clicked on Row: " + selectCard.getName(), Toast.LENGTH_LONG).show();
+                YugiohCard listitem = (YugiohCard)searchResult.getItemAtPosition(position);
+                Boolean isChecked = ((CheckBox)view.findViewById(R.id.selectCard)).isChecked();
+                if(isChecked){
+                    isSelected.remove(listitem);
+                    ((CheckBox)view.findViewById(R.id.selectCard)).setChecked(false);
+                    view.setBackgroundColor(0x00000);
+                }
+                else if(!isChecked){
+                    isSelected.add(listitem);
+                    ((CheckBox)view.findViewById(R.id.selectCard)).setChecked(true);
+                    view.setBackgroundColor(getResources().getColor(R.color.selected));
+                }
             }
         });
-
-        return view;
+        db.close();
     }
 
     @Override
@@ -96,13 +119,14 @@ public class ViewCartFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void moveToInventory(ArrayList<YugiohCard> cartCards){
+    public Boolean moveToInventory(ArrayList<YugiohCard> cartCards){
         cardDatabase db = new cardDatabase(getActivity());
-        if(cartCards.size() == 0){
-            Toast.makeText(getActivity(), "No cards in cart.", Toast.LENGTH_SHORT).show();
+        if(cartCards.size() == 0 || isSelected.size() == 0){
+            Toast.makeText(getActivity(), "No cards to add.", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        else{
-            for(YugiohCard currCard: cartCards){
+        else if (cartCards.size() > 0 && isSelected.size() > 0){
+            for(YugiohCard currCard: isSelected){
                 int ID = db.getIDFromInventory(currCard);
                 int cartID = db.getIDFromCart(currCard);
                 if(ID == -1){
@@ -114,13 +138,15 @@ public class ViewCartFragment extends Fragment {
                     db.deleteFromCart(cartID);
                 }
             }
+            return true;
         }
         db.close();
+        return false;
     }
 
     public void deleteSelected(){
         cardDatabase db = new cardDatabase(getActivity());
-        for(YugiohCard card: toDelete){
+        for(YugiohCard card: isSelected){
             db.deleteFromCart(db.getIDFromCart(card));
         }
         db.close();

@@ -13,13 +13,13 @@
         tools:gravity="center"
         android:gravity="center"
         android:layout_marginLeft="10sp"
-        android:focusable="false" />
+        android:focusable="false"
+        android:clickable="false" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="277dp"
-        android:layout_height="match_parent"
-        android:clickable="true">
+        android:layout_height="match_parent">
 
         <TextView android:id="@+id/cardName"
             android:textSize="18sp"

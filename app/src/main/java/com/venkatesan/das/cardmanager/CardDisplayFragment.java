@@ -95,7 +95,7 @@ public class CardDisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        container.removeAllViews();
+        //container.removeAllViews();
         View view = inflater.inflate(R.layout.fragment_card_display, container, false);
         thisCard = new YugiohCard();
         db = new cardDatabase(getActivity());
@@ -368,7 +368,6 @@ public class CardDisplayFragment extends Fragment {
 
     public void updateNumberInStock(){
         int ID = db.getIDFromInventory(thisCard);
-        System.out.println(ID);
         int quantity;
         if(ID != -1){
             thisCard.setNumInventory(thisCard.getNumInventory() + db.getQuantityFromInventory(ID));

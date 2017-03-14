@@ -1,7 +1,7 @@
 package com.venkatesan.das.cardmanager;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,9 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
-
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
@@ -70,7 +68,7 @@ public class SearchTextFragment extends Fragment {
         displayResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sendToCardDisplay(position);
+                sendToCardDisplayActivity(position);
             }
         });
 
@@ -119,19 +117,17 @@ public class SearchTextFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void sendToCardDisplay(int position){
+    private void sendToCardDisplayActivity(int position){
         YugiohCard chosenCard = resultCards[position];
-        CardDisplayFragment cardDisplayFragment = new CardDisplayFragment();
+        Intent toCardDisplay = new Intent(getActivity(), CardDisplayActivity.class);
 
-        Bundle sendToCardActivity = new Bundle();
-        sendToCardActivity.putString(Contract.nameKey, card_name);
-        sendToCardActivity.putString(Contract.tagKey, chosenCard.getPrint_tag());
-        sendToCardActivity.putString(Contract.rarityKey, chosenCard.getRarity());
-        cardDisplayFragment.setArguments(sendToCardActivity);
-
+        Bundle values = new Bundle();
+        values.putString(Contract.nameKey, card_name);
+        values.putString(Contract.tagKey, chosenCard.getPrint_tag());
+        values.putString(Contract.rarityKey, chosenCard.getRarity());
+        toCardDisplay.putExtras(values);
         //Inflate the fragment
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.frame, cardDisplayFragment)
-                .addToBackStack(null).commit();
+        startActivity(toCardDisplay);
     }
 
     public void setSearchProgress(String message){
@@ -196,7 +192,7 @@ public class SearchTextFragment extends Fragment {
             }
             else if(yugiohCards.length == 1){
                 toAdd(yugiohCards);
-                sendToCardDisplay(0);
+                sendToCardDisplayActivity(0);
             }
             else if(yugiohCards.length > 1){
                 setSearchProgress("Multiple Versions Found:");

@@ -1,12 +1,18 @@
 package com.venkatesan.das.cardmanager;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.app.FragmentTransaction;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 public class SettingsActivity extends AppCompatActivity {
 
     final String title = "Settings";
+
+    public SettingsActivity(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +21,12 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        SettingsFragment settingsFragment = new SettingsFragment();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_settings, settingsFragment);
+        fragmentTransaction.commit();
     }
 
     @Override
