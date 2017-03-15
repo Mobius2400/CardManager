@@ -28,26 +28,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/imageSearch"
-        android:layout_width="75dp"
-        android:layout_height="74dp"
-        android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@drawable/ic_photo_library_black_24dp"
-        app:layout_anchor="@+id/frame"
-        android:layout_above="@+id/textSearch"
-        app:layout_anchorGravity="center_vertical|right"
-        android:layout_gravity="bottom|left" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/textSearch"
-        android:layout_width="74dp"
-        android:layout_height="72dp"
+        android:id="@+id/search"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_gravity="top|left"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_text_search"
         app:layout_anchor="@+id/frame"
-        app:layout_anchorGravity="bottom|right" />
+        app:layout_anchorGravity="bottom|right"
+        app:backgroundTint="@color/red" />
 
 </android.support.design.widget.CoordinatorLayout>

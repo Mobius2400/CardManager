@@ -2,6 +2,7 @@ package com.venkatesan.das.cardmanager;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.hardware.camera2.params.StreamConfigurationMap;
 
 /**
  * Created by Das on 2/15/2017.
@@ -27,9 +28,11 @@ public class Contract {
         //User SettingsActivity Attributes
         final static String userName = "user_name";
         final static String location = "location";
+        final static String email = "email_address";
         //Inventory SettingsActivity Attributes
         final static String bulkManage = "bulk_manage";
         final static String autoCommit = "auto_commit";
+        final static String exitCode = "exit";
 
     //Bundle Attributes
     final static String nameKey = "card_name";

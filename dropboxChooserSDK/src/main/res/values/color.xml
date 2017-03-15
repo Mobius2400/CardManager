@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:dbxbuild="https://android.dropbox.com/StringsSchema">
-    <color name="red">#FFFF0000</color>
+    <color name="red">#af0e0e</color>
     <color name="green">#00ff00</color>
     <color name="blue">#FF0000FF</color>
 

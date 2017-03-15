@@ -10,6 +10,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -55,6 +56,8 @@ public class SearchTextFragment extends Fragment {
         //Create Auto Complete Text
         cardName = (AutoCompleteTextView)view.findViewById(R.id.cardNameByName);
         cardName.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        //Give textview focus
+
         allCardsDatabase db = new allCardsDatabase(getActivity());
         ArrayList<String> allCards = db.getAllMadeCards();
         allCards.toArray();
@@ -152,6 +155,16 @@ public class SearchTextFragment extends Fragment {
             String rarity = card.getRarity();
             results.add(print_tag + " - " + rarity);
         }
+    }
+
+    @Override
+    public void onResume(){
+        if(resultMessage.getText().equals("Searching...")){
+            setSearchProgress("");
+            cardName.setText("");
+            nameDisplay.setText("");
+        }
+        super.onResume();
     }
 
     public class AsyncQuery extends AsyncTask<String, Void, YugiohCard[]> {

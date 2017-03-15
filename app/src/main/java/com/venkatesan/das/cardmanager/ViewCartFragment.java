@@ -58,7 +58,7 @@ public class ViewCartFragment extends Fragment {
             public void onClick(View v) {
                 Boolean moved = moveToInventory(cartCards);
                 if(moved){
-                    Toast.makeText(getActivity(), "Selected Cards added to inventory.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "All Cards added to inventory.", Toast.LENGTH_SHORT).show();
                     //Reload cart items.
                     setupCartList(view);
                 }
@@ -121,12 +121,12 @@ public class ViewCartFragment extends Fragment {
 
     public Boolean moveToInventory(ArrayList<YugiohCard> cartCards){
         cardDatabase db = new cardDatabase(getActivity());
-        if(cartCards.size() == 0 || isSelected.size() == 0){
+        if(cartCards.size() == 0){
             Toast.makeText(getActivity(), "No cards to add.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        else if (cartCards.size() > 0 && isSelected.size() > 0){
-            for(YugiohCard currCard: isSelected){
+        else if (cartCards.size() > 0){
+            for(YugiohCard currCard: cartCards){
                 int ID = db.getIDFromInventory(currCard);
                 int cartID = db.getIDFromCart(currCard);
                 if(ID == -1){

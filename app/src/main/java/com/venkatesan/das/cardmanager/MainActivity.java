@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgNavHeaderBg;
     private TextView txtName, txtWebsite;
     private Toolbar toolbar;
-    private FloatingActionButton textSearch, imageSearch;
+    private FloatingActionButton search;
 
     // urls to load navigation header background image
     // and profile image
@@ -64,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Check for exit flag
+        if(getIntent().getBooleanExtra(Contract.exitCode, false)){
+            finish();
+            return;
+        }
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -71,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        imageSearch = (FloatingActionButton) findViewById(R.id.imageSearch);
-        textSearch = (FloatingActionButton) findViewById(R.id.textSearch);
+        search = (FloatingActionButton) findViewById(R.id.search);
 
         // Navigation view header
         navHeader = navigationView.getHeaderView(0);
@@ -83,14 +89,7 @@ public class MainActivity extends AppCompatActivity {
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        imageSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        textSearch.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -176,24 +175,19 @@ public class MainActivity extends AppCompatActivity {
         switch (navItemIndex) {
             case 0:
                 // home
-                HomeFragment homeFragment = new HomeFragment();
-                return homeFragment;
+                return new HomeFragment();
             case 1:
                 // search by image fragment
-                SearchImageFragment searchImageFragment = new SearchImageFragment();
-                return searchImageFragment;
+                return new SearchImageFragment();
             case 2:
                 // search by text fragment
-                SearchTextFragment searchTextFragment = new SearchTextFragment();
-                return searchTextFragment;
+                return new SearchTextFragment();
             case 3:
                 // view cart fragment
-                ViewCartFragment viewCartFragment = new ViewCartFragment();
-                return viewCartFragment;
+                return new ViewCartFragment();
             case 4:
                 // view inventory fragment
-                ViewInventoryFragment viewInventoryFragment = new ViewInventoryFragment();
-                return viewInventoryFragment;
+                return new ViewInventoryFragment();
             default:
                 return new HomeFragment();
         }
@@ -338,23 +332,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             // action with ID action_settings was selected
             case R.id.action_settings:
                 Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(settings);
                 break;
+            case R.id.action_logout:
+               // Logout user
+                break;
+            case R.id.action_exit:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra(Contract.exitCode, true);
+                startActivity(intent);
+                finish();
             default:
                 break;
-        }
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-            Toast.makeText(getApplicationContext(), "Logout user!", Toast.LENGTH_LONG).show();
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -362,18 +356,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         invalidateOptionsMenu();
+        loadNavHeader();
         super.onResume();
     }
 
     // show or hide the fab
     private void toggleFab() {
         if (navItemIndex == 0) {
-            imageSearch.show();
-            textSearch.show();
+            search.show();
         }
         else {
-            imageSearch.hide();
-            textSearch.hide();
+            search.hide();
         }
     }
 
