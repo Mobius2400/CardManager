@@ -22,9 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,14 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private View navHeader;
-    private ImageView imgNavHeaderBg;
-    private TextView txtName, txtWebsite;
+    private TextView txtName, txtLocation;
     private Toolbar toolbar;
     private FloatingActionButton search;
-
-    // urls to load navigation header background image
-    // and profile image
-    private static final String urlNavHeaderBg = "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -83,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
         // Navigation view header
         navHeader = navigationView.getHeaderView(0);
         txtName = (TextView) navHeader.findViewById(R.id.name);
-        txtWebsite = (TextView) navHeader.findViewById(R.id.website);
-        imgNavHeaderBg = (ImageView) navHeader.findViewById(R.id.img_header_bg);
+        txtLocation = (TextView) navHeader.findViewById(R.id.website);
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
@@ -112,26 +103,14 @@ public class MainActivity extends AppCompatActivity {
 
     /***
      * Load navigation menu header information
-     * like background image, profile image
-     * name, website, notifications action view (dot)
      */
     private void loadNavHeader() {
         // name, location
         SharedPreferences pref = getSharedPreferences(Contract.sharedPreferences, MODE_PRIVATE);
         txtName.setText("Welcome, " + pref.getString(Contract.userName, "<no name set>"));
-        txtWebsite.setText(pref.getString(Contract.location, "<no location set>"));
-
-        // loading header background image
-        Glide.with(this).load(urlNavHeaderBg)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imgNavHeaderBg);
+        txtLocation.setText(pref.getString(Contract.location, "<no location set>"));
     }
 
-    /***
-     * Returns respected fragment that user
-     * selected from navigation menu
-     */
     private void loadHomeFragment() {
         // selecting appropriate nav menu item
         selectNavMenu();
@@ -212,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
-                    case R.id.home:
+                    case R.id.nav_home:
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
