@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public static int navItemIndex = 0;
 
     // tags used to attach the fragments
-    private static final String TAG_HOME = "home";
+    private static final String TAG_HOME = "Home";
     private static final String TAG_SEARCHIMAGE = "Search Image";
     private static final String TAG_SEARCHTEXT = "Search Text";
     private static final String TAG_VIEWCART = "View Cart";

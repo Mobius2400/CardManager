@@ -33,8 +33,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':openCVLibrary320')
     compile files('src/main/libs/json-20140107.jar')
-    compile project(':dropboxChooserSDK')
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
     compile files('src/main/libs/jsoup-1.10.2.jar')
+    compile project(':dropboxChooserSDK')
 }
 

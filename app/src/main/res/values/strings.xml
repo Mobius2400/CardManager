@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CardManager</string>
+    <string name="app_name">Card Manager</string>
     <string name="searchByImage">Search By Image</string>
     <string name="viewInventory">View Inventory</string>
     <string name="viewCart">View Cart</string>
