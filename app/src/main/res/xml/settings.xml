@@ -22,7 +22,7 @@
         <EditTextPreference
             android:key="location"
             android:title="Location"
-            android:summary="Enter Your Location"
+            android:summary="Enter Your Zip Code"
             android:dialogTitle="Enter Your Location"
             android:dialogMessage="Enter Your Location"
             android:defaultValue=""

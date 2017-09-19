@@ -14,13 +14,14 @@ public class Contract {
 
     //URL Attributes
         // Zip Code API URL
-        final static String API_Key = "S9vC4TpAWHaZ5qmiH90UCYMHdFWp7w5ZFACKt1lqJwpOWL6DU7xw5kej0aI7HN6n";
-        final static String format = "json";
-        final static String zipCodeURL = "https://www.zipcodeapi.com/rest/" + API_Key + "/info." + format;
+        final private static String API_Key = "S9vC4TpAWHaZ5qmiH90UCYMHdFWp7w5ZFACKt1lqJwpOWL6DU7xw5kej0aI7HN6n";
+        final static String zipCodeURL = "https://www.zipcodeapi.com/rest/" + API_Key + "/";
+        final static String city = "city";
+        final static String state = "state";
         // List of All YGO Cards
         final static String allCardsURL = "https://www.yugiohcardguide.com/card_list.html";
         // YGOPrices URLs
-        final static String base = "http://yugiohprices.com/api/";
+        final private static String base = "http://yugiohprices.com/api/";
         final static String baseURL_allVersions = base + "card_versions/";
         final static String baseURL_dataByTagandRarity = base + "price_history/";
         final static String baseURL_imageByName = base + "card_image/";

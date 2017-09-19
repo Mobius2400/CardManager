@@ -16,7 +16,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ToggleButton;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import com.venkatesan.das.cardmanager.ZipCodeAPI;
+
+import org.json.JSONObject;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -57,11 +62,22 @@ public class SettingsFragment extends PreferenceFragment {
 
         //Set Location
         EditTextPreference location = (EditTextPreference)findPreference("location");
-        location.setSummary(pref.getString(Contract.location, "Enter Your Location"));
+        location.setSummary(pref.getString(Contract.location, "Enter Your Zip Code"));
         location.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary((String)newValue);
+                String zip_code = (String)newValue;
+                String city_state = "";
+                try {
+                    String results = ZipCodeAPI.locationByZip(zip_code);
+                    JSONObject jsnObj = new JSONObject(results);
+                    String city = jsnObj.getString(Contract.city);
+                    String state = jsnObj.getString(Contract.state);
+                    city_state = city + ", " + state;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                preference.setSummary(city_state);
                 return true;
             }
         });
