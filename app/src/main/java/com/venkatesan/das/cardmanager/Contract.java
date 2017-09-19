@@ -13,6 +13,10 @@ public class Contract {
     private Contract() {}
 
     //URL Attributes
+        // Zip Code API URL
+        final static String API_Key = "S9vC4TpAWHaZ5qmiH90UCYMHdFWp7w5ZFACKt1lqJwpOWL6DU7xw5kej0aI7HN6n";
+        final static String format = "json";
+        final static String zipCodeURL = "https://www.zipcodeapi.com/rest/" + API_Key + "/info." + format;
         // List of All YGO Cards
         final static String allCardsURL = "https://www.yugiohcardguide.com/card_list.html";
         // YGOPrices URLs
@@ -42,9 +46,7 @@ public class Contract {
     //Database Attributes
     final static String databaseName = "CardManagerDatabase";
     final static String allCardDBName = "AllCardsDatabase";
-    final static String zipCodeDBName = "ZipCodeDatabase";
     final static int databaseVersion = 1;
-    final static int zipDatabaseVersion = 1;
     final static String dbPath = "//data//com.venkatesan.das.cardmanager//databases//" + Contract.databaseName;
     final static String backupButton = "Backup Database";
     final static String restoreButton = "Restore Backup";
@@ -58,14 +60,10 @@ public class Contract {
     final static String price_low = "Low";
     final static String price_shift = "Shift";
     final static String numInventory = "Inventory";
-    final static String zipCode = "Zip";
-    final static String primaryCity = "City";
-    final static String state = "State";
     //Table names
     final static String allCardsTable = "AllCards";
     final static String inventoryTable = "Inventory";
     final static String cartTable = "Card";
-    final static String zipCodeTable = "ZipCodes";
     //Create Table Query
     final static String allCardsCreateTable = "CREATE TABLE " + Contract.allCardsTable + "("
             + Contract.ID + " INTEGER PRIMARY KEY, " + Contract.cardName + " TEXT" + ")";
@@ -81,7 +79,4 @@ public class Contract {
             + Contract.price_high + " REAL," + Contract.price_median + " REAL,"
             + Contract.price_low + " REAL," + Contract.price_shift + " REAL,"
             + Contract.numInventory + " INTEGER" + ")";
-    final static String zipCodeCreateTable = "CREATE TABLE " + Contract.zipCodeTable + "("
-            + Contract.zipCode + " INTEGER PRIMARY KEY," + Contract.primaryCity + " TEXT,"
-            + Contract.state + " TEXT" + ")";
 }
