@@ -48,6 +48,7 @@ public class Contract {
     final static String databaseName = "CardManagerDatabase";
     final static String allCardDBName = "AllCardsDatabase";
     final static int databaseVersion = 1;
+    final static int allCardsDatabaseVersion = 1;
     final static String dbPath = "//data//com.venkatesan.das.cardmanager//databases//" + Contract.databaseName;
     final static String backupButton = "Backup Database";
     final static String restoreButton = "Restore Backup";

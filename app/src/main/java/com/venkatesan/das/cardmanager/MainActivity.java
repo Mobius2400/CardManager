@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public static int navItemIndex = 0;
 
     // tags used to attach the fragments
-    private static final String TAG_HOME = "Home";
+    private static final String TAG_HOME = "Card Manager";
     private static final String TAG_SEARCHIMAGE = "Search Image";
     private static final String TAG_SEARCHTEXT = "Search Text";
     private static final String TAG_VIEWCART = "View Cart";

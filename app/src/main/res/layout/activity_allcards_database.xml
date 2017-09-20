@@ -32,6 +32,7 @@
             android:background="@drawable/border"
             android:elevation="9dp"
             android:id="@+id/addedCards"
+            android:textColor="@color/actionBarHighlight"
             android:cacheColorHint="?attr/editTextColor" />
 
     </LinearLayout>
