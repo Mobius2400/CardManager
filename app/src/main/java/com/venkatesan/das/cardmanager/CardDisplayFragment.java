@@ -18,7 +18,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import static android.content.Context.MODE_PRIVATE;
 import static com.venkatesan.das.cardmanager.YGOPricesAPI.getCardForDisplay;
 import static com.venkatesan.das.cardmanager.YGOPricesAPI.toJSON;
@@ -109,7 +116,13 @@ public class CardDisplayFragment extends Fragment {
         cardTag.setText(thisCard.getPrint_tag());
         cardRarity.setText(thisCard.getRarity());
         // Set Image
-        new asyncImageLoad(thisCard.getName(), thisCard.getCardImage()).execute();
+        String getImageURL = null;
+        try {
+            getImageURL = Contract.baseURL_imageByName + URLEncoder.encode(thisCard.getName(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Picasso.with(this.getContext()).load(getImageURL).into(thisCard.getCardImage());
         // Set Inventory
         updateNumberInStock();
         // Set Prices

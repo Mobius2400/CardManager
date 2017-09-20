@@ -21,7 +21,7 @@ public class Contract {
         // List of All YGO Cards
         final static String allCardsURL = "https://www.yugiohcardguide.com/card_list.html";
         // YGOPrices URLs
-        final private static String base = "http://yugiohprices.com/api/";
+        final private static String base = "https://yugiohprices.com/api/";
         final static String baseURL_allVersions = base + "card_versions/";
         final static String baseURL_dataByTagandRarity = base + "price_history/";
         final static String baseURL_imageByName = base + "card_image/";
