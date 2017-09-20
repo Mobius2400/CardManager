@@ -14,7 +14,7 @@ public class Contract {
 
     //URL Attributes
         // Zip Code API URL
-        final private static String API_Key = "S9vC4TpAWHaZ5qmiH90UCYMHdFWp7w5ZFACKt1lqJwpOWL6DU7xw5kej0aI7HN6n";
+        final private static String API_Key = "N8bIZMugSysmaZM51J3idlHfwVurfY527gL73fnVNQiYQ44SN7a1tSh0NLr2Kw5S";
         final static String zipCodeURL = "https://www.zipcodeapi.com/rest/" + API_Key + "/";
         final static String city = "city";
         final static String state = "state";
