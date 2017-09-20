@@ -34,7 +34,7 @@
             android:textColor="@color/barDark" />
 
         <TextView
-            android:id="@+id/website"
+            android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/barDark" />

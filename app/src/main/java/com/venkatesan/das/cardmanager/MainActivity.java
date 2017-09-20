@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         // Navigation view header
         navHeader = navigationView.getHeaderView(0);
         txtName = (TextView) navHeader.findViewById(R.id.name);
-        txtLocation = (TextView) navHeader.findViewById(R.id.website);
+        txtLocation = (TextView) navHeader.findViewById(R.id.location);
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
