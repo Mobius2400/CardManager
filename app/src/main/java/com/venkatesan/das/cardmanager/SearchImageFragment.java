@@ -47,7 +47,9 @@ import static android.app.Activity.RESULT_OK;
 public class SearchImageFragment extends Fragment {
 
     File myFilesDir;
-    ImageView myView;
+    Bitmap myImg;
+    cardImageOCR myAnalyzer;
+    String imageText;
 
     private final int camera_resultCode = 1;
 
@@ -81,6 +83,13 @@ public class SearchImageFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == camera_resultCode){
             if(resultCode == RESULT_OK){
+                // Open Image
+                //myImg = BitmapFactory.decodeFile(Contract.imgSavePath);
+                myImg = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.summoned_skull);
+                myAnalyzer = new cardImageOCR();
+                imageText = myAnalyzer.processImage(myImg);
+                System.out.println(imageText);
+                // Process Image
                 getActivity().onBackPressed();
             }
         }

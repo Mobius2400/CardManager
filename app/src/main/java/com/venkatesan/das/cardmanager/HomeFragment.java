@@ -21,25 +21,16 @@ import java.io.IOException;
 
 public class HomeFragment extends Fragment {
 
-    ImageView myImg;
-    View myView;
-
     public HomeFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        myView = inflater.inflate(R.layout.fragment_home, container, false);
-        return myView;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-    }
-
-    public void refresh(){
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
     }
 }
