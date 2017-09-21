@@ -35,10 +35,11 @@ dependencies {
     //noinspection GradleCompatible
     compile 'com.android.support:support-v4:24.2.1'
     testCompile 'junit:junit:4.12'
-    compile project(':openCVLibrary320')
     compile files('src/main/libs/json-20140107.jar')
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
     compile files('src/main/libs/jsoup-1.10.2.jar')
     compile project(':dropboxChooserSDK')
+    compile project(':openCVLibrary320')
+    compile project(':libraries:tess-two')
 }
 
