@@ -11,11 +11,4 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.venkatesan.das.cardmanager.mainActivityController">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/common_bar_light_gray_bottom"
-        android:id="@+id/homeImage"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
 </RelativeLayout>

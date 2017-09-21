@@ -31,9 +31,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_home, container, false);
-        myImg = (ImageView)myView.findViewById(R.id.homeImage);
-        Picasso.with(getContext()).load(new File(Contract.imgSavePath)).fit().centerCrop().into(myImg);
-        System.out.println("Hello!");
         return myView;
     }
 
