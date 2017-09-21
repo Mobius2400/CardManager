@@ -3,6 +3,7 @@ package com.venkatesan.das.cardmanager;
 import android.app.Application;
 import android.graphics.Bitmap;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.os.Environment;
 
 /**
  * Created by Das on 2/15/2017.
@@ -14,8 +15,8 @@ public class Contract {
 
     //URL Attributes
         // Zip Code API URL
-        final private static String API_Key = "N8bIZMugSysmaZM51J3idlHfwVurfY527gL73fnVNQiYQ44SN7a1tSh0NLr2Kw5S";
-        final static String zipCodeURL = "https://www.zipcodeapi.com/rest/" + API_Key + "/";
+        final private static String zip_API_Key = "N8bIZMugSysmaZM51J3idlHfwVurfY527gL73fnVNQiYQ44SN7a1tSh0NLr2Kw5S";
+        final static String zipCodeURL = "https://www.zipcodeapi.com/rest/" + zip_API_Key + "/";
         final static String city = "city";
         final static String state = "state";
         // List of All YGO Cards
@@ -27,6 +28,10 @@ public class Contract {
         final static String baseURL_imageByName = base + "card_image/";
 
     //Shared Preferences:
+    final static String imgSavePathDir = Environment.getExternalStorageDirectory().getAbsolutePath() +
+            "/Android/data/com.venkatesan.das.cardmanager/files";
+    final static String imgSavePath = imgSavePathDir + "/temp.jpg";
+
     final static String sharedPreferences = "com.venkatesan.das.cardmanager_preferences";
         //Database Attributes
         final static String firstUpdate = "first_update";
