@@ -6,7 +6,7 @@
     <color name="actionModeHighlight">#000000</color>
     <color name="album_list_cover_image_frame">#FF000000</color>
     <color name="barDark">#232222</color>
-    <color name="barDarkBorder">#666</color>
+    <color name="barDarkBorder">#666666</color>
     <color name="barLight">#dcdcdc</color>
     <color name="barLightBorder">#c1c1c1</color>
     <color name="blackBackground">#000000</color>
@@ -14,7 +14,7 @@
     <color name="blueBackground">#1865a9</color>
     <color name="buttonHighlight">#ffa443</color>
     <color name="darkBlueText">#2B405C</color>
-    <color name="darkButtonText">#FFFFFF</color>
+    <color name="darkButtonText">#ffffff</color>
     <color name="darkGrayText">#323436</color>
     <color name="dialogBoxTitleBackground">#DD000000</color>
     <color name="errorText">#bb0000</color>
@@ -52,7 +52,7 @@
     <color name="passwordStrengthText">#58C473</color>
     <color name="passwordStrengthUnlitPhone">#e7e7e7</color>
     <color name="photoTabBackground">#ffffff</color>
-    <color name="red">#FFFF0000</color>
+    <color name="red">#af0e0e</color>
     <color name="redButtonText">#FFFFFF</color>
     <color name="ssLoginText">#354045</color>
     <color name="ss_passwordStrengthMeterLit">#96a5b2</color>
@@ -108,14 +108,10 @@
     <string name="dbx_update_main">Please Update the Dropbox App</string>
     <string name="dbx_update_sub">With the new Dropbox app, you can access all your stuff in your favorite apps, like this one!</string>
     <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+        
     </style>
     <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        
     </style>
     <style name="BottomBar">
         <item name="android:layout_width">match_parent</item>

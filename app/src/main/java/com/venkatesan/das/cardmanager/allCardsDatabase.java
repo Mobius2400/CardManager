@@ -17,7 +17,7 @@ public class allCardsDatabase extends SQLiteOpenHelper {
 
     public allCardsDatabase(Context context){
         // CursorFactory is null.
-        super(context, Contract.allCardDBName, null, Contract.databaseVersion);
+        super(context, Contract.allCardDBName, null, Contract.allCardsDatabaseVersion);
     }
 
     @Override

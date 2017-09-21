@@ -1,14 +1,60 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="info.androidhive.navigationdrawer.fragments.ViewInventoryFragment">
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:alpha="0.3"
-        android:src="@drawable/ic_inventory_icon" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.08"
+        android:paddingBottom="10sp"
+        android:paddingTop="10sp">
 
-</FrameLayout>
+        <TextView
+            android:text="Total Inventory:"
+            android:layout_width="195dp"
+            android:id="@+id/totalCards"
+            android:textStyle="normal|bold"
+            android:textColor="@color/actionBarHighlight"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:paddingLeft="17sp"
+            android:paddingRight="15sp"
+            android:layout_weight="0.22"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:text="999"
+            android:layout_height="wrap_content"
+            android:id="@+id/numCards"
+            android:layout_weight="0.60"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="20sp"
+            android:textColor="@color/actionBarHighlight"
+            android:textStyle="normal|bold"
+            android:layout_width="30sp" />
+    </LinearLayout>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:background="@drawable/border"
+        android:spinnerMode="dropdown"
+        android:paddingLeft="12sp"
+        android:id="@+id/raritySelect"
+        android:layout_weight="0.08"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/galleryItemSelectedOverlay" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/searchInventoryResults"
+        android:clickable="false"
+        android:layout_weight="0.86" />
+
+</LinearLayout>

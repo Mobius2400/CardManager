@@ -6,10 +6,14 @@ import android.view.MenuItem;
 
 public class AboutUsActivity extends AppCompatActivity {
 
+    final String title = "About Us";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.ActionBarTheme);
         setContentView(R.layout.activity_about_us);
+        getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

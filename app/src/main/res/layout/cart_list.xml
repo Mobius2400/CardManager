@@ -13,18 +13,18 @@
         tools:gravity="center"
         android:gravity="center"
         android:layout_marginLeft="10sp"
-        android:focusable="false" />
+        android:focusable="false"
+        android:clickable="false" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="277dp"
-        android:layout_height="match_parent"
-        android:clickable="true">
+        android:layout_height="match_parent">
 
         <TextView android:id="@+id/cardName"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#FFFF00"
+            android:textColor="@color/actionBarHighlight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Card Name" />
@@ -34,14 +34,14 @@
             android:layout_height="wrap_content"
             android:text="Print Tag"
             android:textSize="16sp"
-            android:textColor="@color/barLight" />
+            android:textColor="@color/barDarkBorder" />
 
         <TextView android:id="@+id/rarity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rarity"
             android:textSize="16sp"
-            android:textColor="@color/barLight" />
+            android:textColor="@color/barDarkBorder" />
 
     </LinearLayout>
 
@@ -54,7 +54,7 @@
         android:textSize="20sp"
         android:textAlignment="viewStart"
         android:textStyle="normal|bold"
-        android:textColor="@color/barLight"
+        android:textColor="@color/actionBarHighlight"
         android:focusable="false" />
 
 </LinearLayout>

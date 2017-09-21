@@ -1,107 +1,120 @@
 package com.venkatesan.das.cardmanager;
 
+import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ToggleButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SettingsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SettingsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.io.IOException;
+import java.util.ArrayList;
+import com.venkatesan.das.cardmanager.ZipCodeAPI;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    private OnFragmentInteractionListener mListener;
+import static android.content.Context.MODE_PRIVATE;
 
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+public class SettingsFragment extends PreferenceFragment {
+    private String results = "Try again. Something went wrong.";
+    private String city_state, zipCode;
+    private SharedPreferences pref;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        addPreferencesFromResource(R.xml.settings);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        pref = getActivity().getSharedPreferences(Contract.sharedPreferences, MODE_PRIVATE);
+
+        //Set Name
+        EditTextPreference name = (EditTextPreference) findPreference("user_name");
+        name.setSummary(pref.getString(Contract.userName, ""));
+        name.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                preference.setSummary((String) newValue);
+                return true;
+            }
+        });
+
+        //Set Email Address
+        EditTextPreference email = (EditTextPreference) findPreference("email_address");
+        email.setSummary(pref.getString(Contract.email, ""));
+        email.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                preference.setSummary((String) newValue);
+                return true;
+            }
+        });
+
+        //Set Location
+        EditTextPreference location = (EditTextPreference) findPreference("location");
+        location.setSummary(pref.getString(Contract.location, ""));
+        location.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                zipCode = (String) newValue;
+                try {
+                    new asyncZipToLocation(preference).execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
+        return view;
+    }
+
+    private class asyncZipToLocation extends AsyncTask<Void, Void, Void> {
+        Preference myPref;
+
+        public asyncZipToLocation(Preference preference) {
+            myPref = preference;
         }
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                results = ZipCodeAPI.locationByZip(zipCode);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-    }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            try {
+                JSONObject jsnObj = new JSONObject(results);
+                String city = jsnObj.getString(Contract.city);
+                String state = jsnObj.getString(Contract.state);
+                city_state = city + ", " + state;
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString(Contract.location, city_state);
+                editor.commit();
+                myPref.setSummary(city_state);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        }
     }
 }

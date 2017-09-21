@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="Personal Informations"
+        android:title="Personal Information"
         android:key="personal_category">
         <EditTextPreference
             android:key="user_name"
             android:title="Name"
             android:summary="Enter Your User Name"
-            android:dialogTitle="Your Name"
-            android:dialogMessage="Enter Your Complete Name"
+            android:dialogTitle="Enter Your Name"
             android:defaultValue=""
             android:inputType="textCapWords"/>
         <EditTextPreference
@@ -16,15 +15,13 @@
             android:title="Email Address"
             android:summary="Enter Your Email Address"
             android:dialogTitle="Enter Your Email Address"
-            android:dialogMessage="Enter Your Email Address"
             android:defaultValue=""
             android:inputType="textEmailAddress"/>
         <EditTextPreference
             android:key="location"
             android:title="Location"
-            android:summary="Enter Your Location"
-            android:dialogTitle="Enter Your Location"
-            android:dialogMessage="Enter Your Location"
+            android:summary="Enter Your Zip Code"
+            android:dialogTitle="Enter Your Zip Code"
             android:defaultValue=""
             android:inputType="textCapWords"/>
     </PreferenceCategory>

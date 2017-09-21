@@ -1,15 +1,38 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="info.androidhive.navigationdrawer.fragments.ViewCartFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:alpha="0.3"
-        android:src="@drawable/ic_cart_icon" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-</FrameLayout>
+        <Button
+            android:text="Add To Inventory"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/commitToInventory"
+            android:textSize="14sp"
+            android:layout_weight="0.39" />
+
+        <Button
+            android:text="Discard Selected"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/discardSelected"
+            android:layout_weight="0.53" />
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="514dp"
+        android:id="@+id/searchResults"
+        android:clickable="false"
+        android:focusable="false" />
+
+</LinearLayout>

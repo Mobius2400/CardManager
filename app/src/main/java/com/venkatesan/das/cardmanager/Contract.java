@@ -2,6 +2,8 @@ package com.venkatesan.das.cardmanager;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.hardware.camera2.params.StreamConfigurationMap;
+import android.os.Environment;
 
 /**
  * Created by Das on 2/15/2017.
@@ -12,24 +14,35 @@ public class Contract {
     private Contract() {}
 
     //URL Attributes
+        // Zip Code API URL
+        final private static String zip_API_Key = "N8bIZMugSysmaZM51J3idlHfwVurfY527gL73fnVNQiYQ44SN7a1tSh0NLr2Kw5S";
+        final static String zipCodeURL = "https://www.zipcodeapi.com/rest/" + zip_API_Key + "/";
+        final static String city = "city";
+        final static String state = "state";
         // List of All YGO Cards
         final static String allCardsURL = "https://www.yugiohcardguide.com/card_list.html";
         // YGOPrices URLs
-        final static String base = "http://yugiohprices.com/api/";
+        final private static String base = "https://yugiohprices.com/api/";
         final static String baseURL_allVersions = base + "card_versions/";
         final static String baseURL_dataByTagandRarity = base + "price_history/";
         final static String baseURL_imageByName = base + "card_image/";
 
     //Shared Preferences:
+    final static String imgSavePathDir = Environment.getExternalStorageDirectory().getAbsolutePath() +
+            "/Android/data/com.venkatesan.das.cardmanager/files";
+    final static String imgSavePath = imgSavePathDir + "/temp.jpg";
+
     final static String sharedPreferences = "com.venkatesan.das.cardmanager_preferences";
         //Database Attributes
         final static String firstUpdate = "first_update";
-        //User settingsController Attributes
+        //User SettingsActivity Attributes
         final static String userName = "user_name";
         final static String location = "location";
-        //Inventory settingsController Attributes
+        final static String email = "email_address";
+        //Inventory SettingsActivity Attributes
         final static String bulkManage = "bulk_manage";
         final static String autoCommit = "auto_commit";
+        final static String exitCode = "exit";
 
     //Bundle Attributes
     final static String nameKey = "card_name";
@@ -40,6 +53,7 @@ public class Contract {
     final static String databaseName = "CardManagerDatabase";
     final static String allCardDBName = "AllCardsDatabase";
     final static int databaseVersion = 1;
+    final static int allCardsDatabaseVersion = 1;
     final static String dbPath = "//data//com.venkatesan.das.cardmanager//databases//" + Contract.databaseName;
     final static String backupButton = "Backup Database";
     final static String restoreButton = "Restore Backup";

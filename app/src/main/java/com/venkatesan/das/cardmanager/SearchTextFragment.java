@@ -3,88 +3,110 @@ package com.venkatesan.das.cardmanager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import org.json.JSONException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SearchTextFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SearchTextFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SearchTextFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    AutoCompleteTextView cardName;
+    TextView nameDisplay;
+    TextView resultMessage;
+    ArrayList<String> results = new ArrayList<String>();
+    YugiohCard[] resultCards;
+    ListView displayResults;
+    Button goSearch;
+    String card_name = "";
+    SearchTextFragment.AsyncQuery searcher;
 
     private OnFragmentInteractionListener mListener;
 
-    public SearchTextFragment() {
-        // Required empty public constructor
-    }
+    public SearchTextFragment() {}
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchTextFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchTextFragment newInstance(String param1, String param2) {
+    public static SearchTextFragment newInstance() {
         SearchTextFragment fragment = new SearchTextFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
-        startActivity(intent);
-    }
+    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_text_search, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_search_text, container, false);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        //Create Auto Complete Text
+        cardName = (AutoCompleteTextView)view.findViewById(R.id.cardNameByName);
+        cardName.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        //Give textview focus
+
+        allCardsDatabase db = new allCardsDatabase(getActivity());
+        ArrayList<String> allCards = db.getAllMadeCards();
+        allCards.toArray();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, allCards);
+        cardName.setAdapter(adapter);
+        // Create variable references to each widget.
+        nameDisplay = (TextView)view.findViewById(R.id.cardNameShow);
+        resultMessage = (TextView)view.findViewById(R.id.resultMessage);
+
+        displayResults = (ListView)view.findViewById(R.id.resultSet);
+        displayResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                sendToCardDisplayActivity(position);
+            }
+        });
+
+        cardName.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                cardName.setText("");
+            }
+        });
+
+        goSearch = (Button)view.findViewById(R.id.searchButton);
+        goSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card_name = cardName.getText().toString().trim();
+                if(card_name == null || card_name.trim().equals("")){
+                    Toast.makeText(getActivity(), "Input is empty", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    try {
+                        nameDisplay.setText(cardName.getText());
+                        setSearchProgress("Searching...");
+                        onSearch(v);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        return view;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
     }
 
     @Override
@@ -93,18 +115,107 @@ public class SearchTextFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void sendToCardDisplayActivity(int position){
+        YugiohCard chosenCard = resultCards[position];
+        Intent toCardDisplay = new Intent(getActivity(), CardDisplayActivity.class);
+
+        Bundle values = new Bundle();
+        values.putString(Contract.nameKey, card_name);
+        values.putString(Contract.tagKey, chosenCard.getPrint_tag());
+        values.putString(Contract.rarityKey, chosenCard.getRarity());
+        toCardDisplay.putExtras(values);
+        //Inflate the fragment
+        startActivity(toCardDisplay);
+    }
+
+    public void setSearchProgress(String message){
+        resultMessage.setText(message);
+    }
+
+    public void onSearch(View goSearch) throws MalformedURLException{
+        results.clear();
+        try{
+
+            searcher = new SearchTextFragment.AsyncQuery();
+            searcher.execute(card_name);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void toAdd(YugiohCard[] toadd){
+        for(YugiohCard card: toadd){
+            String print_tag = card.getPrint_tag();
+            String rarity = card.getRarity();
+            results.add(print_tag + " - " + rarity);
+        }
+    }
+
+    @Override
+    public void onResume(){
+        if(resultMessage.getText().equals("Searching...")){
+            setSearchProgress("");
+            cardName.setText("");
+            nameDisplay.setText("");
+        }
+        super.onResume();
+    }
+
+    public class AsyncQuery extends AsyncTask<String, Void, YugiohCard[]> {
+
+        public AsyncQuery() {
+        }
+
+        @Override
+        protected YugiohCard[] doInBackground(String... input)
+        {
+            YugiohCard[] iterator;
+            card_name = input[0];
+            String output = "";
+            try {
+                output = YGOPricesAPI.searchByName(card_name);
+                if (output.length() > 0){
+                    ArrayList<YugiohCard> cardVersions = new ArrayList<YugiohCard>();
+                    cardVersions = YGOPricesAPI.getCardForShortListing(YGOPricesAPI.toJSON(output));
+                    iterator = cardVersions.toArray(new YugiohCard[cardVersions.size()]);
+                    if (iterator.length >= 1){
+                        return iterator;
+                    }
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(YugiohCard[] yugiohCards) {
+            super.onPostExecute(yugiohCards);
+            resultCards = yugiohCards;
+            if(yugiohCards.length == 0){
+                setSearchProgress("No Results Found");
+            }
+            else if(yugiohCards.length == 1){
+                toAdd(yugiohCards);
+                sendToCardDisplayActivity(0);
+            }
+            else if(yugiohCards.length > 1){
+                setSearchProgress("Multiple Versions Found:");
+                toAdd(yugiohCards);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                        (getActivity(), android.R.layout.simple_list_item_1, results);
+                displayResults.setAdapter(adapter);
+                ((EditText) getView().findViewById(R.id.cardNameByName)).setText("");
+            }
+
+        }
     }
 }

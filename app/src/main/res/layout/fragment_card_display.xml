@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_display"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Test1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/cardNameWithCard"
+            android:textAllCaps="true"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:textColor="@color/barDark"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingLeft="20dp"
+            android:id="@+id/card_info"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:text="PSV-EN000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/printTag"
+                android:textSize="18sp"
+                android:textColor="@color/barDarkBorder"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="Ultimate Rare"
+                android:layout_height="wrap_content"
+                android:id="@+id/Rarity"
+                android:textSize="18sp"
+                android:textColor="@color/barDarkBorder"
+                android:layout_marginEnd="25dp"
+                android:textAlignment="center"
+                android:layout_width="125dp"
+                android:layout_gravity="right|center_vertical|center_horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:paddingLeft="15dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/border"
+            android:id="@+id/cardImage"
+            android:keepScreenOn="false"
+            android:background="@color/barDark"
+            android:alpha="15.00"
+            android:minWidth="175sp"
+            android:minHeight="250sp"
+            android:scaleX="1.25"
+            android:scaleY="1.25"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="31dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="31dp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:id="@+id/price_layout"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingTop="10dp"
+            android:gravity="center"
+            android:layout_height="85dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:text="High:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/High"
+                    android:textColor="@color/actionModeHighlight" />
+
+                <TextView
+                    android:text="N/A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/priceHigh"
+                    android:inputType="numberDecimal"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginStart="31dp"
+                    android:textColor="@color/barDarkBorder" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:text="Median:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Median"
+                    android:textStyle="normal|bold"
+                    android:textColor="@color/green" />
+
+                <TextView
+                    android:text="N/A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/priceMedian"
+                    android:inputType="numberDecimal"
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginStart="31dp"
+                    android:textColor="@color/green" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:text="Low:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Low"
+                    android:textColor="@color/actionModeHighlight" />
+
+                <TextView
+                    android:text="N/A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/priceLow"
+                    android:inputType="numberDecimal"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginStart="31dp"
+                    android:textColor="@color/barDarkBorder" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:text="Shift:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Shift"
+                    android:textColor="@color/actionModeHighlight" />
+
+                <TextView
+                    android:text="N/A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/priceShift"
+                    android:inputType="numberDecimal"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginStart="31dp"
+                    android:textColor="@color/barDarkBorder" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:id="@+id/inventory_buttons"
+            android:layout_alignParentEnd="true"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="15dp">
+
+            <ImageButton
+                android:id="@+id/addInventory"
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                android:background="@mipmap/add_inventory"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:text="888"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/qtyInInventory"
+                android:textSize="26sp"
+                android:inputType="number"
+                android:textColor="@color/barDarkBorder"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" />
+
+            <ImageButton
+                android:id="@+id/removeInventory"
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                android:background="@mipmap/remove_inventory"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentBottom="true"
+                android:foregroundGravity="center_vertical|center_horizontal"
+                android:layout_gravity="center" />
+        </TableRow>
+
+    </LinearLayout>
+
+</RelativeLayout>

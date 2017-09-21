@@ -22,14 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mainActivityController" />
-        <activity android:name=".searchTextController" />
-        <activity android:name=".PrivacyPolicyActivity" />
+        <activity android:name=".DatabaseAllCardsActivity" />
         <activity android:name=".AboutUsActivity" />
-        <activity android:name=".settingsController" />
-        <activity android:name=".cardDisplayController" />
-        <activity android:name=".cartListController" />
-        <activity android:name=".inventoryDisplayController" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".CardDisplayActivity"/>
     </application>
 
 </manifest>
