@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
+import java.io.File;
+
 /**
  * Created by Das on 9/21/2017.
  */
@@ -18,7 +20,7 @@ public class cardImageOCR {
     }
 
     public String processImage(Bitmap img){
-        myTess.init(null, "eng");
+        myTess.init(Contract.tessDataPath, "eng");
         myTess.setImage(img);
         String out = myTess.getUTF8Text();
         myTess.end();
