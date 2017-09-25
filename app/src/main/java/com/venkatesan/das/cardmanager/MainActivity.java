@@ -207,6 +207,11 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 1;
                         CURRENT_TAG = TAG_SEARCHIMAGE;
                         break;
+                    //case R.id.nav_searchImage:
+                        // launch new intent instead of loading fragment
+                    //    startActivity(new Intent(MainActivity.this, SearchImageActivity.class));
+                    //    drawer.closeDrawers();
+                    //    return true;
                     case R.id.nav_searchText:
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_SEARCHTEXT;
