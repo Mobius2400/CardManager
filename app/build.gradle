@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.venkatesan.das.cardmanager"
-        minSdkVersion 21
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -41,5 +41,18 @@ dependencies {
     compile project(':dropboxChooserSDK')
     compile project(':openCVLibrary320')
     compile project(':libraries:tess-two')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.android.gms:play-services-vision:11.0.4+'
+
+    // AWS Dependencies
+    compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.7@aar') { transitive = true; }
+    // Mobile Client for initializing the SDK
+    //compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true; }
+    // Cognito UserPools for SignIn
+    //compile 'com.android.support:support-v4:25.+'
+    //compile ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true; }
+    // Sign in UI Library
+    //compile 'com.android.support:appcompat-v7:25.+'
+    //compile ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true; }
 }
 

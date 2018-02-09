@@ -47,7 +47,7 @@ public class allCardsDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         int ID = -1;
         Cursor cursor = db.rawQuery("SELECT " + Contract.ID + " FROM " +
-                Contract.allCardsTable + " WHERE " + Contract.cardName + "=?", new String[] {name});
+                Contract.allCardsTable + " WHERE " + Contract.cardName + "=?", new String[] {name.toLowerCase()});
         if(cursor.getCount() != 0){
             cursor.moveToFirst();
             ID = cursor.getInt(0);

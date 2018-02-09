@@ -23,6 +23,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import com.amazonaws.mobile.client.AWSMobileClient;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AWSMobileClient.getInstance().initialize(this).execute();
         setContentView(R.layout.activity_main);
 
         //Check for exit flag
@@ -203,15 +205,15 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
-                    case R.id.nav_searchImage:
-                        navItemIndex = 1;
-                        CURRENT_TAG = TAG_SEARCHIMAGE;
-                        break;
                     //case R.id.nav_searchImage:
-                        // launch new intent instead of loading fragment
-                    //    startActivity(new Intent(MainActivity.this, SearchImageActivity.class));
-                    //    drawer.closeDrawers();
-                    //    return true;
+                    //    navItemIndex = 1;
+                    //    CURRENT_TAG = TAG_SEARCHIMAGE;
+                    //    break;
+                    case R.id.nav_searchImage:
+                        //launch new intent instead of loading fragment
+                        startActivity(new Intent(MainActivity.this, OCRCaptureActivity.class));
+                        drawer.closeDrawers();
+                        return true;
                     case R.id.nav_searchText:
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_SEARCHTEXT;

@@ -30,7 +30,8 @@ public class Contract {
     //Shared Preferences:
     final static String imgSavePathDir = Environment.getExternalStorageDirectory().getAbsolutePath() +
             "/Android/data/com.venkatesan.das.cardmanager/files";
-    final static String imgSavePath = imgSavePathDir + "/temp.jpg";
+    final static String imgSavePath = imgSavePathDir + "/capture.jpg";
+    final static String grayImgSavePath = imgSavePathDir + "/grayscaled.jpg";
     final static String tessDataPath = Environment.getExternalStorageDirectory() + "/tesseract";
     final static String tessDataPathCopy = Environment.getExternalStorageDirectory() + "/tesseract/tessdata";
 

@@ -1,6 +1,11 @@
 package com.venkatesan.das.cardmanager;
 
 import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -47,6 +52,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -64,26 +70,12 @@ public class SearchImageFragment extends Fragment {
 
     File myFilesDir;
     ImageView showMarkedImgView;
-    Bitmap myImg, myImgMarked;
+    Bitmap myImg, scaledGrayImg;
     String imageText;
+    View myView;
     private TessBaseAPI mTess;
     Context context;
-    Bitmap markedImg;
     private ProgressDialog asyncDialog;
-    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(getContext()) {
-        @Override
-        public void onManagerConnected(int status) {
-            switch (status) {
-                case LoaderCallbackInterface.SUCCESS: {
-                }
-                break;
-                default: {
-                    super.onManagerConnected(status);
-                }
-                break;
-            }
-        }
-    };
 
     private final int camera_resultCode = 1;
 
@@ -101,22 +93,18 @@ public class SearchImageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         myFilesDir = new File(Contract.imgSavePathDir);
         myFilesDir.mkdirs();
-        asyncDialog = new ProgressDialog(getContext());
-        if (!OpenCVLoader.initDebug()) {
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, getContext(), mLoaderCallback);
-        } else {
-            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        myView = inflater.inflate(R.layout.fragment_search_image, container, false);
         Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Contract.imgSavePath)));
         startActivityForResult(camera_intent, camera_resultCode);
-        return inflater.inflate(R.layout.fragment_search_image, container, false);
+        showMarkedImgView = (ImageView)myView.findViewById(R.id.markedImg);
+        return myView;
     }
 
     @Override
@@ -124,9 +112,15 @@ public class SearchImageFragment extends Fragment {
         if(requestCode == camera_resultCode){
             if(resultCode == RESULT_OK){
                 //Process Captured Image
-                new asyncOpenCVMarkup().execute();
-                //imageText = myAnalyzer.processImage(myImg);
-                //System.out.println(imageText);
+                BitmapFactory.Options op = new BitmapFactory.Options();
+                op.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                myImg = BitmapFactory.decodeFile(Contract.imgSavePath, op);
+                //Picasso.with(getContext()).load(Contract.grayImgSavePath).into(showMarkedImgView);
+
+                //Extract Text
+                new asyncTessOCR().execute();
+
+                //Return to Home Page
                 //getActivity().onBackPressed();
             }
         }
@@ -134,93 +128,6 @@ public class SearchImageFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-    }
-
-    public Bitmap detectText(Bitmap img) {
-        Mat mMat = new Mat();
-        System.out.println("Input Image: " + img.getWidth() + " " + img.getHeight());
-        Bitmap croppedImage = Bitmap.createBitmap(img.getWidth(),img.getHeight()/3, Bitmap.Config.ARGB_8888);
-        System.out.println("Cropped Image: " + croppedImage.getWidth() + " " + croppedImage.getHeight());
-        Utils.bitmapToMat(croppedImage, mMat);
-        MatOfKeyPoint keypoint = new MatOfKeyPoint();
-        List<KeyPoint> listpoint;
-        KeyPoint kpoint;
-        Scalar CONTOUR_COLOR = new Scalar(255);
-        Mat mask = Mat.zeros(mMat.size(), CvType.CV_8UC1);
-        int rectanx1;
-        int rectany1;
-        int rectanx2;
-        int rectany2;
-        int imgsize = mMat.height() * mMat.width();
-        Scalar zeos = new Scalar(0, 0, 0);
-        Mat kernel = new Mat(1, 500, CvType.CV_8UC1, Scalar.all(255));
-        Mat morbyte = new Mat();
-        Mat hierarchy = new Mat();
-
-        List<MatOfPoint> contour2 = new ArrayList<MatOfPoint>();
-
-        Rect rectan3;
-        FeatureDetector detector = FeatureDetector
-                .create(FeatureDetector.MSER);
-        detector.detect(mMat, keypoint);
-        listpoint = keypoint.toList();
-
-        for (int ind = 0; ind < listpoint.size(); ind++) {
-            kpoint = listpoint.get(ind);
-            rectanx1 = (int) (kpoint.pt.x - 0.5 * kpoint.size);
-            rectany1 = (int) (kpoint.pt.y - 0.5 * kpoint.size);
-            rectanx2 = (int) (kpoint.size);
-            rectany2 = (int) (kpoint.size);
-            if (rectanx1 <= 0)
-                rectanx1 = 1;
-            if (rectany1 <= 0)
-                rectany1 = 1;
-            if ((rectanx1 + rectanx2) > mMat.width())
-                rectanx2 = mMat.width() - rectanx1;
-            if ((rectany1 + rectany2) > mMat.height())
-                rectany2 = mMat.height() - rectany1;
-            Rect rectant = new Rect(rectanx1, rectany1, rectanx2, rectany2);
-            try {
-                Mat roi = new Mat(mask, rectant);
-                roi.setTo(CONTOUR_COLOR);
-            } catch (Exception ex) {
-                Log.d("mylog", "mat roi error " + ex.getMessage());
-            }
-        }
-
-        Imgproc.morphologyEx(mask, morbyte, Imgproc.MORPH_DILATE, kernel);
-        Imgproc.findContours(morbyte, contour2, hierarchy,
-                Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE);
-
-//        Bitmap bmp = null;
-//        for (int ind = 0; ind < contour2.size(); ind++) {
-//            rectan3 = Imgproc.boundingRect(contour2.get(ind));
-//            try {
-//                Mat croppedPart;
-//                croppedPart = mMat.submat(rectan3);
-//                bmp = Bitmap.createBitmap(croppedPart.width(), croppedPart.height(), Bitmap.Config.ARGB_8888);
-//                Utils.matToBitmap(croppedPart, bmp);
-//            } catch (Exception e) {
-//                Log.d(null, "cropped part data error " + e.getMessage());
-//            }
-//            if (bmp != null) {
-//                System.out.println(getOCRResult(bmp));
-//            }
-//        }
-        for (int ind = 0; ind < contour2.size(); ind++) {
-            rectan3 = Imgproc.boundingRect(contour2.get(ind));
-            if (rectan3.area() > 0.5 * imgsize || rectan3.area() < 100
-                    || rectan3.width / rectan3.height < 2) {
-                Mat roi = new Mat(morbyte, rectan3);
-                roi.setTo(zeos);
-
-            } else{
-                Imgproc.rectangle(mMat, rectan3.br(), rectan3.tl(),
-                        CONTOUR_COLOR);
-                Utils.matToBitmap(mMat, markedImg);
-            }
-        }
-        return markedImg;
     }
 
     public String getOCRResult(Bitmap bitmap) {
@@ -232,38 +139,93 @@ public class SearchImageFragment extends Fragment {
         return result;
     }
 
-    public class asyncOpenCVMarkup extends AsyncTask<Void, Void, Bitmap>{
+    public class asyncTessOCR extends AsyncTask<Void, String, String>{
 
+        public asyncTessOCR(){
+        }
         @Override
         protected void onPreExecute(){
-            super.onPreExecute();
+            asyncDialog = new ProgressDialog(getContext());
             asyncDialog.setMessage("Recognizing Image...");
             asyncDialog.show();
-            BitmapFactory.Options op = new BitmapFactory.Options();
-            op.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            //myImg = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.summoned_skull, op);
-            myImg = BitmapFactory.decodeFile(Contract.imgSavePath, op);
-            showMarkedImgView = (ImageView)getView().findViewById(R.id.markedImg);
+            super.onPreExecute();
         }
 
         @Override
-        protected Bitmap doInBackground(Void... params) {
-            myImgMarked = detectText(myImg);
-            return myImgMarked;
+        protected String doInBackground(Void... params) {
+
+            //Convert to grayscale and store
+            publishProgress("Grayscaling Image...");
+            scaledGrayImg = toGrayscale(myImg);
+            myImg.recycle();
+            scaledGrayImg = scaleBitmap(scaledGrayImg, scaledGrayImg.getWidth()/2, scaledGrayImg.getHeight()/2);
+            saveImage(scaledGrayImg, Contract.grayImgSavePath);
+
+            //Get OCR Result
+            publishProgress("Detecting Text...");
+            imageText = getOCRResult(scaledGrayImg);
+            return imageText;
         }
 
         @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-            asyncDialog.setMessage("Detecting Text...");
+        protected void onProgressUpdate(String... value) {
+            super.onProgressUpdate(value);
+            asyncDialog.setMessage(value[0]);
             asyncDialog.show();
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            showMarkedImgView.setImageBitmap(bitmap);
+        protected void onPostExecute(String input) {
+            super.onPostExecute(input);
             asyncDialog.dismiss();
+            System.out.println(imageText);
         }
+    }
+
+    public Bitmap toGrayscale(Bitmap bmpOriginal)
+    {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+
+        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Canvas c = new Canvas(bmpGrayscale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayscale;
+    }
+
+    public static Boolean saveImage(Bitmap img, String filepath){
+        Boolean success = false;
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(filepath);
+            img.compress(Bitmap.CompressFormat.PNG, 100, out);
+            success = true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally{
+            if (out != null){
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return success;
+    }
+
+    public static Bitmap scaleBitmap(Bitmap bitmap, int wantedWidth, int wantedHeight) {
+        Bitmap output = Bitmap.createBitmap(wantedWidth, wantedHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        Matrix m = new Matrix();
+        m.setScale((float) wantedWidth / bitmap.getWidth(), (float) wantedHeight / bitmap.getHeight());
+        canvas.drawBitmap(bitmap, m, new Paint());
+        return output;
     }
 }
