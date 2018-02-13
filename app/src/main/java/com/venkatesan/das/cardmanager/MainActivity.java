@@ -66,12 +66,6 @@ public class MainActivity extends AppCompatActivity {
         AWSMobileClient.getInstance().initialize(this).execute();
         setContentView(R.layout.activity_main);
 
-        //Check for exit flag
-        if(getIntent().getBooleanExtra(Contract.exitCode, false)){
-            finish();
-            return;
-        }
-
         copyAssets();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        search = (FloatingActionButton) findViewById(R.id.search);
 
         // Navigation view header
         navHeader = navigationView.getHeaderView(0);
@@ -89,14 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
-
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // load nav menu header data
         loadNavHeader();
@@ -109,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = TAG_HOME;
             loadHomeFragment();
         }
+
+        // second load if from Searching Image through OCR
     }
 
     /***
@@ -132,9 +119,6 @@ public class MainActivity extends AppCompatActivity {
         // just close the navigation drawer
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
-
-            // show or hide the fab button
-            toggleFab();
             return;
         }
 
@@ -155,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
         if (mPendingRunnable != null) {
             mHandler.post(mPendingRunnable);
         }
-        toggleFab();
         drawer.closeDrawers();
         invalidateOptionsMenu();
     }
@@ -165,9 +148,6 @@ public class MainActivity extends AppCompatActivity {
             case 0:
                 // home
                 return new HomeFragment();
-            case 1:
-                // search by image fragment
-                return new SearchImageFragment();
             case 2:
                 // search by text fragment
                 return new SearchTextFragment();
@@ -205,10 +185,6 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
-                    //case R.id.nav_searchImage:
-                    //    navItemIndex = 1;
-                    //    CURRENT_TAG = TAG_SEARCHIMAGE;
-                    //    break;
                     case R.id.nav_searchImage:
                         //launch new intent instead of loading fragment
                         startActivity(new Intent(MainActivity.this, OCRCaptureActivity.class));
@@ -336,11 +312,7 @@ public class MainActivity extends AppCompatActivity {
                // Logout user
                 break;
             case R.id.action_exit:
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra(Contract.exitCode, true);
-                startActivity(intent);
-                finish();
+                this.finishAffinity();
             default:
                 break;
         }
@@ -352,16 +324,6 @@ public class MainActivity extends AppCompatActivity {
         invalidateOptionsMenu();
         loadNavHeader();
         super.onResume();
-    }
-
-    // show or hide the fab
-    private void toggleFab() {
-        if (navItemIndex == 0) {
-            search.show();
-        }
-        else {
-            search.hide();
-        }
     }
 
     public void onButtonClick(View in_view){

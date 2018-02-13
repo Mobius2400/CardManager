@@ -156,11 +156,13 @@ public class CardDisplayFragment extends Fragment {
                                         db.addCardToInventory(adder);
                                         Toast.makeText(getActivity(), "Card added to inventory.", Toast.LENGTH_SHORT).show();
                                         startActivity(cardDisplay);
+                                        getActivity().finish();
                                     }
                                     else{
                                         db.addQuantityFromInventory(thisCard, quantity);
                                         Toast.makeText(getActivity(), "Increased quantity by " + quantity, Toast.LENGTH_SHORT).show();
                                         startActivity(cardDisplay);
+                                        getActivity().finish();
                                     }
                                 }
                                 else{
@@ -170,11 +172,13 @@ public class CardDisplayFragment extends Fragment {
                                         db.addCardToCart(adder);
                                         Toast.makeText(getActivity(), "Card added to cart.", Toast.LENGTH_SHORT).show();
                                         startActivity(cardDisplay);
+                                        getActivity().finish();
                                     }
                                     else{
                                         db.addQuantityFromCart(thisCard, quantity);
                                         Toast.makeText(getActivity(), "Increased quantity by " + quantity, Toast.LENGTH_SHORT).show();
                                         startActivity(cardDisplay);
+                                        getActivity().finish();
                                     }
                                 }
                             }
@@ -196,11 +200,13 @@ public class CardDisplayFragment extends Fragment {
                             db.addCardToCart(adder);
                             Toast.makeText(getActivity(), "Card added to cart.", Toast.LENGTH_SHORT).show();
                             startActivity(cardDisplay);
+                            getActivity().finish();
                         }
                         else{
                             db.addQuantityFromCart(thisCard, quantity);
                             Toast.makeText(getActivity(), "Increased quantity by " + quantity, Toast.LENGTH_SHORT).show();
                             startActivity(cardDisplay);
+                            getActivity().finish();
                         }
                     }
                 }
@@ -278,20 +284,24 @@ public class CardDisplayFragment extends Fragment {
         if(inventoryID == -1){
             Toast.makeText(getActivity(), "You don't have this card.", Toast.LENGTH_SHORT).show();
             startActivity(mainScreen);
+            getActivity().finish();
         }
         else if(quantity > db.getQuantityFromInventory(inventoryID)){
             Toast.makeText(getActivity(), "You don't have the required quantity.", Toast.LENGTH_SHORT).show();
             startActivity(mainScreen);
+            getActivity().finish();
         }
         else if(quantity == db.getQuantityFromInventory(inventoryID)){
             db.deleteFromInventory(inventoryID);
             Toast.makeText(getActivity(), "Removed card from inventory.", Toast.LENGTH_SHORT).show();
             startActivity(mainScreen);
+            getActivity().finish();
         }
         else if(quantity < db.getQuantityFromInventory(inventoryID)){
             db.removeQuantityFromInventory(thisCard, quantity);
             Toast.makeText(getActivity(), "Removed " + quantity + " from inventory.", Toast.LENGTH_SHORT).show();
             startActivity(mainScreen);
+            getActivity().finish();
         }
     }
 
@@ -304,18 +314,21 @@ public class CardDisplayFragment extends Fragment {
         if (cartID == -1 && inventoryID == -1) {
             Toast.makeText(getActivity(), "You don't have this card.", Toast.LENGTH_SHORT).show();
             startActivity(mainScreen);
+            getActivity().finish();
         }
         //Card is in cart and removing less than total in cart.
         else if (cartID != -1 && quantity < db.getQuantityFromCart(cartID)) {
             db.removeQuantityFromCart(thisCard, quantity);
             Toast.makeText(getActivity(), "Removed " + quantity + " from cart.", Toast.LENGTH_SHORT).show();
             startActivity(mainScreen);
+            getActivity().finish();
         }
         //Card is in cart and removing equal to total in cart.
         else if (cartID != -1 && quantity == db.getQuantityFromCart(cartID)) {
             db.deleteFromCart(cartID);
             Toast.makeText(getActivity(), "Removed " + quantity + " from cart.", Toast.LENGTH_SHORT).show();
             startActivity(mainScreen);
+            getActivity().finish();
         }
         //Card is in cart and removing more than total in cart.
         else if (cartID != -1 && quantity > db.getQuantityFromCart(cartID)) {
@@ -323,6 +336,7 @@ public class CardDisplayFragment extends Fragment {
             if (inventoryID == -1 || (inventoryID != -1 && db.getQuantityFromInventory(inventoryID) < remainder)) {
                 Toast.makeText(getActivity(), "Not permitted: removing more than quantity owned.", Toast.LENGTH_SHORT).show();
                 startActivity(mainScreen);
+                getActivity().finish();
             } else if (inventoryID != -1 && db.getQuantityFromInventory(inventoryID) >= remainder) {
                 db.deleteFromCart(cartID);
                 YugiohCard remover = thisCard;
@@ -330,6 +344,7 @@ public class CardDisplayFragment extends Fragment {
                 db.addCardToCart(remover);
                 Toast.makeText(getActivity(), "Added task to cart.", Toast.LENGTH_SHORT).show();
                 startActivity(mainScreen);
+                getActivity().finish();
             }
         }
         //Card is not in cart and removing less than total in inventory.
@@ -340,6 +355,7 @@ public class CardDisplayFragment extends Fragment {
                 db.addCardToCart(remover);
                 Toast.makeText(getActivity(), "Added task to cart.", Toast.LENGTH_SHORT).show();
                 startActivity(mainScreen);
+                getActivity().finish();
             }
         }
     }

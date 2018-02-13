@@ -26,11 +26,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -41,6 +44,9 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -52,7 +58,10 @@ import com.venkatesan.das.cardmanager.camera.CameraSource;
 import com.venkatesan.das.cardmanager.camera.CameraSourcePreview;
 import com.venkatesan.das.cardmanager.camera.GraphicOverlay;
 
+import org.json.JSONException;
+
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 /**
@@ -430,10 +439,109 @@ public final class OCRCaptureActivity extends AppCompatActivity {
                     // Check for card name in allCards list.
                     if(realCards.contains(item.getValue().toLowerCase())){
                         Log.d("OCR_Processor", "Found the card: " + item.getValue());
+                        String cardName = toTitleCase(item.getValue());
+                        AsyncOCRQuery searchCard = new AsyncOCRQuery(cardName, OCRCaptureActivity.this);
+                        searchCard.execute();
                     }
                 }
                 OCRGraphic graphic = new OCRGraphic(mGraphicOverlay, item);
                 mGraphicOverlay.add(graphic);
+            }
+        }
+    }
+
+    private String toTitleCase(String str) {
+
+        if (str == null) {
+            return null;
+        }
+
+        boolean space = true;
+        StringBuilder builder = new StringBuilder(str);
+        final int len = builder.length();
+
+        for (int i = 0; i < len; ++i) {
+            char c = builder.charAt(i);
+            if (space) {
+                if (!Character.isWhitespace(c)) {
+                    // Convert to title case and switch out of whitespace mode.
+                    builder.setCharAt(i, Character.toTitleCase(c));
+                    space = false;
+                }
+            } else if (Character.isWhitespace(c)) {
+                space = true;
+            } else {
+                builder.setCharAt(i, Character.toLowerCase(c));
+            }
+        }
+
+        return builder.toString();
+    }
+
+    public class AsyncOCRQuery extends AsyncTask<Void, Void, YugiohCard[]> {
+
+        private String c_name;
+        private Activity mActivity;
+
+        public AsyncOCRQuery(String name, Activity inActivity) {
+            c_name = name;
+            mActivity = inActivity;
+        }
+
+        @Override
+        protected YugiohCard[] doInBackground(Void... Void)
+        {
+            YugiohCard[] iterator;
+            String output = "";
+            try {
+                output = YGOPricesAPI.searchByName(c_name);
+                if (output.length() > 0){
+                    ArrayList<YugiohCard> cardVersions = new ArrayList<YugiohCard>();
+                    cardVersions = YGOPricesAPI.getCardForShortListing(YGOPricesAPI.toJSON(output));
+                    iterator = cardVersions.toArray(new YugiohCard[cardVersions.size()]);
+                    if (iterator.length >= 1){
+                        return iterator;
+                    }
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(YugiohCard[] yugiohCards) {
+            super.onPostExecute(yugiohCards);
+            if(yugiohCards.length == 0){
+                Log.d("OCR_Processor", "Something happened; recognized card but API call failed.");
+            }
+            else if(yugiohCards.length == 1){
+                //Send directly to CardDisplayActivity.
+                YugiohCard chosenCard = yugiohCards[0];
+                Intent toCardDisplay = new Intent(mActivity, CardDisplayActivity.class);
+                Bundle values = new Bundle();
+                values.putString(Contract.nameKey, chosenCard.getName());
+                values.putString(Contract.tagKey, chosenCard.getPrint_tag());
+                values.putString(Contract.rarityKey, chosenCard.getRarity());
+                toCardDisplay.putExtras(values);
+                //Move to cardDisplay
+                startActivity(toCardDisplay);
+            }
+            else if(yugiohCards.length > 1){
+                //Send to shortlisting via SearchTextFragment.
+                String[] cardsInfo = new String[yugiohCards.length];
+                for(int c = 0; c < cardsInfo.length; c++){
+                    String temp = (yugiohCards[c].getPrint_tag() + " - " + yugiohCards[c].getRarity());
+                    cardsInfo[c] = temp;
+                }
+                Intent toImageResultActivity = new Intent(mActivity, SearchImageResultActivity.class);
+                Bundle values = new Bundle();
+                values.putString(Contract.cardCode, yugiohCards[0].getName());
+                values.putStringArray(Contract.cardInfoCode, cardsInfo);
+                toImageResultActivity.putExtras(values);
+                startActivity(toImageResultActivity);
             }
         }
     }

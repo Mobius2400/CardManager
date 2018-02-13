@@ -27,15 +27,4 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/search"
-        android:layout_width="57dp"
-        android:layout_height="57dp"
-        android:layout_gravity="top|left"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_text_search"
-        app:layout_anchor="@+id/frame"
-        app:layout_anchorGravity="bottom|right"
-        app:backgroundTint="@color/red" />
-
 </android.support.design.widget.CoordinatorLayout>

@@ -46,6 +46,8 @@ public class Contract {
         final static String bulkManage = "bulk_manage";
         final static String autoCommit = "auto_commit";
         final static String exitCode = "exit";
+        final static String cardCode = "cardName";
+        final static String cardInfoCode = "cardInfo";
 
     //Bundle Attributes
     final static String nameKey = "card_name";
