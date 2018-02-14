@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -40,6 +41,11 @@ public class SearchImageResultActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.ActionBarTheme);
+        setContentView(R.layout.fragment_search_image);
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Receive bundle
         Bundle cards = getIntent().getExtras();
         if(cards != null){
@@ -47,7 +53,6 @@ public class SearchImageResultActivity extends AppCompatActivity {
             cardName = cards.getString(Contract.cardCode);
         }
         // Inflate the layout
-        setContentView(R.layout.fragment_search_image);
         ((TextView)findViewById(R.id.OCRResultMessage)).setText("Multiple Versions Found, Choose One:");
         // Set Card Name in Display.
         nameDisplay = (TextView)findViewById(R.id.OCRCardNameShow);
@@ -73,5 +78,22 @@ public class SearchImageResultActivity extends AppCompatActivity {
                 startActivity(toCardDisplay);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            // finish the activity
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

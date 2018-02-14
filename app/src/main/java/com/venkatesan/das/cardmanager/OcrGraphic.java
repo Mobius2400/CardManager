@@ -26,10 +26,6 @@ import com.google.android.gms.vision.text.TextBlock;
 
 import java.util.List;
 
-/**
- * Graphic instance for rendering TextBlock position, size, and ID within an associated graphic
- * overlay view.
- */
 public class OCRGraphic extends GraphicOverlay.Graphic {
 
     private int mId;
@@ -85,9 +81,6 @@ public class OCRGraphic extends GraphicOverlay.Graphic {
         return false;
     }
 
-    /**
-     * Draws the text block annotations for position, size, and raw value on the supplied canvas.
-     */
     @Override
     public void draw(Canvas canvas) {
         // TODO: Draw the text onto the canvas.

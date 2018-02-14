@@ -33,7 +33,7 @@
                 android:id="@+id/nav_about_us"
                 android:title="@string/nav_about_us" />
             <item
-                android:id="@+id/nav_update_database"
+                android:id="@+id/nav_card_statistics"
                 android:title="@string/update_database" />
         </menu>
     </item>

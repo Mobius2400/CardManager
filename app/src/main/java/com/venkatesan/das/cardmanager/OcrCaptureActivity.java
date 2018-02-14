@@ -64,11 +64,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-/**
- * Activity for the Ocr Detecting app.  This app detects text and displays the value with the
- * rear facing camera. During detection overlay graphics are drawn to indicate the position,
- * size, and contents of each TextBlock.
- */
 public final class OCRCaptureActivity extends AppCompatActivity {
     private static final String TAG = "OCRCaptureActivity";
     private static final String title = "Image Capture";
@@ -92,9 +87,6 @@ public final class OCRCaptureActivity extends AppCompatActivity {
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector gestureDetector;
 
-    /**
-     * Initializes the UI and creates the detector pipeline.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,9 +192,10 @@ public final class OCRCaptureActivity extends AppCompatActivity {
 
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
         allCardsDatabase db = new allCardsDatabase(context);
-        ArrayList<String> allCards = db.getAllMadeCards();
+        String allCards = db.getAllMadeCards();
+        String[] allCardsList = allCards.split("\t");
         db.close();
-        textRecognizer.setProcessor(new OCRDetectorProcessor(mGraphicOverlay, allCards));
+        textRecognizer.setProcessor(new OCRDetectorProcessor(mGraphicOverlay, allCardsList));
 
         if (!textRecognizer.isOperational()) {
             Log.w(TAG, "Detector dependencies are not yet available.");
@@ -228,18 +221,12 @@ public final class OCRCaptureActivity extends AppCompatActivity {
                         .build();
     }
 
-    /**
-     * Restarts the camera.
-     */
     @Override
     protected void onResume() {
         super.onResume();
         startCameraSource();
     }
 
-    /**
-     * Stops the camera.
-     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -248,10 +235,6 @@ public final class OCRCaptureActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Releases the resources associated with the camera source, the associated detectors, and the
-     * rest of the processing pipeline.
-     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -277,9 +260,7 @@ public final class OCRCaptureActivity extends AppCompatActivity {
      * @see #requestPermissions(String[], int)
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode != RC_HANDLE_CAMERA_PERM) {
             Log.d(TAG, "Got unexpected permission result: " + requestCode);
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -416,7 +397,7 @@ public final class OCRCaptureActivity extends AppCompatActivity {
         private GraphicOverlay<OCRGraphic> mGraphicOverlay;
         private ArrayList<String> realCards;
 
-        OCRDetectorProcessor(GraphicOverlay<OCRGraphic> ocrGraphicOverlay, ArrayList<String> allCards) {
+        OCRDetectorProcessor(GraphicOverlay<OCRGraphic> ocrGraphicOverlay, String[] allCards) {
             mGraphicOverlay = ocrGraphicOverlay;
             realCards = new ArrayList();
             for(String card: allCards){

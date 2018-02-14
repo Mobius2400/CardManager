@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
-
-
 /**
  * Created by Das on 2/22/2017.
  */
@@ -33,6 +31,12 @@ public class allCardsDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void deleteAllCards(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Contract.allCardsTable, null, null);
+        db.close();
+    }
+
     void addCard(String toAdd){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues attributes = new ContentValues();
@@ -43,21 +47,7 @@ public class allCardsDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int getIDFromName(String name){
-        SQLiteDatabase db = this.getReadableDatabase();
-        int ID = -1;
-        Cursor cursor = db.rawQuery("SELECT " + Contract.ID + " FROM " +
-                Contract.allCardsTable + " WHERE " + Contract.cardName + "=?", new String[] {name.toLowerCase()});
-        if(cursor.getCount() != 0){
-            cursor.moveToFirst();
-            ID = cursor.getInt(0);
-        }
-        cursor.close();
-        db.close();
-        return ID;
-    }
-
-    public ArrayList<String> getAllMadeCards() {
+    public String getAllMadeCards() {
         ArrayList<String> YugiohCards = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(Contract.allCardsTable,
@@ -71,6 +61,12 @@ public class allCardsDatabase extends SQLiteOpenHelper {
         // make sure to close the cursor
         cursor.close();
         db.close();
-        return YugiohCards;
+        StringBuilder sb = new StringBuilder();
+        for (String s : YugiohCards)
+        {
+            sb.append(s);
+            sb.append("\t");
+        }
+        return sb.toString();
     }
 }

@@ -1,15 +1,15 @@
 package com.venkatesan.das.cardmanager;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
     private View navHeader;
     private TextView txtName, txtLocation;
     private Toolbar toolbar;
-    private FloatingActionButton search;
+    private allCardsDatabase db;
+    private ProgressDialog asyncDialog;
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "Card Manager";
-    private static final String TAG_SEARCHIMAGE = "Search Image";
     private static final String TAG_SEARCHTEXT = "Search Text";
     private static final String TAG_VIEWCART = "View Cart";
     private static final String TAG_VIEWINVENTORY = "View Inventory";
@@ -94,8 +95,9 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = TAG_HOME;
             loadHomeFragment();
         }
-
-        // second load if from Searching Image through OCR
+        db = new allCardsDatabase(this);
+        asyncDialog = new ProgressDialog(this);
+        new asyncGetAllCards().execute();
     }
 
     /***
@@ -212,9 +214,9 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                         drawer.closeDrawers();
                         return true;
-                    case R.id.nav_update_database:
+                    case R.id.nav_card_statistics:
                         // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, DatabaseAllCardsActivity.class));
+                        startActivity(new Intent(MainActivity.this, CardStatisticsActivity.class));
                         drawer.closeDrawers();
                         return true;
                     default:
@@ -379,6 +381,64 @@ public class MainActivity extends AppCompatActivity {
         int read;
         while((read = in.read(buffer)) != -1){
             out.write(buffer, 0, read);
+        }
+    }
+
+    class asyncGetAllCards extends AsyncTask<Void, Void, Void> {
+
+        String allCards;
+        String existingCards;
+
+        public asyncGetAllCards(){}
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            asyncDialog.setMessage("Searching for update...");
+            asyncDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                ArrayList<String> allCardsList = getAllMadeYGOCards.setupAllCards();
+                StringBuilder sb = new StringBuilder();
+                for (String s : allCardsList)
+                {
+                    sb.append(s);
+                    sb.append("\t");
+                }
+                allCards = sb.toString();
+                existingCards = db.getAllMadeCards();
+                if(allCards.length() > existingCards.length()){
+                    db.deleteAllCards();
+                    db.addCard(allCards);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+            asyncDialog.setMessage("Updating cards...");
+            asyncDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            if(allCards.length() > existingCards.length()){
+                asyncDialog.setMessage("Added new cards");
+                asyncDialog.dismiss();
+            }
+            else{
+                asyncDialog.setMessage("Database up to date.");
+                asyncDialog.dismiss();
+            }
         }
     }
 }
