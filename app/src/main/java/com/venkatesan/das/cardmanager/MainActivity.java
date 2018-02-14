@@ -282,8 +282,10 @@ public class MainActivity extends AppCompatActivity {
 
         super.onBackPressed();
     }
+
     //Setup Menu
     private Menu thisMenu = null;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         thisMenu = menu;
@@ -376,6 +378,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    
     private void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
