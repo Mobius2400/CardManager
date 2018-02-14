@@ -26,8 +26,7 @@ public class YugiohCard {
         cardImage = null;
     }
 
-    public YugiohCard(String newname, String newprint_tag, double newhigh, double newmedian, double newlow, double newshift,
-                      int newnumInventory, String newrarity){
+    public YugiohCard(String newname, String newprint_tag, double newhigh, double newmedian, double newlow, double newshift, int newnumInventory, String newrarity){
         name = newname;
         print_tag = newprint_tag;
         low = newlow;

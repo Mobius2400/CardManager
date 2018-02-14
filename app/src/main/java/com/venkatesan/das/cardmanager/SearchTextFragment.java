@@ -53,8 +53,8 @@ public class SearchTextFragment extends Fragment {
         cardName.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         allCardsDatabase db = new allCardsDatabase(getActivity());
-        ArrayList<String> allCards = db.getAllMadeCards();
-        allCards.toArray();
+        String allCardsString = db.getAllMadeCards();
+        String[] allCards = allCardsString.split("\t");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, allCards);
         cardName.setAdapter(adapter);
         // Create variable references to each widget.
@@ -80,6 +80,7 @@ public class SearchTextFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String card_name = cardName.getText().toString().trim();
+                hideKeyboardFrom(getContext(), getView());
                 if(card_name == null || card_name.trim().equals("")){
                     Toast.makeText(getActivity(), "Input is empty", Toast.LENGTH_SHORT).show();
                 }
@@ -111,6 +112,11 @@ public class SearchTextFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    public static void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private void sendToCardDisplayActivity(int position){

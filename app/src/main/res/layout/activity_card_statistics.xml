@@ -16,24 +16,13 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:text="Added Cards:"
+            android:text="In Progress"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/textAddedCards"
+            android:id="@+id/cardStatisticsTitle"
             android:textSize="16sp"
             android:gravity="center_vertical"
             android:textColor="@color/actionBarHighlight" />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/border"
-            android:elevation="9dp"
-            android:id="@+id/addedCards"
-            android:textColor="@color/actionBarHighlight"
-            android:cacheColorHint="?attr/editTextColor" />
 
     </LinearLayout>
 

@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-
 /**
  * Created by Das on 2/15/2017.
  */

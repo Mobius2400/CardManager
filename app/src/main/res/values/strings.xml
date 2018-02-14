@@ -39,7 +39,7 @@
     <string name="action_clear_all">Clear All</string>
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
-    <string name="update_database">Update Card Database</string>
+    <string name="update_database">Card Statistics</string>
 
     <string name="about_us_text1">For more information on CardManager, please contact:</string>
     <string name="about_us_name">Thirumalai (Das) Venkatesan</string>
