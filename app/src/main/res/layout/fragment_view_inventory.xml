@@ -17,7 +17,6 @@
         <TextView
             android:text="Total Inventory:"
             android:layout_width="195dp"
-            android:id="@+id/totalCards"
             android:textStyle="normal|bold"
             android:textColor="@color/actionBarHighlight"
             android:gravity="center_vertical"

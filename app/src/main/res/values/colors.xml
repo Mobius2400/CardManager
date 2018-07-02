@@ -4,4 +4,12 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="selected">#55007EE5</color>
+    <color name="green">#00ff00</color>
+    <color name="galleryItemSelectedOverlay">#55007ee5</color>
+    <color name="darkButtonText">#ffffff</color>
+    <color name="actionBarHighlight">#000000</color>
+    <color name="actionModeHighlight">#000000</color>
+    <color name="barDark">#232222</color>
+    <color name="barDarkBorder">#666666</color>
+    <color name="barLightBorder">#c1c1c1</color>
 </resources>

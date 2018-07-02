@@ -18,14 +18,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
 import static android.content.Context.MODE_PRIVATE;
 import static com.venkatesan.das.cardmanager.YGOPricesAPI.getCardForDisplay;
 import static com.venkatesan.das.cardmanager.YGOPricesAPI.toJSON;
@@ -60,16 +56,6 @@ public class CardDisplayFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public CardDisplayFragment() {}
-
-    public static CardDisplayFragment newInstance(String param1, String param2, String param3) {
-        CardDisplayFragment fragment = new CardDisplayFragment();
-        Bundle args = new Bundle();
-        args.putString(CARD_NAME, param1);
-        args.putString(PRINT_TAG, param2);
-        args.putString(RARITY, param3);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -255,12 +241,6 @@ public class CardDisplayFragment extends Fragment {
             }
         });
         return view;
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override

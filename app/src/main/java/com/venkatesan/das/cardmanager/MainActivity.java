@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private View navHeader;
     private TextView txtName, txtLocation;
     private Toolbar toolbar;
-    private allCardsDatabase db;
-    private ProgressDialog asyncDialog;
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -95,9 +93,6 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = TAG_HOME;
             loadHomeFragment();
         }
-        db = new allCardsDatabase(this);
-        asyncDialog = new ProgressDialog(this);
-        new asyncGetAllCards().execute();
     }
 
     /***
@@ -384,64 +379,6 @@ public class MainActivity extends AppCompatActivity {
         int read;
         while((read = in.read(buffer)) != -1){
             out.write(buffer, 0, read);
-        }
-    }
-
-    class asyncGetAllCards extends AsyncTask<Void, Void, Void> {
-
-        String allCards;
-        String existingCards;
-
-        public asyncGetAllCards(){}
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            asyncDialog.setMessage("Searching for update...");
-            asyncDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                ArrayList<String> allCardsList = getAllMadeYGOCards.setupAllCards();
-                StringBuilder sb = new StringBuilder();
-                for (String s : allCardsList)
-                {
-                    sb.append(s);
-                    sb.append("\t");
-                }
-                allCards = sb.toString();
-                existingCards = db.getAllMadeCards();
-                if(allCards.length() > existingCards.length()){
-                    db.deleteAllCards();
-                    db.addCard(allCards);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-            asyncDialog.setMessage("Updating cards...");
-            asyncDialog.show();
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if(allCards.length() > existingCards.length()){
-                asyncDialog.setMessage("Added new cards");
-                asyncDialog.dismiss();
-            }
-            else{
-                asyncDialog.setMessage("Database up to date.");
-                asyncDialog.dismiss();
-            }
         }
     }
 }

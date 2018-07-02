@@ -25,6 +25,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class SearchTextFragment extends Fragment {
 
@@ -199,8 +201,9 @@ public class SearchTextFragment extends Fragment {
         protected void onPostExecute(YugiohCard[] yugiohCards) {
             super.onPostExecute(yugiohCards);
             resultCards = yugiohCards;
-            if(yugiohCards.length == 0){
+            if(yugiohCards == null){
                 setSearchProgress("No Results Found");
+                Toast.makeText(getActivity(), "No results found, please enter a valid Yugioh card name.", Toast.LENGTH_SHORT).show();
             }
             else if(yugiohCards.length == 1){
                 toAdd(yugiohCards);
