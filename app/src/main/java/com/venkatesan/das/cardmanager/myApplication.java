@@ -26,27 +26,6 @@ public class myApplication extends Application{
         //Check for new cards and update if needed.
         db = new allCardsDatabase(this);
         new asyncGetAllCards().execute();
-        showLocationAlert();
-    }
-
-    private void showLocationAlert() {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Enable Location")
-                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " +
-                        "check nearby users' data.")
-                .setPositiveButton("Location Settings", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(myIntent);
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                    }
-                });
-        dialog.show();
     }
 
     private class asyncGetAllCards extends AsyncTask<Void, Void, Void> {

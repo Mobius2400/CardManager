@@ -37,18 +37,20 @@ public class Contract {
     final static String tessDataPathCopy = Environment.getExternalStorageDirectory() + "/tesseract/tessdata";
 
     final static String sharedPreferences = "com.venkatesan.das.cardmanager_preferences";
-        //Database Attributes
-        final static String firstUpdate = "first_update";
-        //User SettingsActivity Attributes
-        final static String userName = "user_name";
-        final static String location = "location";
-        final static String email = "email_address";
-        //Inventory SettingsActivity Attributes
-        final static String bulkManage = "bulk_manage";
-        final static String autoCommit = "auto_commit";
-        final static String exitCode = "exit";
-        final static String cardCode = "cardName";
-        final static String cardInfoCode = "cardInfo";
+    //Database Attributes
+    final static String firstUpdate = "first_update";
+    //User SettingsActivity Attributes
+    final static String userName = "user_name";
+    final static String location = "location";
+    final static String email = "email_address";
+    final static String lastLongitude = "longitude";
+    final static String lastLatitude = "latitude";
+    //Inventory SettingsActivity Attributes
+    final static String bulkManage = "bulk_manage";
+    final static String autoCommit = "auto_commit";
+    final static String exitCode = "exit";
+    final static String cardCode = "cardName";
+    final static String cardInfoCode = "cardInfo";
 
     //Bundle Attributes
     final static String nameKey = "card_name";

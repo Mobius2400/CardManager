@@ -1,15 +1,22 @@
 package com.venkatesan.das.cardmanager;
 
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -23,15 +30,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.amazonaws.mobile.client.AWSMobileClient;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private View navHeader;
     private TextView txtName, txtLocation;
     private Toolbar toolbar;
+    private Context myContext;
+    private LocationManager locationManager;
+    private SharedPreferences pref;
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -64,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AWSMobileClient.getInstance().initialize(this).execute();
         setContentView(R.layout.activity_main);
+        myContext = this;
+        pref = myContext.getSharedPreferences(Contract.sharedPreferences, MODE_PRIVATE);
+
+        //Location Setting
+        locationManager = (LocationManager) myContext.getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListenerGPS);
+        isLocationEnabled();
 
         copyAssets();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -92,6 +112,63 @@ public class MainActivity extends AppCompatActivity {
             navItemIndex = 0;
             CURRENT_TAG = TAG_HOME;
             loadHomeFragment();
+        }
+    }
+
+    LocationListener locationListenerGPS = new LocationListener() {
+        @Override
+        public void onLocationChanged(android.location.Location location) {
+            double latitude=location.getLatitude();
+            double longitude=location.getLongitude();
+            String addressLocality = "";
+            //Reverse Geocode to get address.
+            Geocoder geocoder = new Geocoder(myContext, Locale.getDefault());
+            try {
+                List<Address> list = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                Address address = list.get(0);
+                addressLocality = address.getLocality()+", "+address.getAdminArea();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putFloat(Contract.lastLatitude, (float)latitude);
+            editor.putFloat(Contract.lastLongitude, (float)longitude);
+            editor.putString(Contract.location, addressLocality);
+            editor.apply();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+        }
+    };
+
+    private void isLocationEnabled() {
+
+        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            AlertDialog.Builder alertDialog=new AlertDialog.Builder(myContext);
+            alertDialog.setTitle("Enable Location");
+            alertDialog.setMessage("Your locations setting is not enabled. Please enabled it in settings menu.");
+            alertDialog.setPositiveButton("Location Settings", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which){
+                    Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which){
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alert=alertDialog.create();
+            alert.show();
         }
     }
 
@@ -322,6 +399,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         invalidateOptionsMenu();
         loadNavHeader();
+        isLocationEnabled();
         super.onResume();
     }
 
