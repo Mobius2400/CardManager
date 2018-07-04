@@ -30,7 +30,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.amazonaws.mobile.client.AWSMobileClient;
 import java.io.File;
 import java.io.FileOutputStream;
